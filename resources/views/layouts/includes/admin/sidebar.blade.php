@@ -21,8 +21,8 @@
         </a>
         <div class="collapse" id="category">
             <ul class="nav flex-column sub-menu">
-            <li class="nav-item"> <a class="nav-link" href="#">Add</a></li>
-            <li class="nav-item"> <a class="nav-link" href="#">List</a></li>
+            <li class="nav-item"> <a class="nav-link" href="{{ route('admin.category.create') }}">Add</a></li>
+            <li class="nav-item"> <a class="nav-link" href="{{ route('admin.category.index') }}">List</a></li>
             </ul>
         </div>
     </li>
