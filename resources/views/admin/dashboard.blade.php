@@ -9,16 +9,9 @@
             @endif
         <div class="d-flex justify-content-between flex-wrap">
         <div class="d-flex align-items-end flex-wrap">
-            <div class="me-md-3 me-xl-5">
-            @if (session('message'))
-                <h2>Dashboard</h2>
-            @endif
-            <p class="mb-md-0">Your analytics dashboard template.</p>
-            </div>
             <div class="d-flex">
-            <i class="mdi mdi-home text-muted hover-cursor"></i>
-            <p class="text-muted mb-0 hover-cursor">&nbsp;/&nbsp;Dashboard&nbsp;/&nbsp;</p>
-            <p class="text-primary mb-0 hover-cursor">Analytics</p>
+                <i class="mdi mdi-home text-muted hover-cursor"></i>
+                <p class="text-muted mb-0 hover-cursor">&nbsp;/&nbsp;Dashboard</p>
             </div>
         </div>
         <div class="d-flex justify-content-between align-items-end flex-wrap">
