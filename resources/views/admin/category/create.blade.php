@@ -4,11 +4,21 @@
 
 <div class="row">
     <div class="col-md-12 grid-margin">
+        @include('layouts.includes.admin.top_page', [
+            'icon' => 'mdi-view-list',
+            'title' => 'Category',
+            'functions' => [
+                [
+                    'icon' => 'mdi-list',
+                    'route' => route('admin.category.index')
+                ]
+            ]
+        ])
+    </div>
+    <div class="col-md-12 grid-margin">
         <div class="card">
             <div class="card-header">
-                <h3>Category
-                    <a href="{{ route('admin.category.index') }}" class="btn btn-primary btn-sm text-white float-end">Back</a>
-                </h3>
+                <h3>Category</h3>
             </div>
             <div class="card-body">
                 <form action="{{ route('admin.category.save') }}" method="post" enctype="multipart/form-data">

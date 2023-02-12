@@ -21,6 +21,8 @@
                 ]
             ]
         ])
+    </div>
+    <div class="col-md-12 grid-margin">
         <div class="card">
             <div class="card-header">
                 <h3>Category</h3>

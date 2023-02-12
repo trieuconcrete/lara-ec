@@ -1,4 +1,4 @@
-<div class="d-flex justify-content-between flex-wrap mb-4">
+<div class="d-flex justify-content-between flex-wrap">
     <div class="d-flex align-items-end flex-wrap">
         <div class="d-flex">
             <i class="mdi {{ $icon }} hover-cursor"></i>
