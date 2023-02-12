@@ -7,11 +7,23 @@
         @if (session('message'))
             <h6 class="alert alert-success">{{ session('message') }}</h6>
         @endif
+        @include('layouts.includes.admin.top_page', [
+            'icon' => 'mdi-view-list',
+            'title' => 'Category',
+            'functions' => [
+                [
+                    'icon' => 'mdi-plus',
+                    'route' => route('admin.category.create')
+                ],
+                [
+                    'icon' => 'mdi-download',
+                    'route' => '#'
+                ]
+            ]
+        ])
         <div class="card">
             <div class="card-header">
-                <h3>Category
-                    <a href="{{ route('admin.category.create') }}" class="btn btn-primary btn-sm text-white float-end">Create</a>
-                </h3>
+                <h3>Category</h3>
             </div>
             <div class="card-body">
                 
