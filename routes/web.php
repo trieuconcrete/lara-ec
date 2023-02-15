@@ -19,11 +19,12 @@ use App\Http\Controllers\Admin\CategoryController;
 Route::get('/', function () {
     return view('welcome');
 });
-
-Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/product/detail/{id}', [HomeController::class, 'getProductDetail'])->name('product.detail');
-
 Auth::routes();
+
+Route::name('frontend.')->group(function () {
+    Route::get('/', [HomeController::class, 'index'])->name('home');
+    Route::get('/product/detail/{id}', [HomeController::class, 'getProductDetail'])->name('product.detail');
+});  
 
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'isAdmin'])->group(function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');

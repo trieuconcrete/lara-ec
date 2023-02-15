@@ -40,7 +40,7 @@
         <div class="container">
             <div class="header-wrap">
                 <div class="logo logo-width-1">
-                    <a href="index.html"><img src="https://laravel.com/img/logotype.min.svg" alt="logo"></a>
+                    <a href="{{ route('frontend.home') }}"><img src="https://laravel.com/img/logotype.min.svg" alt="logo"></a>
                 </div>
                 <div class="header-right">
                     <div class="search-style-1">
