@@ -17,12 +17,22 @@ class HomeController extends Controller
     }
 
     /**
-     * Show the application dashboard.
+     * Show the homepage.
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
     {
         return view('frontend.index');
+    }
+
+    /**
+     * Show the production detail.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function getProductDetail($id)
+    {
+        return view('frontend.product_detail');
     }
 }
