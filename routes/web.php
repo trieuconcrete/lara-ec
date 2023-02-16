@@ -29,9 +29,11 @@ Route::name('frontend.')->group(function () {
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'isAdmin'])->group(function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-    Route::prefix('category')->name('category.')->group(function () {
-        Route::get('/', [CategoryController::class, 'index'])->name('index');
-        Route::get('create', [CategoryController::class, 'create'])->name('create');
-        Route::post('create', [CategoryController::class, 'save'])->name('save');
+    Route::controller(CategoryController::class)->prefix('category')->name('category.')->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('create', 'create')->name('create');
+        Route::post('create', 'save')->name('save');
+        Route::get('/{category}/edit', 'edit')->name('edit');
+        Route::put('/{category}/update', 'update')->name('update');
     });
 });
