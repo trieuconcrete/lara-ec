@@ -13,8 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/laravel', function () {
-    return view('welcome');
+Route::controller(HomeController::class)->group(function () {
+    Route::get('/', 'index')->name('home');
+    Route::get('/product/detail/{id}', 'getProductDetail')->name('product.detail');
 });
-
-Auth::routes();
