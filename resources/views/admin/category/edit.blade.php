@@ -35,7 +35,16 @@
                             <input type="text" name="slug" readonly class="form-control name-slug" value="{{ $category->slug }}" />
                             @error('slug') <small class="text-danger">{{ $message }}</small>@enderror
                         </div>
-                        <div class="col-md-12 mb-3 form-group">
+                        <div class="col-md-6 mb-3 form-group">
+                            <label for="parent">Parent</label>
+                            <select name="parent_id" id="parent" class="form-control form-control-sm">
+                                <option value=""></option>
+                                @foreach($categories as $cat)
+                                <option value="{{ $cat->id }}" {{ $cat->id == $category->parent_id ? 'selected' : '' }}>{{ $cat->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-md-6 mb-3 form-group">
                             <label for="slug">Description</label>
                             <textarea name="description" class="form-control" rows="3">{{ $category->description }}</textarea>
                         </div>

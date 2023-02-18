@@ -19,13 +19,16 @@ class CategoryController extends Controller
 
     public function create()
     {
-        return view('admin.category.create');
+        $categories = Category::select('id', 'name')->get();
+        return view('admin.category.create', ['categories' => $categories]);
     }
 
     public function save(CategoryFromRequest $request)
     {
         $validateData = $request->validated();
         $category = new Category();
+
+        $category->parent_id = $validateData['parent_id'];
         $category->name = $validateData['name'];
         $category->slug = Str::slug($validateData['slug']);
         $category->description = $validateData['description'];
@@ -49,7 +52,8 @@ class CategoryController extends Controller
 
     public function edit(Category $category)
     {
-        return view('admin.category.edit', compact('category'));
+        $categories = Category::select('id', 'name')->where('id', '<>', $category->id)->get();
+        return view('admin.category.edit', compact('category', 'categories'));
     }
 
     public function update(CategoryFromRequest $request, $category)
@@ -57,6 +61,7 @@ class CategoryController extends Controller
         $validateData = $request->validated();
         $category = Category::findOrFail($category);
 
+        $category->parent_id = $validateData['parent_id'];
         $category->name = $validateData['name'];
         $category->slug = Str::slug($validateData['slug']);
         $category->description = $validateData['description'];
