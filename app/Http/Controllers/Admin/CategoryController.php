@@ -8,6 +8,7 @@ use App\Http\Requests\CategoryFromRequest;
 use App\Models\Category;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class CategoryController extends Controller
 {
@@ -31,14 +32,14 @@ class CategoryController extends Controller
         $category->meta_title = $validateData['meta_title'];
         $category->meta_keyword = $validateData['meta_keyword'];
         $category->meta_description = $validateData['meta_description'];
-        $category->status = $category->status == true ? 1: 0;
+        $category->status = $validateData['status'] ?? 0;
 
         // store file
         if ($request->hasFile('image')) {
             $file = $request->file('image');
             $ext = $file->getClientOriginalExtension();
             $filename = time().'.'.$ext;
-            $file->move('uploads/category/', $filename);
+            $file->storeAs('uploads/category', $filename);
             $category->image = $filename;
         }
 
@@ -54,7 +55,6 @@ class CategoryController extends Controller
     public function update(CategoryFromRequest $request, $category)
     {
         $validateData = $request->validated();
-
         $category = Category::findOrFail($category);
 
         $category->name = $validateData['name'];
@@ -63,18 +63,18 @@ class CategoryController extends Controller
         $category->meta_title = $validateData['meta_title'];
         $category->meta_keyword = $validateData['meta_keyword'];
         $category->meta_description = $validateData['meta_description'];
-        $category->status = $category->status == true ? 1: 0;
+        $category->status = $validateData['status'] ?? 0;
 
         // store file
         if ($request->hasFile('image')) {
-            $path = 'uploads/category/'.$category->image;
+            $path = 'storage/uploads/category/'.$category->image;
             if(File::exists($path)) {
                 File::delete($path);
             }
             $file = $request->file('image');
             $ext = $file->getClientOriginalExtension();
             $filename = time().'.'.$ext;
-            $file->move('uploads/category/', $filename);
+            $file->storeAs('uploads/category', $filename);
             $category->image = $filename;
         }
 

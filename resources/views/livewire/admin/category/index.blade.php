@@ -42,7 +42,7 @@
         <div class="col-md-12 grid-margin">
             <div class="card">
                 <div class="card-header">
-                    <h3>Category</h3>
+                    <h3>List</h3>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -60,24 +60,28 @@
                                 @foreach ($categories as $item)
                                     <tr>
                                         <td>{{ $item->id }}</td>
-                                        <td><img src="{{ asset('uploads/category/'.$item->image) }}" alt=""></td>
+                                        <td><img src="{{ asset('storage/uploads/category/'.$item->image) }}" alt=""></td>
                                         <td>{{ $item->name }}</td>
                                         <td>
-                                            @if ($item->status)
-                                                <span class="badge badge-danger">Hidden</span>
+                                            @if (!$item->status)
+                                                <label class="badge bg-danger">Hidden</label>
                                             @else
-                                                <span class="badge badge-success">Visible</span>
+                                                <label class="badge bg-success">Visible</label>
                                             @endif
                                         </td>
                                         <td>
-                                            <a href="{{ route('admin.category.edit', $item->id) }}" class="btn btn-success">Edit</a>
-                                            <a href="#" wire:click="deleteCategory({{$item->id}})" data-bs-toggle="modal" data-bs-target="#deleteModal" class="btn btn-danger">Delete</a>
+                                            <a href="{{ route('admin.category.edit', $item->id) }}" class="btn btn-inverse-success btn-fw btn-sm">
+                                                <span class="mdi mdi-pencil"></span>
+                                            </a>
+                                            <a href="#" wire:click="deleteCategory({{$item->id}})" data-bs-toggle="modal" data-bs-target="#deleteModal" class="btn btn-inverse-danger btn-fwb btn-sm">
+                                                <span class="mdi mdi-trash-can"></span>
+                                            </a>
                                         </td>
                                     </tr>
                                 @endforeach
                             </tbody>
                         </table>
-                        <div>
+                        <div class="mt-3 ">
                             {{ $categories->links() }}
                         </div>
                     </div>

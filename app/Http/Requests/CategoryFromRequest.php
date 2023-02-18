@@ -26,6 +26,7 @@ class CategoryFromRequest extends FormRequest
         return [
             'name' => 'required|string',
             'slug' => 'required|string',
+            'status' => 'nullable',
             'description' => 'nullable|string',
             'image' => 'nullable|mimes:jpg,jpeg,png',
             'meta_title' => 'nullable|string',

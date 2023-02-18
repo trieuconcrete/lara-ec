@@ -27,12 +27,12 @@
                     <div class="row">
                         <div class="col-md-6 mb-3 form-group">
                             <label for="name">Name</label>
-                            <input type="text" name="name" class="form-control" value="{{ $category->name }}" />
+                            <input type="text" name="name" class="form-control generate-slug" value="{{ $category->name }}" />
                             @error('name') <small class="text-danger">{{ $message }}</small>@enderror
                         </div>
                         <div class="col-md-6 mb-3 form-group">
                             <label for="slug">Slug</label>
-                            <input type="text" name="slug" class="form-control" value="{{ $category->slug }}" />
+                            <input type="text" name="slug" readonly class="form-control name-slug" value="{{ $category->slug }}" />
                             @error('slug') <small class="text-danger">{{ $message }}</small>@enderror
                         </div>
                         <div class="col-md-12 mb-3 form-group">
@@ -42,13 +42,14 @@
                         <div class="col-md-6 mb-3 form-group">
                             <label for="image">Image</label>
                             <input type="file" name="image" class="form-control" />
-                            <img src="{{ asset('uploads/category/'.$category->image) }}" alt="" width="60px" height="60px">
+                            @error('image') <small class="text-danger">{{ $message }}</small>@enderror
+                            <img src="{{ asset('storage/uploads/category/'.$category->image) }}" alt="" width="60px" height="60px">
                         </div>
                         <div class="col-md-6 mb-3 form-group">
                             <label for="form-check-label">
                                 Status
                             </label>
-                            <input type="checkbox" name="status" class="form-check-input" {{ $category->status == 1 ? 'checked' : '' }} />
+                            <input type="checkbox" name="status" value="1" class="form-check-input" {{ $category->status == 1 ? 'checked' : '' }} />
                         </div>
                         <div class="col-md-12 mt-3 form-group">
                             <h4>SEO Tags</h4>
@@ -76,3 +77,21 @@
 </div>
 
 @endsection
+
+@push('script')
+<script>
+    $(function() {
+        $('.generate-slug').keyup(function(e) {
+            var val = $(this).val();
+            var slug = convertToSlug(val);
+            $('.name-slug').val(slug);
+        })
+    })
+    /* Encode string to slug */
+    function convertToSlug(Text) {
+        return Text.toLowerCase()
+                .replace(/ /g, '-')
+                .replace(/[^\w-]+/g, '');
+    }
+</script>
+@endpush
