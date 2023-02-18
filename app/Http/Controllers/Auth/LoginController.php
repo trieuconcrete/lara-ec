@@ -30,7 +30,7 @@ class LoginController extends Controller
     // protected $redirectTo = RouteServiceProvider::HOME;
     protected function authenticated()
     {
-        if (Auth::user()->role_as == '1') {
+        if (Auth::user()->user_type == 1) {
             return redirect('admin/dashboard')->with('message', 'Welcome to Dashboard');
         } else {
             return redirect('/shop')->with('status', 'Logged In Successfully');
