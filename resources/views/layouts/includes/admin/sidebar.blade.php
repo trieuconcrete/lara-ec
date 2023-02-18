@@ -34,13 +34,13 @@
         </a>
         <div class="collapse" id="product">
             <ul class="nav flex-column sub-menu">
-            <li class="nav-item"> <a class="nav-link" href="pages/ui-features/buttons.html">Buttons</a></li>
-            <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">Typography</a></li>
+            <li class="nav-item"> <a class="nav-link" href="#">Add</a></li>
+            <li class="nav-item"> <a class="nav-link" href="#">List</a></li>
             </ul>
         </div>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="pages/forms/basic_elements.html">
+        <a class="nav-link" href="{{ route('admin.brand.index') }}">
             <i class="mdi mdi-view-headline menu-icon"></i>
             <span class="menu-title">Brands</span>
         </a>

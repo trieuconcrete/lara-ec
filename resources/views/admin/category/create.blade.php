@@ -84,21 +84,3 @@
 </div>
 
 @endsection
-
-@push('script')
-<script>
-    $(function() {
-        $('.generate-slug').keyup(function(e) {
-            var val = $(this).val();
-            var slug = convertToSlug(val);
-            $('.name-slug').val(slug);
-        })
-    })
-    /* Encode string to slug */
-    function convertToSlug(Text) {
-        return Text.toLowerCase()
-                .replace(/ /g, '-')
-                .replace(/[^\w-]+/g, '');
-    }
-</script>
-@endpush
