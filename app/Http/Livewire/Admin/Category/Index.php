@@ -12,16 +12,16 @@ class Index extends Component
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
 
-    public $category_id;
+    public $categoryId;
 
-    public function deleteCategory($category_id)
+    public function deleteCategory($id)
     {
-        $this->category_id = $category_id;
+        $this->categoryId = $id;
     }
 
     public function destroyCategory()
     {
-        $category = Category::find($this->category_id);
+        $category = Category::find($this->categoryId);
         $path = 'uploads/category/'.$category->image;
         if(File::exists($path)) {
             File::delete($path);

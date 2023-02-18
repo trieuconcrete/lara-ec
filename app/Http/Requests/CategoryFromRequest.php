@@ -26,11 +26,11 @@ class CategoryFromRequest extends FormRequest
         return [
             'name' => 'required|string',
             'slug' => 'required|string',
-            'description' => 'required',
+            'description' => 'nullable|string',
             'image' => 'nullable|mimes:jpg,jpeg,png',
-            'meta_title' => 'required|string',
-            'meta_keyword' => 'required|string',
-            'meta_description' => 'required|string',
+            'meta_title' => 'nullable|string',
+            'meta_keyword' => 'nullable|string',
+            'meta_description' => 'nullable|string',
         ];
     }
 }
