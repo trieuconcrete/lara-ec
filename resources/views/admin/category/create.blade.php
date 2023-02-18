@@ -18,7 +18,7 @@
     <div class="col-md-12 grid-margin">
         <div class="card">
             <div class="card-header">
-                <h3>Category</h3>
+                <h3>Create</h3>
             </div>
             <div class="card-body">
                 <form action="{{ route('admin.category.save') }}" method="post" enctype="multipart/form-data">
