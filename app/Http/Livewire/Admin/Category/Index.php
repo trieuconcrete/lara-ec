@@ -28,6 +28,7 @@ class Index extends Component
         }
         $category->delete();
         session()->flash('message', 'Deleted successfully!');
+        $this->dispatchBrowserEvent('close-modal');
     }
 
     public function render()

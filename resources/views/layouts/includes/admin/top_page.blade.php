@@ -7,8 +7,8 @@
     </div>
     <div class="d-flex justify-content-between align-items-end flex-wrap">
         @foreach ($functions as $button)
-        <a href="{{ $button['route'] }}">
-            <button type="button" class="btn btn-outline-primary btn-icon @if (!$loop->last) me-3 @endif mt-2 mt-xl-0">
+        <a href="{{ $button['route'] }}" @if($button['modal']) data-bs-toggle="modal" data-bs-target="{{ $button['modal_name'] }}" @endif>
+            <button type="button" class="btn btn-outline-primary btn-icon {{ $button['class'] ?? '' }} @if (!$loop->last) me-3 @endif mt-2 mt-xl-0">
                 <i class="mdi {{ $button['icon'] }}"></i>
             </button>
         </a>
