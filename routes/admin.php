@@ -26,3 +26,11 @@ Route::controller(CategoryController::class)->prefix('categories')->name('catego
 Route::controller(BrandController::class)->prefix('brands')->name('brand.')->group(function () {
     Route::get('/', 'index')->name('index');
 });
+
+Route::controller(ProductController::class)->prefix('products')->name('product.')->group(function () {
+    Route::get('/', 'index')->name('index');
+    Route::get('create', 'create')->name('create');
+    Route::post('create', 'save')->name('save');
+    Route::get('/{category}/edit', 'edit')->name('edit');
+    Route::put('/{category}/update', 'update')->name('update');
+});

@@ -19,7 +19,9 @@ class CategoryController extends Controller
 
     public function create()
     {
-        $categories = Category::select('id', 'name')->get();
+        $categories = Category::select('id', 'name')
+        ->whereNull('parent_id')
+        ->get();
         return view('admin.category.create', ['categories' => $categories]);
     }
 
@@ -52,7 +54,10 @@ class CategoryController extends Controller
 
     public function edit(Category $category)
     {
-        $categories = Category::select('id', 'name')->where('id', '<>', $category->id)->get();
+        $categories = Category::select('id', 'name')
+        ->where('id', '<>', $category->id)
+        ->whereNull('parent_id')
+        ->get();
         return view('admin.category.edit', compact('category', 'categories'));
     }
 

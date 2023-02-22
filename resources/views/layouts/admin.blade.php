@@ -12,6 +12,9 @@
     <!-- plugins:css -->
     <link rel="stylesheet" href="{{ asset('admin/vendors/mdi/css/materialdesignicons.min.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/vendors/base/vendor.bundle.base.css') }}">
+
+    <link rel="stylesheet" href="{{ asset('admin/vendors/select2/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('admin/vendors/select2/select2-bootstrap.min.css') }}">
     <!-- endinject -->
     <!-- plugin css for this page -->
     <link rel="stylesheet" href="{{ asset('admin/vendors/datatables.net-bs4/dataTables.bootstrap4.css') }}">
@@ -40,6 +43,8 @@
 
     <!-- plugins:js -->
     <script src="{{ asset('admin/vendors/base/vendor.bundle.base.js') }}"></script>
+    <script src="{{ asset('admin/vendors/select2/select2.min.js') }}"></script>
+    
     <!-- endinject -->
     <!-- Plugin js for this page-->
     <script src="{{ asset('admin/vendors/chart.js/Chart.min.js') }}"></script>
@@ -57,6 +62,7 @@
     <script src="{{ asset('admin/js/jquery.dataTables.js') }}"></script>
     <script src="{{ asset('admin/js/dataTables.bootstrap4.js') }}"></script>
     <!-- End custom js for this page-->
+    <script src="{{ asset('admin/vendors/select2/select2.js') }}"></script>
 
     @livewireScripts
     <script>
@@ -73,6 +79,35 @@
                     .replace(/ /g, '-')
                     .replace(/[^\w-]+/g, '');
         }
+
+		$(function() {
+        //     $('ul.nav .nav-item .collapse').removeClass("show");
+		// 	$('ul.nav .nav-item').removeClass("active");
+		// 	$('ul.nav .nav-link').removeClass("active");
+		// 	$('ul.nav .sub-menu').removeClass("active");
+
+			var url = window.location.href;
+            $('ul.nav .nav-item').removeClass("active");
+            $('ul.nav .nav-item').find('.collapse').removeClass("show");
+			$("ul.nav li.nav-item").each(function(index, e) {
+				if($(this).find('.nav-link').attr("href") == url) {
+                    console.log(111);
+                    $(this).parents('nav-item').addClass("active");
+                    $(this).find('.collapse').addClass("show");
+		// 			$(this).addClass("show");
+		// 			$(this).addClass("active");
+		// 			$(this).find('.nav-link').addClass("active");
+		// 		}
+		// 		$(this).find('li.sub-menu').each(function() {
+		// 			if($(this).find('.nav-link').attr("href") == url) {
+		// 				$(this).parents('.nav-item').addClass("show")
+		// 				$(this).parents('.nav-item').addClass("active")
+		// 				$(this).addClass("active");
+		// 				$(this).find('.nav-link').addClass("active");
+					}
+				// })
+			})
+		})
     </script>
     @stack('script')
 </body>

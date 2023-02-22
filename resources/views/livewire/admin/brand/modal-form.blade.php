@@ -12,7 +12,7 @@
                         <div class="modal-body">
                             <div class="mb-3">
                                 <label for="">Brand Name</label>
-                                <input type="text" wire:model.defer="name" class="form-control generate-slug">
+                                <input type="text" wire:model.defer="name" class="form-control generate-slug" wire:keydown="generateSlug">
                                 @error('name')<small class="text-danger">{{ $message }}</small>@enderror
                             </div>
                             <div class="mb-3">
@@ -20,6 +20,14 @@
                                 <input type="text" wire:model.defer="slug" class="form-control name-slug" readonly>
                                 @error('slug')<small class="text-danger">{{ $message }}</small>@enderror
                             </div>
+                            <div class="mb-3">
+                                <label for="">Brand Image</label>
+                                <input type="file" wire:model.defer="image" class="form-control">
+                                @error('image')<small class="text-danger">{{ $message }}</small>@enderror
+                            </div>
+                            @if ($image)
+                                <x-image :path="$image->temporaryUrl()" :width="64" :height="64"/>
+                            @endif
                             <div class="mb-3">
                                 <label for="">Status</label>
                                 <input type="checkbox" value="1" wire:model.defer="status" />
@@ -35,7 +43,6 @@
         </div>
     </div>
 </div>
-
 
 <!-- Modal Update -->
 <div wire:ignore.self class="modal fade" id="updateBrandModal" tabindex="-1" aria-labelledby="brandModal" aria-hidden="true">
@@ -66,6 +73,16 @@
                                 <input type="text" wire:model.defer="slug" class="form-control name-slug" readonly>
                                 @error('slug')<small class="text-danger">{{ $message }}</small>@enderror
                             </div>
+                            <div class="mb-3">
+                                <label for="">Brand Image</label>
+                                <input type="file" wire:model.defer="image" class="form-control">
+                                @error('image')<small class="text-danger">{{ $message }}</small>@enderror
+                            </div>
+                            @if(!$image)
+                                <x-image :path="$imageUrl" :width="64" :height="64"/>
+                            @else
+                                <x-image :path="$image->temporaryUrl()" :width="64" :height="64"/>
+                            @endif
                             <div class="mb-3">
                                 <label for="">Status</label>
                                 <input type="checkbox" value="1" wire:model.defer="status" />

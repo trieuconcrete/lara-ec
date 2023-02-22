@@ -6,20 +6,28 @@ use App\Models\Brand;
 use Livewire\Component;
 use Illuminate\Support\Str;
 use Livewire\WithPagination;
+use Livewire\WithFileUploads;
+use Illuminate\Support\Facades\File;
 
 class Index extends Component
 {
-    use WithPagination;
+    use WithPagination, WithFileUploads;
     protected $paginationTheme = 'bootstrap';
     
-    public $name, $slug, $status, $brandId;
+    public $name, $slug, $status, $brandId, $image, $isEdit, $imageUrl;
 
     public function rules()
     {
         return [
             'name' => 'required|string',
-            'status' => 'nullable'
+            'status' => 'nullable',
+            'image' => 'nullable|image|max:1024', // 1MB Max
         ];
+    }
+
+    public function generateSlug()
+    {
+        $this->slug = Str::slug($this->name);
     }
 
     public function resetInput()
@@ -27,6 +35,7 @@ class Index extends Component
         $this->name = null;
         $this->slug = null;
         $this->status = null;
+        $this->image = null;
     }
 
     public function closeModal()
@@ -36,16 +45,23 @@ class Index extends Component
 
     public function openModal()
     {
+        $this->isEdit = false;
         $this->resetInput();
     }
 
     public function storeBrand()
     {
         $validatedData = $this->validate();
+        if ($this->image) {
+            $ext = $this->image->getClientOriginalExtension();
+            $filename = time().'.'.$ext;
+            $this->image->storeAs('uploads/brand', $filename);
+        }
         Brand::create([
             'name' => $this->name,
             'slug' => Str::slug($this->name),
-            'status' => $this->status ? 1 : 0
+            'status' => $this->status ? 1 : 0,
+            'image' => $filename ?? null,
         ]);
         session()->flash('message', 'Brand Added Successfully');
         $this->dispatchBrowserEvent('close-modal');
@@ -54,21 +70,36 @@ class Index extends Component
 
     public function editBrand(int $id)
     {
+        $this->isEdit = true;
         $this->brandId = $id;
         $brand = Brand::find($id);
         $this->name = $brand->name;
         $this->slug = $brand->slug;
         $this->status = $brand->status;
+        $this->imageUrl = $brand->image ? asset('storage/uploads/brand/'.$brand->image) : null;
     }
 
     public function updateBrand()
     {
         $validatedData = $this->validate();
-        Brand::findOrFail($this->brandId)->update([
+        $brand = Brand::findOrFail($this->brandId);
+        $data = [
             'name' => $this->name,
             'slug' => Str::slug($this->name),
             'status' => $this->status ? 1 : 0
-        ]);
+        ];
+        if ($this->image) {
+            $path = 'storage/uploads/brand/'.$brand->image;
+            if(File::exists($path)) {
+                File::delete($path);
+            }
+
+            $ext = $this->image->getClientOriginalExtension();
+            $filename = time().'.'.$ext;
+            $this->image->storeAs('uploads/brand', $filename);
+            $data['image'] = $filename;
+        }
+        $brand->update($data);
         session()->flash('message', 'Brand Updated Successfully');
         $this->dispatchBrowserEvent('close-modal');
         $this->resetInput();
@@ -82,6 +113,10 @@ class Index extends Component
     public function deleteBrand()
     {
         $brand = Brand::find($this->brandId);
+        $path = 'storage/uploads/brand/'.$brand->image ?? null;
+        if(File::exists($path)) {
+            File::delete($path);
+        }
         $brand->delete();
         session()->flash('message', 'Deleted successfully!');
         $this->dispatchBrowserEvent('close-modal');
