@@ -52,8 +52,9 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Image</th>
-                                    <th>Category</th>
                                     <th>Name</th>
+                                    <th>Category</th>
+                                    <th>Brand</th>
                                     <th>Origin Price</th>
                                     <th>Selling Price</th>
                                     <th>Status</th>
@@ -67,8 +68,9 @@
                                         <td>
                                             <x-image :path="$item->getImagePath()" />
                                         </td>
-                                        <td>{{ $item->category->name }}</td>
                                         <td>{{ $item->name }}</td>
+                                        <td>{{ $item->category->name }}</td>
+                                        <td>{{ optional($item->brand)->name }}</td>
                                         <td>{{ number_format($item->original_price, 2) }}</td>
                                         <td>{{ number_format($item->selling_price, 2) }}</td>
                                         <td>

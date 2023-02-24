@@ -37,7 +37,7 @@
                                     <tr>
                                         <td>{{ $item->id }}</td>
                                         <td>
-                                            <x-image :path="$item->image ? asset('storage/uploads/brand/'.$item->image) : null" />
+                                            <x-image :path="$item->getImagePath()" />
                                         </td>
                                         <td>{{ $item->name }}</td>
                                         <td>

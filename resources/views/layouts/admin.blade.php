@@ -8,7 +8,6 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
     <!-- plugins:css -->
     <link rel="stylesheet" href="{{ asset('admin/vendors/mdi/css/materialdesignicons.min.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/vendors/base/vendor.bundle.base.css') }}">
@@ -43,7 +42,6 @@
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- plugins:js -->
     <script src="{{ asset('admin/vendors/base/vendor.bundle.base.js') }}"></script>
     <script src="{{ asset('admin/vendors/select2/select2.min.js') }}"></script>
@@ -83,20 +81,20 @@
                     .replace(/[^\w-]+/g, '');
         }
 
-		$(function() {
+		// $(function() {
         //     $('ul.nav .nav-item .collapse').removeClass("show");
 		// 	$('ul.nav .nav-item').removeClass("active");
 		// 	$('ul.nav .nav-link').removeClass("active");
 		// 	$('ul.nav .sub-menu').removeClass("active");
 
-			var url = window.location.href;
-            $('ul.nav .nav-item').removeClass("active");
-            $('ul.nav .nav-item').find('.collapse').removeClass("show");
-			$("ul.nav li.nav-item").each(function(index, e) {
-				if($(this).find('.nav-link').attr("href") == url) {
-                    console.log(111);
-                    $(this).parents('nav-item').addClass("active");
-                    $(this).find('.collapse').addClass("show");
+			// var url = window.location.href;
+            // $('ul.nav .nav-item').removeClass("active");
+            // $('ul.nav .nav-item').find('.collapse').removeClass("show");
+			// $("ul.nav li.nav-item").each(function(index, e) {
+			// 	if($(this).find('.nav-link').attr("href") == url) {
+            //         console.log(111);
+            //         $(this).parents('nav-item').addClass("active");
+            //         $(this).find('.collapse').addClass("show");
 		// 			$(this).addClass("show");
 		// 			$(this).addClass("active");
 		// 			$(this).find('.nav-link').addClass("active");
@@ -107,10 +105,10 @@
 		// 				$(this).parents('.nav-item').addClass("active")
 		// 				$(this).addClass("active");
 		// 				$(this).find('.nav-link').addClass("active");
-					}
-				// })
-			})
-		})
+		// 			}
+		// 		// })
+		// 	})
+		// })
     </script>
     @stack('script')
 </body>

@@ -55,13 +55,15 @@ class Index extends Component
         if ($this->image) {
             $ext = $this->image->getClientOriginalExtension();
             $filename = time().'.'.$ext;
-            $this->image->storeAs('uploads/brand', $filename);
+            $path = 'uploads/brand/';
+            $this->image->storeAs($path, $filename);
+            $filePath = $path.$filename;
         }
         Brand::create([
             'name' => $this->name,
             'slug' => Str::slug($this->name),
             'status' => $this->status ? 1 : 0,
-            'image' => $filename ?? null,
+            'image' => $filePath ?? null,
         ]);
         session()->flash('message', 'Brand Added Successfully');
         $this->dispatchBrowserEvent('close-modal');
@@ -76,7 +78,7 @@ class Index extends Component
         $this->name = $brand->name;
         $this->slug = $brand->slug;
         $this->status = $brand->status;
-        $this->imageUrl = $brand->image ? asset('storage/uploads/brand/'.$brand->image) : null;
+        $this->imageUrl = $brand->image ? asset('storage/'.$brand->image) : null;
     }
 
     public function updateBrand()
@@ -89,15 +91,16 @@ class Index extends Component
             'status' => $this->status ? 1 : 0
         ];
         if ($this->image) {
-            $path = 'storage/uploads/brand/'.$brand->image;
+            $path = storage_path().'/'.$brand->image;
             if(File::exists($path)) {
                 File::delete($path);
             }
 
             $ext = $this->image->getClientOriginalExtension();
             $filename = time().'.'.$ext;
-            $this->image->storeAs('uploads/brand', $filename);
-            $data['image'] = $filename;
+            $path = 'uploads/brand/';
+            $this->image->storeAs($path, $filename);
+            $data['image'] = $path.$filename;
         }
         $brand->update($data);
         session()->flash('message', 'Brand Updated Successfully');
@@ -113,7 +116,7 @@ class Index extends Component
     public function deleteBrand()
     {
         $brand = Brand::find($this->brandId);
-        $path = 'storage/uploads/brand/'.$brand->image ?? null;
+        $path = storage_path().'/'.$brand->image ?? null;
         if(File::exists($path)) {
             File::delete($path);
         }

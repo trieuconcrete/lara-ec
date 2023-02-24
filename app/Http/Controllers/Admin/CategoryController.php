@@ -3,14 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Http\Requests\CategoryFromRequest;
 use App\Models\Category;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 
-class CategoryController extends Controller
+class CategoryController extends BaseController
 {
     public function index()
     {
@@ -41,11 +40,7 @@ class CategoryController extends Controller
             $category->status = $validateData['status'] ?? 0;
             // store file
             if ($request->hasFile('image')) {
-                $file = $request->file('image');
-                $ext = $file->getClientOriginalExtension();
-                $filename = time().'.'.$ext;
-                $file->storeAs('uploads/category', $filename);
-                $category->image = $filename;
+                $category->image = $this->uploadImage($path = 'uploads/category/', $request->file('image'));
             }
 
             $category->save();
@@ -80,15 +75,7 @@ class CategoryController extends Controller
             $category->status = $validateData['status'] ?? 0;
             // store file
             if ($request->hasFile('image')) {
-                $path = 'storage/uploads/category/'.$category->image;
-                if(File::exists($path)) {
-                    File::delete($path);
-                }
-                $file = $request->file('image');
-                $ext = $file->getClientOriginalExtension();
-                $filename = time().'.'.$ext;
-                $file->storeAs('uploads/category', $filename);
-                $category->image = $filename;
+                $category->image = $this->uploadImage($path = 'uploads/category/', $request->file('image'), $category->image);
             }
 
             $category->update();

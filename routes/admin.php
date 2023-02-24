@@ -33,4 +33,5 @@ Route::controller(ProductController::class)->prefix('products')->name('product.'
     Route::post('create', 'save')->name('save');
     Route::get('/{product}/edit', 'edit')->name('edit');
     Route::put('/{product}/update', 'update')->name('update');
+    Route::get('/{image_id}/image', 'removeImage')->name('remove.image');
 });

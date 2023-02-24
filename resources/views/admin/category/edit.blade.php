@@ -52,7 +52,7 @@
                             <label for="image">Image</label>
                             <input type="file" name="image" class="form-control" />
                             @error('image') <small class="text-danger">{{ $message }}</small>@enderror
-                            <img src="{{ asset('storage/uploads/category/'.$category->image) }}" alt="" width="60px" height="60px">
+                            <x-image :path="$category->getImagePath()" :width="60" :height="60" />
                         </div>
                         <div class="col-md-6 mb-3 form-group">
                             <label for="form-check-label">

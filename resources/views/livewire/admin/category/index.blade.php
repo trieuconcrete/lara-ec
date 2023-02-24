@@ -57,7 +57,9 @@
                                 @foreach ($categories as $item)
                                     <tr>
                                         <td>{{ $item->id }}</td>
-                                        <td><img src="{{ asset('storage/uploads/category/'.$item->image) }}" alt=""></td>
+                                        <td>
+                                            <x-image :path="$item->getImagePath()" />
+                                        </td>
                                         <td>{{ $item->name }}</td>
                                         <td>
                                             @if (!$item->status)

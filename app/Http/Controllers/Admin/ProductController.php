@@ -17,7 +17,7 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $products = Product::with('category')->orderBy('id', 'DESC')->paginate(10);
+        $products = Product::with('category', 'brand')->orderBy('id', 'DESC')->paginate(10);
         return view('admin.product.index', ['products' => $products]);
     }
 
@@ -77,5 +77,63 @@ class ProductController extends Controller
         $brands = Brand::select('id', 'name')->get();
         $product = Product::with('productImages')->findOrFail($id);
         return view('admin.product.edit', compact('product', 'categories', 'brands'));
+    }
+
+    public function update(ProductFormRequest $request, int $product_id)
+    {
+        try {
+            $product = Category::findOrFail($request->category_id)
+                    ->products()->where('id', $product_id)->first();
+            if ($product) {
+                $data = [
+                    'category_id' => $request->category_id,
+                    'brand_id' => $request->brand_id ?? null,
+                    'name' => $request->name,
+                    'slug' => Str::slug($request->name),
+                    'small_description' => $request->small_description ?? null,
+                    'description' => $request->description ?? null,
+                    'original_price' => $request->original_price ?? null,
+                    'selling_price' => $request->selling_price ?? null,
+                    'quantity' => $request->quantity ?? null,
+                    'meta_title' => $request->meta_title ?? null,
+                    'meta_keyword' => $request->meta_keyword ?? null,
+                    'meta_description' => $request->meta_description ?? null,
+                    'status' => $request->status ?? null,
+                    'trending' => $request->trending ?? null
+                ];
+                $product->update($data);
+
+                if ($request->hasFile('product_images')) {
+                    $path = 'uploads/product';
+                    foreach ($request->file('product_images') as $file) {
+                        $ext = $file->getClientOriginalExtension();
+                        $filename = time().'.'.$ext;
+                        $file->storeAs($path, $filename);
+                        $imagePath = $path.'/'.$filename;
+                        
+                        $product->productImages()->create([
+                            'product_id' => $product_id,
+                            'image' => $imagePath
+                        ]);
+                    }
+                }
+            } else {
+                return redirect()->back()->with('error', "Product not found!");
+            }
+            return redirect(route('admin.product.index'))->with('message', 'Product Updated Successfully!');
+        } catch(\Exception $e) {
+            return redirect()->back()->with('error', "Oops an error occurred!</br>".$e->getMessage());
+        }
+    }
+
+    public function removeImage($image_id)
+    {
+        $productImage = ProductImage::find($image_id);
+        $fileStoragePath = 'storage/'.$productImage->image;
+        if(File::exists($fileStoragePath)) {
+            File::delete($fileStoragePath);
+        }
+        $productImage->delete();
+        return redirect()->back()->with('message', 'Product Image Deleted Successfully!');
     }
 }
