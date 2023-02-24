@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class ProductImage extends Model
 {
@@ -14,4 +15,10 @@ class ProductImage extends Model
         'product_id',
         'image'
     ];
+
+    public function getImagePath()
+    {
+        $url = $this->image ? Storage::disk('local')->url($this->image) : null;
+        return $url ? asset($url) : null;
+    }
 }

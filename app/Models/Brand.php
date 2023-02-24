@@ -21,4 +21,9 @@ class Brand extends Model
         'phone',
         'image'
     ];
+
+    public function products()
+    {
+        return $this->hasOne(Product::class, 'brand_id', 'id');
+    }
 }

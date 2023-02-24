@@ -27,29 +27,32 @@ class CategoryController extends Controller
 
     public function save(CategoryFromRequest $request)
     {
-        $validateData = $request->validated();
-        $category = new Category();
+        try {
+            $validateData = $request->validated();
+            $category = new Category();
 
-        $category->parent_id = $validateData['parent_id'];
-        $category->name = $validateData['name'];
-        $category->slug = Str::slug($validateData['slug']);
-        $category->description = $validateData['description'];
-        $category->meta_title = $validateData['meta_title'];
-        $category->meta_keyword = $validateData['meta_keyword'];
-        $category->meta_description = $validateData['meta_description'];
-        $category->status = $validateData['status'] ?? 0;
+            $category->parent_id = $validateData['parent_id'];
+            $category->name = $validateData['name'];
+            $category->slug = Str::slug($validateData['slug']);
+            $category->description = $validateData['description'];
+            $category->meta_title = $validateData['meta_title'];
+            $category->meta_keyword = $validateData['meta_keyword'];
+            $category->meta_description = $validateData['meta_description'];
+            $category->status = $validateData['status'] ?? 0;
+            // store file
+            if ($request->hasFile('image')) {
+                $file = $request->file('image');
+                $ext = $file->getClientOriginalExtension();
+                $filename = time().'.'.$ext;
+                $file->storeAs('uploads/category', $filename);
+                $category->image = $filename;
+            }
 
-        // store file
-        if ($request->hasFile('image')) {
-            $file = $request->file('image');
-            $ext = $file->getClientOriginalExtension();
-            $filename = time().'.'.$ext;
-            $file->storeAs('uploads/category', $filename);
-            $category->image = $filename;
+            $category->save();
+            return redirect(route('admin.category.index'))->with('message', 'Category Added Successfully!');
+        } catch(\Exception $e) {
+            return redirect(route('admin.category.create'))->with('error', "Oops an error occurred!</br>".$e->getMessage());
         }
-
-        $category->save();
-        return redirect(route('admin.category.index'))->with('message', 'Category Added Successfully!');
     }
 
     public function edit(Category $category)
@@ -63,33 +66,35 @@ class CategoryController extends Controller
 
     public function update(CategoryFromRequest $request, $category)
     {
-        $validateData = $request->validated();
-        $category = Category::findOrFail($category);
+        try {
+            $validateData = $request->validated();
+            $category = Category::findOrFail($category);
 
-        $category->parent_id = $validateData['parent_id'];
-        $category->name = $validateData['name'];
-        $category->slug = Str::slug($validateData['slug']);
-        $category->description = $validateData['description'];
-        $category->meta_title = $validateData['meta_title'];
-        $category->meta_keyword = $validateData['meta_keyword'];
-        $category->meta_description = $validateData['meta_description'];
-        $category->status = $validateData['status'] ?? 0;
-
-        // store file
-        if ($request->hasFile('image')) {
-            $path = 'storage/uploads/category/'.$category->image;
-            if(File::exists($path)) {
-                File::delete($path);
+            $category->parent_id = $validateData['parent_id'];
+            $category->name = $validateData['name'];
+            $category->slug = Str::slug($validateData['slug']);
+            $category->description = $validateData['description'];
+            $category->meta_title = $validateData['meta_title'];
+            $category->meta_keyword = $validateData['meta_keyword'];
+            $category->meta_description = $validateData['meta_description'];
+            $category->status = $validateData['status'] ?? 0;
+            // store file
+            if ($request->hasFile('image')) {
+                $path = 'storage/uploads/category/'.$category->image;
+                if(File::exists($path)) {
+                    File::delete($path);
+                }
+                $file = $request->file('image');
+                $ext = $file->getClientOriginalExtension();
+                $filename = time().'.'.$ext;
+                $file->storeAs('uploads/category', $filename);
+                $category->image = $filename;
             }
-            $file = $request->file('image');
-            $ext = $file->getClientOriginalExtension();
-            $filename = time().'.'.$ext;
-            $file->storeAs('uploads/category', $filename);
-            $category->image = $filename;
+
+            $category->update();
+            return redirect(route('admin.category.index'))->with('message', 'Category Updated Successfully!');
+        } catch(\Exception $e) {
+            return redirect(route('admin.category.update'))->with('error', "Oops an error occurred!</br>".$e->getMessage());
         }
-
-        $category->update();
-
-        return redirect(route('admin.category.index'))->with('message', 'Category Updated Successfully!');
     }
 }

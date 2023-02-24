@@ -3,7 +3,6 @@
 @section('content')
 
 <div class="row">
-    <x-button />
     <div class="col-md-12 grid-margin">
         @include('layouts.includes.admin.top_page', [
             'icon' => 'mdi-view-list',

@@ -8,7 +8,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
     <!-- plugins:css -->
     <link rel="stylesheet" href="{{ asset('admin/vendors/mdi/css/materialdesignicons.min.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/vendors/base/vendor.bundle.base.css') }}">
@@ -25,6 +25,8 @@
     <link rel="shortcut icon" href="{{ asset('admin/images/favicon.png') }}" />
 
     @livewireStyles
+
+    @stack('style')
 </head>
 <body>
     <div class="container-scroller">
@@ -41,6 +43,7 @@
         </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- plugins:js -->
     <script src="{{ asset('admin/vendors/base/vendor.bundle.base.js') }}"></script>
     <script src="{{ asset('admin/vendors/select2/select2.min.js') }}"></script>

@@ -22,9 +22,9 @@ return new class extends Migration
             $table->mediumText('small_description')->nullable();
             $table->longText('description')->nullable();
 
-            $table->integer('original_price');
-            $table->integer('selling_price');
-            $table->integer('quantity');
+            $table->integer('original_price')->nullable();
+            $table->integer('selling_price')->nullable();
+            $table->integer('quantity')->nullable();
             $table->tinyInteger('trending')->default(0)->comment('0=not-trending,1=trending');
             $table->tinyInteger('status')->default(0)->comment('0=hidden,1=publish');
 

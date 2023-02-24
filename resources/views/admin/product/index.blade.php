@@ -8,10 +8,10 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="deleteModalLabel">Category Delete</h5>
+                    <h5 class="modal-title" id="deleteModalLabel">Product Delete</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form wire:submit.prevent="destroyCategory">
+                <form wire:submit.prevent="deleteProduct">
                     <div class="modal-body">
                         <h6>Are you sure want to delete?</h6>
                     </div>
@@ -25,9 +25,6 @@
     </div>
     <div class="row">
         <div class="col-md-12 grid-margin">
-            @if (session('message'))
-                <h6 class="alert alert-success">{{ session('message') }}</h6>
-            @endif
             @include('layouts.includes.admin.top_page', [
                 'icon' => 'mdi-view-list',
                 'title' => 'Product',
@@ -54,7 +51,11 @@
                             <thead>
                                 <tr>
                                     <th>ID</th>
+                                    <th>Image</th>
+                                    <th>Category</th>
                                     <th>Name</th>
+                                    <th>Origin Price</th>
+                                    <th>Selling Price</th>
                                     <th>Status</th>
                                     <th>Action</th>
                                 </tr>
@@ -63,7 +64,13 @@
                                 @foreach ($products as $item)
                                     <tr>
                                         <td>{{ $item->id }}</td>
+                                        <td>
+                                            <x-image :path="$item->getImagePath()" />
+                                        </td>
+                                        <td>{{ $item->category->name }}</td>
                                         <td>{{ $item->name }}</td>
+                                        <td>{{ number_format($item->original_price, 2) }}</td>
+                                        <td>{{ number_format($item->selling_price, 2) }}</td>
                                         <td>
                                             @if (!$item->status)
                                                 <label class="badge bg-danger">Hidden</label>
@@ -83,7 +90,7 @@
                                 @endforeach
                             </tbody>
                         </table>
-                        <div class="mt-3 ">
+                        <div class="container mt-3">
                             {{ $products->links() }}
                         </div>
                     </div>
