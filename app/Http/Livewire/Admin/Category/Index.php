@@ -5,7 +5,7 @@ namespace App\Http\Livewire\Admin\Category;
 use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\Category;
-use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 
 class Index extends Component
 {
@@ -22,9 +22,8 @@ class Index extends Component
     public function destroyCategory()
     {
         $category = Category::find($this->categoryId);
-        $path = storage_path().'/'.$category->image;
-        if(File::exists($path)) {
-            File::delete($path);
+        if(Storage::exists($category->image)) {
+            Storage::delete($category->image);
         }
         $category->delete();
         session()->flash('message', 'Deleted successfully!');

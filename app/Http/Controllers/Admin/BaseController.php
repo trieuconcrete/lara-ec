@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 
 class BaseController extends Controller
 {
@@ -13,9 +14,8 @@ class BaseController extends Controller
         if ($file) {
             // remove file
             if ($filePath) {
-                $fileStoragePath = storage_path().'/'.$filePath;
-                if(File::exists($fileStoragePath)) {
-                    File::delete($fileStoragePath);
+                if(Storage::exists($filePath)) {
+                    Storage::delete($filePath);
                 }
             }
             $ext = $file->getClientOriginalExtension();

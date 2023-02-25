@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-class BrandController extends BaseController
+class ColorController extends BaseController
 {
     public function index()
     {
-        return view('admin.brand.index');
+        return view('admin.color.index');
     }
 }

@@ -7,7 +7,7 @@
                     <h5 class="modal-title" id="deleteModalLabel">Product Delete</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form wire:submit.prevent="deleteProduct">
+                <form wire:submit.prevent="destroyProduct">
                     <div class="modal-body">
                         <h6>Are you sure want to delete?</h6>
                     </div>
@@ -80,7 +80,7 @@
                                             <a href="{{ route('admin.product.edit', $item->id) }}" class="btn btn-inverse-success btn-fw btn-sm">
                                                 <span class="mdi mdi-pencil"></span>
                                             </a>
-                                            <a href="#" data-bs-toggle="modal" data-bs-target="#deleteModal" class="btn btn-inverse-danger btn-fwb btn-sm">
+                                            <a href="#" wire:click="deleteProduct({{$item->id}})"  data-bs-toggle="modal" data-bs-target="#deleteModal" class="btn btn-inverse-danger btn-fwb btn-sm">
                                                 <span class="mdi mdi-trash-can"></span>
                                             </a>
                                         </td>

@@ -2,12 +2,13 @@
 
 namespace App\Http\Livewire\Admin\Brand;
 
-use App\Models\Brand;
 use Livewire\Component;
+use App\Models\Brand;
 use Illuminate\Support\Str;
 use Livewire\WithPagination;
 use Livewire\WithFileUploads;
-use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\BrandFormRequest;
 
 class Index extends Component
 {
@@ -18,11 +19,7 @@ class Index extends Component
 
     public function rules()
     {
-        return [
-            'name' => 'required|string',
-            'status' => 'nullable',
-            'image' => 'nullable|image|max:1024', // 1MB Max
-        ];
+        return (new BrandFormRequest())->rules();
     }
 
     public function generateSlug()
@@ -91,9 +88,8 @@ class Index extends Component
             'status' => $this->status ? 1 : 0
         ];
         if ($this->image) {
-            $path = storage_path().'/'.$brand->image;
-            if(File::exists($path)) {
-                File::delete($path);
+            if($brand->image && Storage::exists($brand->image)) {
+                Storage::delete($brand->image);
             }
 
             $ext = $this->image->getClientOriginalExtension();
@@ -116,9 +112,8 @@ class Index extends Component
     public function deleteBrand()
     {
         $brand = Brand::find($this->brandId);
-        $path = storage_path().'/'.$brand->image ?? null;
-        if(File::exists($path)) {
-            File::delete($path);
+        if($brand->image && Storage::exists($brand->image)) {
+            Storage::delete($brand->image);
         }
         $brand->delete();
         session()->flash('message', 'Deleted successfully!');

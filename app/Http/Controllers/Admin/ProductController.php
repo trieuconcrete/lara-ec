@@ -9,7 +9,6 @@ use App\Models\Brand;
 use App\Models\Product;
 use App\Models\ProductImage;
 use Illuminate\Support\Str;
-use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 
 class ProductController extends BaseController
@@ -118,9 +117,8 @@ class ProductController extends BaseController
     public function removeImage($image_id)
     {
         $productImage = ProductImage::find($image_id);
-        $fileStoragePath = 'storage/' . $productImage->image;
-        if (File::exists($fileStoragePath)) {
-            File::delete($fileStoragePath);
+        if (Storage::exists($productImage->image)) {
+            Storage::delete($productImage->image);
         }
         $productImage->delete();
         return redirect()->back()->with('message', 'Product Image Deleted Successfully!');

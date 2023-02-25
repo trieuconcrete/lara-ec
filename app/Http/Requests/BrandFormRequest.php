@@ -25,7 +25,8 @@ class BrandFormRequest extends FormRequest
     {
         return [
             'name' => 'required|string',
-            'slug' => 'required|string'
+            'status' => 'nullable',
+            'image' => 'nullable|image|max:1024', // 1MB Max
         ];
     }
 }

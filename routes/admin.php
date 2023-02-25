@@ -35,3 +35,7 @@ Route::controller(ProductController::class)->prefix('products')->name('product.'
     Route::put('/{product}/update', 'update')->name('update');
     Route::get('/{image_id}/image', 'removeImage')->name('remove.image');
 });
+
+Route::controller(ColorController::class)->prefix('colors')->name('color.')->group(function () {
+    Route::get('/', 'index')->name('index');
+});
