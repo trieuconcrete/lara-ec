@@ -81,6 +81,10 @@
                     .replace(/[^\w-]+/g, '');
         }
 
+        $(".alert").fadeTo(5000, 1000).slideUp(1000, function(){
+            $(".alert").slideUp(1000);
+        });
+
 		// $(function() {
         //     $('ul.nav .nav-item .collapse').removeClass("show");
 		// 	$('ul.nav .nav-item').removeClass("active");

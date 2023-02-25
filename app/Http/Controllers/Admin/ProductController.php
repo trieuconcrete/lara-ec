@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\ProductFormRequest;
 use App\Models\Category;
@@ -13,12 +12,11 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 
-class ProductController extends Controller
+class ProductController extends BaseController
 {
     public function index()
     {
-        $products = Product::with('category', 'brand')->orderBy('id', 'DESC')->paginate(10);
-        return view('admin.product.index', ['products' => $products]);
+        return view('admin.product.index');
     }
 
     public function create()
@@ -52,22 +50,18 @@ class ProductController extends Controller
             $product = $category->products()->create($data);
             // insert product images
             if ($request->hasFile('product_images')) {
-                $path = 'uploads/product';
+                $path = 'uploads/product/';
                 foreach ($request->file('product_images') as $file) {
-                    $ext = $file->getClientOriginalExtension();
-                    $filename = time().'.'.$ext;
-                    $file->storeAs($path, $filename);
-                    $imagePath = $path.'/'.$filename;
                     $product->productImages()->create([
                         'product_id' => $product->id,
-                        'image' => $imagePath
+                        'image' => $this->uploadImage($path, $file)
                     ]);
                 }
             }
 
             return redirect(route('admin.product.index'))->with('message', 'Product Added Successfully!');
-        } catch(\Exception $e) {
-            return redirect(route('admin.product.create'))->with('error', "Oops an error occurred!</br>Errors:".$e->getMessage());
+        } catch (\Exception $e) {
+            return redirect(route('admin.product.create'))->with('error', "Oops an error occurred!</br>Errors:" . $e->getMessage());
         }
     }
 
@@ -83,7 +77,7 @@ class ProductController extends Controller
     {
         try {
             $product = Category::findOrFail($request->category_id)
-                    ->products()->where('id', $product_id)->first();
+                ->products()->where('id', $product_id)->first();
             if ($product) {
                 $data = [
                     'category_id' => $request->category_id,
@@ -102,35 +96,30 @@ class ProductController extends Controller
                     'trending' => $request->trending ?? null
                 ];
                 $product->update($data);
-
+                // upload product images
                 if ($request->hasFile('product_images')) {
-                    $path = 'uploads/product';
+                    $path = 'uploads/product/';
                     foreach ($request->file('product_images') as $file) {
-                        $ext = $file->getClientOriginalExtension();
-                        $filename = time().'.'.$ext;
-                        $file->storeAs($path, $filename);
-                        $imagePath = $path.'/'.$filename;
-                        
                         $product->productImages()->create([
                             'product_id' => $product_id,
-                            'image' => $imagePath
+                            'image' => $this->uploadImage($path, $file)
                         ]);
                     }
                 }
             } else {
-                return redirect()->back()->with('error', "Product not found!");
+                return redirect()->back()->with('error', "Product Not Found!");
             }
             return redirect(route('admin.product.index'))->with('message', 'Product Updated Successfully!');
-        } catch(\Exception $e) {
-            return redirect()->back()->with('error', "Oops an error occurred!</br>".$e->getMessage());
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', "Oops an error occurred!</br>" . $e->getMessage());
         }
     }
 
     public function removeImage($image_id)
     {
         $productImage = ProductImage::find($image_id);
-        $fileStoragePath = 'storage/'.$productImage->image;
-        if(File::exists($fileStoragePath)) {
+        $fileStoragePath = 'storage/' . $productImage->image;
+        if (File::exists($fileStoragePath)) {
             File::delete($fileStoragePath);
         }
         $productImage->delete();

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
 
 class BaseController extends Controller
 {
@@ -18,7 +19,7 @@ class BaseController extends Controller
                 }
             }
             $ext = $file->getClientOriginalExtension();
-            $filename = time().'.'.$ext;
+            $filename = time().'-'.Str::random(5).'.'.$ext;
             $file->storeAs($path, $filename);
             return $path.$filename;
         }
