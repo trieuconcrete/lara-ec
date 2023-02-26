@@ -44,6 +44,11 @@ class Product extends Model
         return $this->hasMany(ProductImage::class, 'product_id', 'id');
     }
 
+    public function productColors()
+    {
+        return $this->hasMany(productColor::class, 'product_id', 'id');
+    }
+
     public function firstImage()
     {
         return $this->hasOne(ProductImage::class)->orderBy('id', 'ASC');

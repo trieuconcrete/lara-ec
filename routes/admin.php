@@ -34,6 +34,8 @@ Route::controller(ProductController::class)->prefix('products')->name('product.'
     Route::get('/{product}/edit', 'edit')->name('edit');
     Route::put('/{product}/update', 'update')->name('update');
     Route::get('/{image_id}/image', 'removeImage')->name('remove.image');
+    Route::post('/color/{product_color_id}/quantity', 'updateQuantity')->name('color.update.quantity');
+    Route::post('/color/{product_color_id}', 'deleteColor')->name('color.delete');
 });
 
 Route::controller(ColorController::class)->prefix('colors')->name('color.')->group(function () {
