@@ -25,7 +25,6 @@ class CategoryController extends BaseController
     public function create()
     {
         $categories = Category::select('id', 'name')
-        ->whereNull('parent_id')
         ->get();
         return view('admin.category.create', ['categories' => $categories]);
     }
@@ -60,7 +59,6 @@ class CategoryController extends BaseController
     {
         $categories = Category::select('id', 'name')
         ->where('id', '<>', $category->id)
-        ->whereNull('parent_id')
         ->get();
         return view('admin.category.edit', compact('category', 'categories'));
     }
