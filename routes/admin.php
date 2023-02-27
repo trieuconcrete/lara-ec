@@ -41,3 +41,11 @@ Route::controller(ProductController::class)->prefix('products')->name('product.'
 Route::controller(ColorController::class)->prefix('colors')->name('color.')->group(function () {
     Route::get('/', 'index')->name('index');
 });
+
+Route::controller(SliderController::class)->prefix('sliders')->name('slider.')->group(function () {
+    Route::get('/', 'index')->name('index');
+    Route::get('create', 'create')->name('create');
+    Route::post('create', 'save')->name('save');
+    Route::get('/{slider}/edit', 'edit')->name('edit');
+    Route::put('/{slider}/update', 'update')->name('update');
+});
