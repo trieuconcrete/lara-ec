@@ -6,9 +6,17 @@ use Illuminate\Http\Request;
 use App\Http\Requests\CategoryFromRequest;
 use App\Models\Category;
 use Illuminate\Support\Str;
+use App\Repositories\CategoryRepositoryInterface as CategoryRepository;
 
 class CategoryController extends BaseController
 {
+    private $categoryRepo;
+
+    public function __construct(CategoryRepository $categoryRepo)
+    {
+        $this->categoryRepo = $categoryRepo;
+    }
+
     public function index()
     {
         return view('admin.category.index');
