@@ -1,7 +1,7 @@
 <div>
     <div class="row">
         <div class="col-md-12 grid-margin">
-            @include('layouts.includes.admin.top_page', [
+            @include('layouts.includes.admin.breadcrumb', [
                 'icon' => 'mdi-view-list',
                 'title' => 'Slider',
                 'functions' => [

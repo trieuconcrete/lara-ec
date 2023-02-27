@@ -47,7 +47,7 @@
     </li>
     <li class="nav-item">
         <a class="nav-link" href="{{ route('admin.color.index') }}">
-            <i class="mdi mdi-view-headline menu-icon"></i>
+            <i class="mdi mdi-palette menu-icon"></i>
             <span class="menu-title">Colors</span>
         </a>
     </li>
