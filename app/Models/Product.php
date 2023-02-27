@@ -49,14 +49,9 @@ class Product extends Model
         return $this->hasMany(productColor::class, 'product_id', 'id');
     }
 
-    public function firstImage()
-    {
-        return $this->hasOne(ProductImage::class)->orderBy('id', 'ASC');
-    }
-
     public function getImagePath()
     {
-        $url = $this->firstImage ? Storage::disk('local')->url($this->firstImage->image) : null;
+        $url = isset($this->productImages[0]) ? Storage::disk('local')->url($this->productImages[0]['image']) : null;
         return $url ? asset($url) : null;
     }
 }
