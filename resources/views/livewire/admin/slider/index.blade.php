@@ -1,4 +1,24 @@
 <div>
+    <!-- Modal -->
+    <div wire:ignore.self class="modal fade" id="deleteSliderModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalLabel">Slider Delete</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form wire:submit.prevent="destroySlider">
+                    <div class="modal-body">
+                        <h6>Are you sure want to delete?</h6>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Yes, Delete</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
     <div class="row">
         <div class="col-md-12 grid-margin">
             @include('layouts.includes.admin.breadcrumb', [
@@ -50,7 +70,7 @@
                                             <a href="{{ route('admin.slider.edit', $item->id) }}" class="btn btn-inverse-success btn-fw btn-sm">
                                                 <span class="mdi mdi-pencil"></span>
                                             </a>
-                                            <a href="#" wire:click="deleteSliderModal({{ $item->id }})" data-bs-toggle="modal" data-bs-target="#deleteSliderModal" class="btn btn-inverse-danger btn-fwb btn-sm">
+                                            <a href="#" wire:click="deleteSlider({{ $item->id }})" data-bs-toggle="modal" data-bs-target="#deleteSliderModal" class="btn btn-inverse-danger btn-fwb btn-sm">
                                                 <span class="mdi mdi-trash-can"></span>
                                             </a>
                                         </td>

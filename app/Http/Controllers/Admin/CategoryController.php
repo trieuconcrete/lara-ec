@@ -35,14 +35,14 @@ class CategoryController extends BaseController
             $validateData = $request->validated();
             $category = new Category();
 
-            $category->parent_id = $validateData['parent_id'];
-            $category->name = $validateData['name'];
-            $category->slug = Str::slug($validateData['slug']);
-            $category->description = $validateData['description'];
-            $category->meta_title = $validateData['meta_title'];
-            $category->meta_keyword = $validateData['meta_keyword'];
-            $category->meta_description = $validateData['meta_description'];
-            $category->status = $validateData['status'] ?? 0;
+            $category->parent_id = $request->parent_id;
+            $category->name = $request->name;
+            $category->slug = Str::slug($request->slug);
+            $category->description = $request->description;
+            $category->meta_title = $request->meta_title;
+            $category->meta_keyword = $request->meta_keyword;
+            $category->meta_description = $request->meta_description;
+            $category->status = $request->status ?? 0;
             // store file
             if ($request->hasFile('image')) {
                 $category->image = $this->uploadImage($path = 'uploads/category/', $request->file('image'));
@@ -69,14 +69,14 @@ class CategoryController extends BaseController
             $validateData = $request->validated();
             $category = Category::findOrFail($category);
 
-            $category->parent_id = $validateData['parent_id'];
-            $category->name = $validateData['name'];
-            $category->slug = Str::slug($validateData['slug']);
-            $category->description = $validateData['description'];
-            $category->meta_title = $validateData['meta_title'];
-            $category->meta_keyword = $validateData['meta_keyword'];
-            $category->meta_description = $validateData['meta_description'];
-            $category->status = $validateData['status'] ?? 0;
+            $category->parent_id = $request->parent_id;
+            $category->name = $request->name;
+            $category->slug = Str::slug($request->slug);
+            $category->description = $request->description;
+            $category->meta_title = $request->meta_title;
+            $category->meta_keyword = $request->meta_keyword;
+            $category->meta_description = $request->meta_description;
+            $category->status = $request->status ?? 0;
             // store file
             if ($request->hasFile('image')) {
                 $category->image = $this->uploadImage($path = 'uploads/category/', $request->file('image'), $category->image);
@@ -85,7 +85,7 @@ class CategoryController extends BaseController
             $category->update();
             return redirect(route('admin.category.index'))->with('message', 'Category Updated Successfully!');
         } catch(\Exception $e) {
-            return redirect(route('admin.category.update'))->with('error', "Oops an error occurred!</br>".$e->getMessage());
+            return redirect()->back()->with('error', "Oops an error occurred!</br>".$e->getMessage());
         }
     }
 }

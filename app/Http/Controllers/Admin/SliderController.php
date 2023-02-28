@@ -53,10 +53,24 @@ class SliderController extends BaseController
     {
         try {
             $validateData = $request->validated();
-            
+            $slider = Slider::findOrFail($slider);
+
+            $slider->title = $request->title;
+            $slider->title_md = $request->title_md;
+            $slider->title_sm = $request->title_sm;
+            $slider->link = $request->link;
+            $slider->text_link = $request->text_link;
+            $slider->description = $request->description;
+            $slider->status = $request->status ?? 0;
+            // store file
+            if ($request->hasFile('image')) {
+                $slider->image = $this->uploadImage($path = 'uploads/slider/', $request->file('image'), $slider->image);
+            }
+
+            $slider->update();
             return redirect(route('admin.slider.index'))->with('message', 'Slider Updated Successfully!');
         } catch(\Exception $e) {
-            return redirect(route('admin.slider.update'))->with('error', "Oops an error occurred!</br>".$e->getMessage());
+            return redirect()->back()->with('error', "Oops an error occurred!</br>".$e->getMessage());
         }
     }
 }
