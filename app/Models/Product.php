@@ -26,7 +26,8 @@ class Product extends Model
         'status',
         'meta_title',
         'meta_keyword',
-        'meta_description'
+        'meta_description',
+        'sale_off'
     ];
 
     public function category()
@@ -49,9 +50,26 @@ class Product extends Model
         return $this->hasMany(productColor::class, 'product_id', 'id');
     }
 
-    public function getImagePath()
+    public function getImagePath($index = 0)
     {
-        $url = isset($this->productImages[0]) ? Storage::disk('local')->url($this->productImages[0]['image']) : null;
+        $url = isset($this->productImages[$index]) ? Storage::disk('local')->url($this->productImages[$index]['image']) : null;
         return $url ? asset($url) : null;
+    }
+
+    /**
+     * Get the sale off price
+     */
+    protected function getSalePriceAttribute()
+    {
+        $salePrice = ($this->selling_price * $this->sale_off)/100;
+        return $this->selling_price - $salePrice;
+    }
+
+    /**
+     * Get the sale off
+     */
+    protected function getSalePercentAttribute()
+    {
+        return $this->sale_off ? '↓'.$this->sale_off.'%' : null;
     }
 }

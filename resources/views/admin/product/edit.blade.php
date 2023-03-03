@@ -105,21 +105,28 @@
                             <div class="tab-pane fade" id="detail-tab-pane" role="tabpanel" aria-labelledby="detail-tab"
                                 tabindex="0">
                                 <div class="row">
-                                    <div class="col-md-4 mb-3 form-group">
+                                    <div class="col-md-3 mb-3 form-group">
                                         <label for="original_price">Original Price</label>
                                         <input type="text" name="original_price" class="form-control" value="{{ $product->original_price }}" />
                                         @error('original_price')
                                             <small class="text-danger">{{ $message }}</small>
                                         @enderror
                                     </div>
-                                    <div class="col-md-4 mb-3 form-group">
+                                    <div class="col-md-3 mb-3 form-group">
                                         <label for="selling_price">Selling Price</label>
                                         <input type="text" name="selling_price" class="form-control" value="{{ $product->selling_price }}" />
                                         @error('selling_price')
                                             <small class="text-danger">{{ $message }}</small>
                                         @enderror
                                     </div>
-                                    <div class="col-md-4 mb-3 form-group">
+                                    <div class="col-md-3 mb-3 form-group">
+                                        <label for="sale_off">Sale Off</label>
+                                        <input type="text" name="sale_off" class="form-control" value="{{ $product->sale_off }}" />
+                                        @error('selling_price')
+                                            <small class="text-danger">{{ $message }}</small>
+                                        @enderror
+                                    </div>
+                                    <div class="col-md-3 mb-3 form-group">
                                         <label for="quantity">Quantity</label>
                                         <input type="text" name="quantity" class="form-control" value="{{ $product->quantity }}" />
                                         @error('quantity')

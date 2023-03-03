@@ -31,9 +31,7 @@ class ProductController extends BaseController
     public function save(ProductFormRequest $request)
     {
         try {
-            // dd($request->all());
             $category = Category::findOrFail($request->category_id);
-            // dd($category);
             $data = [
                 'category_id' => $request->category_id,
                 'brand_id' => $request->brand_id ?? null,
@@ -43,6 +41,7 @@ class ProductController extends BaseController
                 'description' => $request->description ?? null,
                 'original_price' => $request->original_price ?? null,
                 'selling_price' => $request->selling_price ?? null,
+                'sale_off' => $request->sale_off ?? null,
                 'quantity' => $request->quantity ?? null,
                 'meta_title' => $request->meta_title ?? null,
                 'meta_keyword' => $request->meta_keyword ?? null,
@@ -92,8 +91,7 @@ class ProductController extends BaseController
     public function update(ProductFormRequest $request, int $product_id)
     {
         try {
-            $product = Category::findOrFail($request->category_id)
-                ->products()->where('id', $product_id)->first();
+            $product = Product::where('id', $product_id)->first();
             if ($product) {
                 $data = [
                     'category_id' => $request->category_id,
@@ -104,6 +102,7 @@ class ProductController extends BaseController
                     'description' => $request->description ?? null,
                     'original_price' => $request->original_price ?? null,
                     'selling_price' => $request->selling_price ?? null,
+                    'sale_off' => $request->sale_off ?? null,
                     'quantity' => $request->quantity ?? null,
                     'meta_title' => $request->meta_title ?? null,
                     'meta_keyword' => $request->meta_keyword ?? null,
