@@ -119,7 +119,7 @@
                         <div class="categori-dropdown-wrap categori-dropdown-active-large">
                             <ul>
                                 @foreach($categories as $cat)
-                                <li><a href="{{ route('frontend.product.list', $cat->slug) }}"><i class="surfsidemedia-font-desktop"></i>{{ $cat->name }}</a></li>
+                                <li><a href="{{ route('frontend.product.list', ['category' => $cat->slug]) }}"><i class="surfsidemedia-font-desktop"></i>{{ $cat->name }}</a></li>
                                 @endforeach
                             </ul>
                         </div>

@@ -8,6 +8,7 @@ use App\Models\Slider;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
+
 class FrontendController extends Controller
 {
     /**
@@ -30,7 +31,7 @@ class FrontendController extends Controller
      */
     public function getProductDetail($id)
     {
-        $product = Product::find($id);
+        $product = Product::with('productImages', 'productColors')->find($id);
         return view('frontend.product_detail', compact('product'));
     }
 
@@ -39,13 +40,8 @@ class FrontendController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function getProductList($categorySlug = null)
+    public function getProductList()
     {
-        $productLists = Product::with('productImages', 'category', 'brand')->when($categorySlug, function($query) use ($categorySlug) {
-            $query->whereHas('category', function($where) use ($categorySlug) {
-                $where->where('slug', $categorySlug);
-            });
-        })->paginate(12);
-        return view('frontend.product_list', compact('productLists'));
+        return view('frontend.product_list');
     }
 }

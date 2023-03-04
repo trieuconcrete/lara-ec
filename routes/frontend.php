@@ -16,5 +16,5 @@ use Illuminate\Support\Facades\Route;
 Route::controller(FrontendController::class)->group(function () {
     Route::get('/', 'index')->name('home');
     Route::get('/product/detail/{id}', 'getProductDetail')->name('product.detail');
-    Route::get('/product/list/{category_slug?}', 'getProductList')->name('product.list');
+    Route::get('/product/list', 'getProductList')->name('product.list');
 });

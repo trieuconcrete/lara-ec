@@ -14,6 +14,9 @@
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('frontend/assets/imgs/yolo-default.png') }}">
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/main.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/custom.css') }}">
+
+    @livewireStyles
+    @stack('style')
 </head>
 
 <body>
@@ -48,6 +51,9 @@
     <!-- Template  JS -->
     <script src="{{ asset('frontend/assets/js/main.js?v=3.3') }}"></script>
     <script src="{{ asset('frontend/assets/js/shop.js?v=3.3') }}"></script>
+
+    @livewireScripts
+    @stack('script')
 </body>
 
 </html>
