@@ -69,16 +69,7 @@
                                             <li><i class="fi-rs-credit-card mr-5"></i> Cash on Delivery available</li>
                                         </ul>
                                     </div>
-                                    <div class="attr-detail attr-color mb-15">
-                                        @if ($product->productColors->count() > 0)
-                                            <strong class="mr-10">Color</strong>
-                                            <ul class="list-filter color-filter">
-                                                @foreach($product->productColors as $item)
-                                                    <li class="{{ $this->colorId == $item->color_id ? 'active' : '' }}"><a wire:click="colorSelected({{ $item->color_id }})" data-color="{{ $item->color->name }}"><span class="product-color-{{ $item->color->code }}"></span></a></li>
-                                                @endforeach
-                                            </ul>
-                                        @endif
-                                    </div>
+                                    @livewire('frontend.product.color-select', ['product' => $product])
                                     <div class="attr-detail attr-size">
                                         <strong class="mr-10">Size</strong>
                                         <ul class="list-filter size-filter font-small">
@@ -94,13 +85,7 @@
                                         @livewire('frontend.product.quantity-count')
                                         <div class="product-extra-link2">
                                             <button type="submit" class="button button-add-to-cart">Add to cart</button>
-                                            <a wire:click="addToWishList({{ $product->id }})" aria-label="Add To Wishlist" class="action-btn hover-up">
-                                                <i class="fi-rs-heart"></i>
-                                            </a>
-                                            <span wire:loading>Adding...</span>
-                                            @if (!$this->productColorQtyCheck)
-                                            <small class="text-red">Out of stock</small>
-                                            @endif
+                                            @livewire('frontend.product.add-wish-list', ['product' => $product])
                                         </div>
                                     </div>
                                     <ul class="product-meta font-xs color-grey mt-50">
