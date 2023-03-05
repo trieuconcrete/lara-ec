@@ -85,7 +85,7 @@ class Action extends Component
                         if (Cart::where([
                             'user_id' => auth()->user()->id,
                             'product_id' => $this->productId
-                        ])) {
+                        ])->exists()) {
                             $message = 'Product Already Added to cart';
                             $type = 'warning';
                             $status = 200;
@@ -99,6 +99,7 @@ class Action extends Component
                             $message = 'Product Added to cart Successfuly';
                             $type = 'success';
                             $status = 200;
+                            $this->emit('cartAddedUpdate');
                         }
                     }
                 } else {

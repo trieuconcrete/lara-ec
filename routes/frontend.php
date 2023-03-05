@@ -15,10 +15,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::controller(FrontendController::class)->group(function () {
     Route::get('/', 'index')->name('home');
-    Route::get('/product/detail/{id}', 'getProductDetail')->name('product.detail');
-    Route::get('/product/list', 'getProductList')->name('product.list');
+    Route::get('product/detail/{id}', 'getProductDetail')->name('product.detail');
+    Route::get('product/list', 'getProductList')->name('product.list');
 });
 
-Route::controller(WishListController::class)->group(function () {
-    Route::get('/wishlist', 'index')->name('wishlist');
+Route::controller(MypageController::class)->group(function () {
+    Route::get('mypage/wishlist', 'wishList')->name('mypage.wishlist');
+    Route::get('mypage/cart', 'cart')->name('mypage.cart');
 });

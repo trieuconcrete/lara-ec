@@ -27,8 +27,16 @@ class Cart extends Model
         return $this->belongsTo(Product::class);
     }
 
-    public function color()
+    public function productColor()
     {
-        return $this->belongsTo(Color::class, 'product_color_id');
+        return $this->belongsTo(ProductColor::class, 'product_color_id');
+    }
+
+    /**
+     * Get the sale off
+     */
+    protected function getSumProductPriceAttribute()
+    {
+        return $this->quantity * $this->product->selling_price;
     }
 }
