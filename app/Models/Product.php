@@ -50,7 +50,7 @@ class Product extends Model
         return $this->hasMany(productColor::class, 'product_id', 'id');
     }
 
-    public function getImagePath($index = 0)
+    public function getImage($index = 0)
     {
         $url = isset($this->productImages[$index]) ? Storage::disk('local')->url($this->productImages[$index]['image']) : null;
         return $url ? asset($url) : null;

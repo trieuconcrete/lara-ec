@@ -53,8 +53,8 @@
                                         <div class="product-img-action-wrap">
                                             <div class="product-img product-img-zoom">
                                                 <a href="{{ route('frontend.product.detail', $prod->id) }}l">
-                                                    <img class="default-img" src="{{ $prod->getImagePath() }}" alt="">
-                                                    <img class="hover-img" src="{{ $prod->getImagePath(1) }}" alt="">
+                                                    <img class="default-img" src="{{ $prod->getImage() }}" alt="">
+                                                    <img class="hover-img" src="{{ $prod->getImage(1) }}" alt="">
                                                 </a>
                                             </div>
                                             <div class="product-action-1">

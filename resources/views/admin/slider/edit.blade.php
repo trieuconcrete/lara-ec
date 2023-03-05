@@ -38,7 +38,7 @@
                             <label for="image">Image</label>
                             <input type="file" name="image" class="form-control" />
                             @error('image') <small class="text-danger">{{ $message }}</small>@enderror
-                            <x-image :path="$slider->getImagePath()" :width="60" :height="60" />
+                            <x-image :path="$slider->getImage()" :width="60" :height="60" />
                         </div>
                         <div class="col-md-6 mb-3 form-group">
                             <label for="form-check-label">

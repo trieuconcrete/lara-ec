@@ -23,6 +23,11 @@ class ViewServiceProvider extends ServiceProvider
     public function boot(): void
     {
         // Using class based composers...
-        Facades\View::composer(['frontend.index', 'frontend.product_detail', 'frontend.product_list'], CategoryComposer::class);
+        Facades\View::composer([
+            'frontend.index',
+            'frontend.product_detail',
+            'frontend.product_list',
+            'frontend.wishlist'
+        ], CategoryComposer::class);
     }
 }

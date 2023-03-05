@@ -176,7 +176,7 @@
                                     @if($product->productImages)
                                         @foreach($product->productImages as $image)
                                             <div class="col-md-2">
-                                                <x-image :path="$image->getImagePath()" :class="'me-4 border'" :width="86" :height="86" />
+                                                <x-image :path="$image->getImage()" :class="'me-4 border'" :width="86" :height="86" />
                                                 <a href="{{ route('admin.product.remove.image', $image->id) }}" class="d-block">Remove</a>
                                             </div>
                                         @endforeach

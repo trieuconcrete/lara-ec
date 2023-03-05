@@ -55,7 +55,7 @@
                                     <tr>
                                         <td>{{ $item->id }}</td>
                                         <td>
-                                            <x-image :path="$item->getImagePath()" />
+                                            <x-image :path="$item->getImage()" />
                                         </td>
                                         <td>{{ $item->title }}</td>
                                         <td>{{ $item->description }}</td>

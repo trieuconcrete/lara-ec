@@ -27,7 +27,7 @@ class Slider extends Model
         'contents' => 'array'
     ];
 
-    public function getImagePath()
+    public function getImage()
     {
         $url = $this->image ? Storage::disk('local')->url($this->image) : null;
         return $url ? asset($url) : null;

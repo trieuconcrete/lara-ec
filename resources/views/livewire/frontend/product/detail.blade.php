@@ -12,14 +12,14 @@
                                     <div class="product-image-slider">
                                         @foreach($product->productImages as $image)
                                         <figure class="border-radius-10">
-                                            <img src="{{ $image->getImagePath() }}" alt="product image">
+                                            <img src="{{ $image->getImage() }}" alt="product image">
                                         </figure>
                                         @endforeach
                                     </div>
                                     <!-- THUMBNAILS -->
                                     <div class="slider-nav-thumbnails pl-15 pr-15">
                                         @foreach($product->productImages as $image)
-                                        <div><img src="{{ $image->getImagePath() }}" alt="product image"></div>
+                                        <div><img src="{{ $image->getImage() }}" alt="product image"></div>
                                         @endforeach
                                     </div>
                                 </div>
@@ -78,9 +78,6 @@
                                                 @endforeach
                                             </ul>
                                         @endif
-                                        @if (!$this->productColorQtyCheck)
-                                        <small class="text-red">Out of stock</small>
-                                        @endif
                                     </div>
                                     <div class="attr-detail attr-size">
                                         <strong class="mr-10">Size</strong>
@@ -94,14 +91,16 @@
                                     </div>
                                     <div class="bt-1 border-color-1 mt-30 mb-30"></div>
                                     <div class="detail-extralink">
-                                        <div class="detail-qty border radius">
-                                            <a wire:click="productQty('down')" class="qty-down"><i class="fi-rs-angle-small-down"></i></a>
-                                            <span class="qty-val">1</span>
-                                            <a wire:click="productQty('up')" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
-                                        </div>
+                                        @livewire('frontend.product.quantity-count')
                                         <div class="product-extra-link2">
                                             <button type="submit" class="button button-add-to-cart">Add to cart</button>
-                                            <a aria-label="Add To Wishlist" class="action-btn hover-up" href="#"><i class="fi-rs-heart"></i></a>
+                                            <a wire:click="addToWishList({{ $product->id }})" aria-label="Add To Wishlist" class="action-btn hover-up">
+                                                <i class="fi-rs-heart"></i>
+                                            </a>
+                                            <span wire:loading>Adding...</span>
+                                            @if (!$this->productColorQtyCheck)
+                                            <small class="text-red">Out of stock</small>
+                                            @endif
                                         </div>
                                     </div>
                                     <ul class="product-meta font-xs color-grey mt-50">

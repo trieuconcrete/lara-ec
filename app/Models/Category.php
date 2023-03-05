@@ -28,7 +28,7 @@ class Category extends Model
         return $this->hasMany(Product::class, 'category_id', 'id');
     }
 
-    public function getImagePath()
+    public function getImage()
     {
         $url = $this->image ? Storage::disk('local')->url($this->image) : null;
         return $url ? asset($url) : null;

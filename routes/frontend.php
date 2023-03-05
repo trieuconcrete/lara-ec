@@ -18,3 +18,7 @@ Route::controller(FrontendController::class)->group(function () {
     Route::get('/product/detail/{id}', 'getProductDetail')->name('product.detail');
     Route::get('/product/list', 'getProductList')->name('product.list');
 });
+
+Route::controller(WishListController::class)->group(function () {
+    Route::get('/wishlist', 'index')->name('wishlist');
+});

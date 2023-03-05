@@ -15,6 +15,15 @@
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/main.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/custom.css') }}">
 
+    <!-- CSS -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+    <!-- Default theme -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
+    <!-- Semantic UI theme -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/semantic.min.css"/>
+    <!-- Bootstrap theme -->
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/bootstrap.min.css"/>
+
     @livewireStyles
     @stack('style')
 </head>
@@ -51,8 +60,17 @@
     <!-- Template  JS -->
     <script src="{{ asset('frontend/assets/js/main.js?v=3.3') }}"></script>
     <script src="{{ asset('frontend/assets/js/shop.js?v=3.3') }}"></script>
+    <!-- JavaScript -->
+    <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 
     @livewireScripts
+    
+    <script>
+        window.addEventListener('message', event => {
+            alertify.set('notifier','position', 'top-right');
+            alertify.notify(event.detail.text, event.detail.type);
+        })
+    </script>
     @stack('script')
 </body>
 

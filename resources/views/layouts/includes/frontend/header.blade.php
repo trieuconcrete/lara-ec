@@ -19,17 +19,21 @@
                     <div class="text-center">
                         <div id="news-flash" class="d-inline-block">
                             <ul>
-                                <li>Get great devices up to 50% off <a href="shop.html">View details</a></li>
+                                <li>Get great devices up to 50% off <a href="#">View details</a></li>
                                 <li>Supper Value Deals - Save more with coupons</li>
-                                <li>Trendy 25silver jewelry, save up 35% off today <a href="shop.html">Shop now</a></li>
+                                <li>Trendy 25silver jewelry, save up 35% off today <a href="#">Shop now</a></li>
                             </ul>
                         </div>
                     </div>
                 </div>
                 <div class="col-xl-3 col-lg-4">
                     <div class="header-info header-info-right">
-                        <ul>                                
-                            <li><i class="fi-rs-key"></i><a href="{{ route('login') }}">Log In </a>  / <a href="{{ route('register') }}">Sign Up</a></li>
+                        <ul>
+                            @if (!Auth::check())                                
+                                <li><i class="fi-rs-key"></i><a href="{{ route('login') }}">Log In </a>  / <a href="{{ route('register') }}">Sign Up</a></li>
+                            @else
+                                <li><i class="fi-rs-key"></i><a href="#">Logout </a></li>
+                            @endif
                         </ul>
                     </div>
                 </div>
@@ -50,12 +54,7 @@
                     </div>
                     <div class="header-action-right">
                         <div class="header-action-2">
-                            <div class="header-action-icon-2">
-                                <a href="#">
-                                    <img class="svgInject" alt="Surfside Media" src="{{ asset('frontend/assets/imgs/theme/icons/icon-heart.svg') }}">
-                                    <span class="pro-count blue">4</span>
-                                </a>
-                            </div>
+                            @livewire('frontend.mypage.wish-list-count')
                             <div class="header-action-icon-2">
                                 <a class="mini-cart-icon" href="#">
                                     <img alt="Surfside Media" src="{{ asset('frontend/assets/imgs/theme/icons/icon-cart.svg') }}">

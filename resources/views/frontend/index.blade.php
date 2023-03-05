@@ -20,7 +20,7 @@
                         </div>
                         <div class="col-lg-7 col-md-6">
                             <div class="single-slider-img single-slider-img-1">
-                                <img class="animated slider-1-1" src="{{ $slider->getImagePath() }}" alt="">
+                                <img class="animated slider-1-1" src="{{ $slider->getImage() }}" alt="">
                             </div>
                         </div>
                     </div>
@@ -83,8 +83,8 @@
                         <div class="product-img-action-wrap">
                             <div class="product-img product-img-zoom">
                                 <a href="{{ route('frontend.product.detail', $prod->id) }}">
-                                    <img class="default-img" src="{{ $prod->getImagePath() }}" alt="">
-                                    <img class="hover-img" src="{{ $prod->getImagePath(1) }}" alt="">
+                                    <img class="default-img" src="{{ $prod->getImage() }}" alt="">
+                                    <img class="hover-img" src="{{ $prod->getImage(1) }}" alt="">
                                 </a>
                             </div>
                             <div class="product-action-1">
@@ -138,7 +138,7 @@
                     @foreach($categories as $cat)
                     <div class="card-1">
                         <figure class=" img-hover-scale overflow-hidden">
-                            <a href="{{ route('frontend.product.list', $cat->slug) }}"><img src="{{ $cat->getImagePath() }}" alt=""></a>
+                            <a href="{{ route('frontend.product.list', $cat->slug) }}"><img src="{{ $cat->getImage() }}" alt=""></a>
                         </figure>
                         <h5><a href="{{ route('frontend.product.list', $cat->slug) }}">{{ $cat->name }}</a></h5>
                     </div>
@@ -415,7 +415,7 @@
                 <div class="carausel-6-columns text-center" id="carausel-6-columns-3">
                     @foreach($brands as $brand)
                     <div class="brand-logo">
-                        <img class="img-grey-hover" src="{{ $brand->getImagePath() }}" alt="">
+                        <img class="img-grey-hover" src="{{ $brand->getImage() }}" alt="">
                     </div>
                     @endforeach
                 </div>

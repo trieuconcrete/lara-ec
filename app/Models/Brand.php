@@ -28,7 +28,7 @@ class Brand extends Model
         return $this->hasOne(Product::class, 'brand_id', 'id');
     }
 
-    public function getImagePath()
+    public function getImage()
     {
         $url = $this->image ? Storage::disk('local')->url($this->image) : null;
         return $url ? asset($url) : null;
