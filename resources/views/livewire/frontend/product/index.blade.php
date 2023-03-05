@@ -52,7 +52,7 @@
                                     <div class="product-cart-wrap mb-30">
                                         <div class="product-img-action-wrap">
                                             <div class="product-img product-img-zoom">
-                                                <a href="{{ route('frontend.product.detail', $prod->id) }}l">
+                                                <a href="{{ route('frontend.product.detail', $prod->id) }}">
                                                     <img class="default-img" src="{{ $prod->getImage() }}" alt="">
                                                     <img class="hover-img" src="{{ $prod->getImage(1) }}" alt="">
                                                 </a>
@@ -70,7 +70,7 @@
                                             <div class="product-category">
                                                 <a href="{{ route('frontend.product.list', optional($prod->category)->slug ) }}">{{ optional($prod->category)->name }}</a>
                                             </div>
-                                            <h2><a href="{{ route('frontend.product.detail', $prod->id) }}l">{{ $prod->name }}</a></h2>
+                                            <h2><a href="{{ route('frontend.product.detail', $prod->id) }}">{{ $prod->name }}</a></h2>
                                             <div class="product-price">
                                                 <span>${{ $prod->sale_price }}</span>
                                                 @if($prod->sale_off)

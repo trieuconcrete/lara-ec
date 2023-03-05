@@ -69,25 +69,7 @@
                                             <li><i class="fi-rs-credit-card mr-5"></i> Cash on Delivery available</li>
                                         </ul>
                                     </div>
-                                    @livewire('frontend.product.color-select', ['product' => $product])
-                                    <div class="attr-detail attr-size">
-                                        <strong class="mr-10">Size</strong>
-                                        <ul class="list-filter size-filter font-small">
-                                            <li><a href="#">S</a></li>
-                                            <li class="active"><a href="#">M</a></li>
-                                            <li><a href="#">L</a></li>
-                                            <li><a href="#">XL</a></li>
-                                            <li><a href="#">XXL</a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="bt-1 border-color-1 mt-30 mb-30"></div>
-                                    <div class="detail-extralink">
-                                        @livewire('frontend.product.quantity-count')
-                                        <div class="product-extra-link2">
-                                            <button type="submit" class="button button-add-to-cart">Add to cart</button>
-                                            @livewire('frontend.product.add-wish-list', ['product' => $product])
-                                        </div>
-                                    </div>
+                                    @livewire('frontend.product.action', ['product' => $product])
                                     <ul class="product-meta font-xs color-grey mt-50">
                                         <li class="mb-5">SKU: <a href="#">FWM15VKT</a></li>
                                         <li class="mb-5">Tags: <a href="#" rel="tag">Cloth</a>, <a href="#" rel="tag">Women</a>, <a href="#" rel="tag">Dress</a> </li>
