@@ -19,7 +19,7 @@ Route::controller(FrontendController::class)->group(function () {
     Route::get('product/list', 'getProductList')->name('product.list');
 });
 
-Route::controller(MypageController::class)->group(function () {
+Route::controller(MypageController::class)->middleware('auth')->group(function () {
     Route::get('mypage/wishlist', 'wishList')->name('mypage.wishlist');
     Route::get('mypage/cart', 'cart')->name('mypage.cart');
 });

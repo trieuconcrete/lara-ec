@@ -368,7 +368,7 @@
                                         <tbody>
                                             <tr>
                                                 <td class="cart_total_label">Cart Subtotal</td>
-                                                <td class="cart_total_amount"><span class="font-lg fw-900 text-brand">${{ $carts->sum('sum_product_price') }}</span></td>
+                                                <td class="cart_total_amount"><span class="font-lg fw-900 text-brand">${{ $carts ? $carts->sum('sum_product_price') : 0 }}</span></td>
                                             </tr>
                                             <tr>
                                                 <td class="cart_total_label">Shipping</td>
@@ -376,7 +376,7 @@
                                             </tr>
                                             <tr>
                                                 <td class="cart_total_label">Total</td>
-                                                <td class="cart_total_amount"><strong><span class="font-xl fw-900 text-brand">${{ $carts->sum('sum_product_price') }}</span></strong></td>
+                                                <td class="cart_total_amount"><strong><span class="font-xl fw-900 text-brand">${{ $carts ? $carts->sum('sum_product_price') : 0 }}</span></strong></td>
                                             </tr>
                                         </tbody>
                                     </table>

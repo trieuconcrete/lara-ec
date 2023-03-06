@@ -28,7 +28,9 @@ class ViewServiceProvider extends ServiceProvider
             'frontend.product_detail',
             'frontend.product_list',
             'frontend.wishlist',
-            'frontend.cart'
+            'frontend.cart',
+            'auth.login',
+            'auth.register'
         ], CategoryComposer::class);
     }
 }
