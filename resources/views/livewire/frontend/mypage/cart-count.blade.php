@@ -26,11 +26,11 @@
             </ul>
             <div class="shopping-cart-footer">
                 <div class="shopping-cart-total">
-                    <h4>Total <span>${{ $carts->sum('sum_product_price') }}</span></h4>
+                    <h4>Total <span>${{ $carts->sum('sub_total_price') }}</span></h4>
                 </div>
                 <div class="shopping-cart-button">
                     <a href="{{ route('frontend.mypage.cart') }}" class="outline">View cart</a>
-                    <a href="{{ route('frontend.mypage.cart') }}">Checkout</a>
+                    <a href="{{ route('frontend.mypage.checkout') }}">Checkout</a>
                 </div>
             </div>
         </div>

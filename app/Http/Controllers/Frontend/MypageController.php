@@ -26,4 +26,14 @@ class MypageController extends Controller
     {
         return view('frontend.cart');
     }
+
+    /**
+     * Show the checkout.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function checkout()
+    {
+        return view('frontend.checkout');
+    }
 }

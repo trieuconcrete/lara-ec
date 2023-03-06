@@ -5,21 +5,23 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Cart extends Model
+class OrderItem extends Model
 {
     use HasFactory;
 
-    protected $table = 'carts';
+    protected $table = 'order_items';
+
     protected $fillable = [
-        'user_id',
+        'order_id',
         'product_id',
         'product_color_id',
         'quantity',
+        'price',
     ];
 
-    public function user()
+    public function order()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Order::class);
     }
 
     public function product()
@@ -29,14 +31,14 @@ class Cart extends Model
 
     public function productColor()
     {
-        return $this->belongsTo(ProductColor::class, 'product_color_id');
+        return $this->belongsTo(ProductColor::class);
     }
 
     /**
      * Get subtotal price
      */
-    protected function getSubTotalPriceAttribute()
+    protected function getSubTotaltPriceAttribute()
     {
-        return $this->quantity * $this->product->selling_price;
+        return $this->quantity * $this->price;
     }
 }

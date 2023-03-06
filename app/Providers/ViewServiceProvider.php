@@ -29,6 +29,7 @@ class ViewServiceProvider extends ServiceProvider
             'frontend.product_list',
             'frontend.wishlist',
             'frontend.cart',
+            'frontend.checkout',
             'auth.login',
             'auth.register'
         ], CategoryComposer::class);
