@@ -93,7 +93,7 @@
                                 </table>
                             </div>
                             <div class="bt-1 border-color-1 mt-30 mb-30"></div>
-                            <div class="payment_method">
+                            <div class="payment_method" wire:ignore>
                                 <button type="button" wire:click="createOrder" wire.loading.attr="disabled" class="btn btn-fill-out w-100 mt-30">
                                     <span wire:loading.remove wire.target="createOrder">Cash On Delivery</span>
                                     <span wire:loading wire.target="createOrder">Placing Order...</span>
@@ -123,7 +123,7 @@
             ) {
                 // document.querySelector('#error').classList.remove('hidden');
                 Livewire.emit('validationForAll');
-                // return false;
+                return false;
             } else {
                 @this.set('first_name', document.getElementById('first_name').value);
                 @this.set('last_name', document.getElementById('last_name').value);
