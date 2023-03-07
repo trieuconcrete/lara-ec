@@ -94,31 +94,11 @@
                             </div>
                             <div class="bt-1 border-color-1 mt-30 mb-30"></div>
                             <div class="payment_method">
-                                <div class="mb-25">
-                                    <h5>Payment</h5>
-                                </div>
-                                <div class="payment_option">
-                                    @error('payment_mode')<small class="text-danger">{{ $message }}</small>@enderror
-                                    <div class="custome-radio">
-                                        <input class="form-check-input" required="" type="radio" wire:model.defer="payment_mode" name="payment_mode" checked id="exampleRadios3" value="Cash On Delivery">
-                                        <label class="form-check-label" for="exampleRadios3" data-bs-toggle="collapse" data-target="#cashOnDelivery" aria-controls="cashOnDelivery">Cash On Delivery</label>                                        
-                                    </div>
-                                    <div class="custome-radio">
-                                        <input class="form-check-input" required="" type="radio" wire:model.defer="payment_mode" name="payment_mode" id="exampleRadios4" value="Card Payment">
-                                        <label class="form-check-label" for="exampleRadios4" data-bs-toggle="collapse" data-target="#cardPayment" aria-controls="cardPayment">Card Payment</label>                                        
-                                    </div>
-                                    <div class="custome-radio">
-                                        <input class="form-check-input" required="" type="radio" wire:model.defer="payment_mode" name="payment_mode" id="exampleRadios5" value="Paypal">
-                                        <label class="form-check-label" for="exampleRadios5" data-bs-toggle="collapse" data-target="#paypal" aria-controls="paypal">Paypal</label>                                        
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="btn-fill-out btn-block mt-30">
-                                <button type="button" wire:click="createOrder" wire.loading.attr="disabled" class="btn btn-fill-out btn-block mt-30">
-                                    <span wire:loading.remove wire.target="createOrder">Place Order</span>
+                                <button type="button" wire:click="createOrder" wire.loading.attr="disabled" class="btn btn-fill-out w-100 mt-30">
+                                    <span wire:loading.remove wire.target="createOrder">Cash On Delivery</span>
                                     <span wire:loading wire.target="createOrder">Placing Order...</span>
                                 </button>
-                                <div id="paypal-button-container" class="mt-30"></div>
+                                <div id="paypal-button-container" class="mt-20"></div>
                             </div>
                         </div>
                     </div>
@@ -143,9 +123,8 @@
             ) {
                 // document.querySelector('#error').classList.remove('hidden');
                 Livewire.emit('validationForAll');
-                return false;
+                // return false;
             } else {
-
                 @this.set('first_name', document.getElementById('first_name').value);
                 @this.set('last_name', document.getElementById('last_name').value);
                 @this.set('billing_address', document.getElementById('billing_address').value);

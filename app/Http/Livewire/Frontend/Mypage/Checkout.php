@@ -29,8 +29,7 @@ class Checkout extends Component
             'phone' => 'required|string',
             'email' => 'required|string',
             'zipcode' => 'required|string',
-            'billing_address' => 'required|string',
-            // 'payment_mode' => 'required|string'
+            'billing_address' => 'required|string'
         ];
     }
 
@@ -82,6 +81,7 @@ class Checkout extends Component
     {
         $this->validate();
         DB::beginTransaction();
+        $this->payment_mode = 'Cash On Delivery';
         $order = $this->placeOrder();
         if ($order) {
             Cart::where('user_id', auth()->user()->id)->delete();
