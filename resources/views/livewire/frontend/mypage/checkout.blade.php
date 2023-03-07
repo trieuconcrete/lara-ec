@@ -94,9 +94,9 @@
                             </div>
                             <div class="bt-1 border-color-1 mt-30 mb-30"></div>
                             <div class="payment_method" wire:ignore>
-                                <button type="button" wire:click="createOrder" wire.loading.attr="disabled" class="btn btn-fill-out w-100 mt-30">
-                                    <span wire:loading.remove wire.target="createOrder">Cash On Delivery</span>
-                                    <span wire:loading wire.target="createOrder">Placing Order...</span>
+                                <button type="button" wire:click="codOrder" wire.loading.attr="disabled" class="btn btn-fill-out w-100 mt-30">
+                                    <span wire:loading.remove wire.target="codOrder">Cash On Delivery</span>
+                                    <span wire:loading wire.target="codOrder">Placing Order...</span>
                                 </button>
                                 <div id="paypal-button-container" class="mt-20"></div>
                             </div>
@@ -150,7 +150,7 @@
                 console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
                 const transaction = orderData.purchase_units[0].payments.captures[0];
                 if (transaction.status == 'COMPLETED') {
-                    Livewire.emit('createOrder');
+                    Livewire.emit('transactionEmit', transaction.id);
                 }
                 // alert(`Transaction ${transaction.status}: ${transaction.id}\n\nSee console for all available details`);
                 // When ready to go live, remove the alert and show a success message within this page. For example:

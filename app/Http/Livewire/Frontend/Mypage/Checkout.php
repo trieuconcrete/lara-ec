@@ -14,11 +14,18 @@ class Checkout extends Component
 
     public $carts, $first_name, $last_name, $billing_address, $billing_address2, $city, $country, $zipcode, $phone, $email, $status_message, $notes, $payment_mode, $payment_id = NULL;
 
-    protected $listeners = ['validationForAll', 'createOrder'];
+    protected $listeners = ['validationForAll', 'transactionEmit' => 'paidOnlineOrder'];
 
     public function validationForAll()
     {
         $this->validate();
+    }
+
+    public function paidOnlineOrder($transId)
+    {
+        $this->payment_id = $transId;
+        $this->payment_mode = 'Paid By Paypal';
+        $this->createOrder();
     }
 
     public function rules()
@@ -77,11 +84,17 @@ class Checkout extends Component
         }
     }
 
-    public function createOrder()
+    // Cash On Delivery
+    public function codOrder()
     {
         $this->validate();
-        DB::beginTransaction();
         $this->payment_mode = 'Cash On Delivery';
+        $this->createOrder();
+    }
+
+    public function createOrder()
+    {
+        DB::beginTransaction();
         $order = $this->placeOrder();
         if ($order) {
             Cart::where('user_id', auth()->user()->id)->delete();
