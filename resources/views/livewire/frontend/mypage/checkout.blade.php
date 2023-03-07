@@ -113,12 +113,12 @@
                                     </div>
                                 </div>
                             </div>
-                            <button type="button" wire:click="createOrder" wire.loading.attr="disabled" class="btn btn-fill-out btn-block mt-30">
-                                <span wire:loading.remove wire.target="createOrder">Place Order</span>
-                                <span wire:loading wire.target="createOrder">Placing Order...</span>
-                            </button>
                             <div class="btn-fill-out btn-block mt-30">
-                                <div id="paypal-button-container0"></div>
+                                <button type="button" wire:click="createOrder" wire.loading.attr="disabled" class="btn btn-fill-out btn-block mt-30">
+                                    <span wire:loading.remove wire.target="createOrder">Place Order</span>
+                                    <span wire:loading wire.target="createOrder">Placing Order...</span>
+                                </button>
+                                <div id="paypal-button-container" class="mt-30"></div>
                             </div>
                         </div>
                     </div>
