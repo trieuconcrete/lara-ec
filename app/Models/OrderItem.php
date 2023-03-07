@@ -37,7 +37,7 @@ class OrderItem extends Model
     /**
      * Get subtotal price
      */
-    protected function getSubTotaltPriceAttribute()
+    protected function getSubTotalPriceAttribute()
     {
         return $this->quantity * $this->price;
     }

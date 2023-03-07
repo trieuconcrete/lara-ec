@@ -24,4 +24,5 @@ Route::controller(MypageController::class)->prefix('mypage')->name('mypage.')->m
     Route::get('cart', 'cart')->name('cart');
     Route::get('checkout', 'checkout')->name('checkout');
     Route::get('thank-you', 'thankYou')->name('thankyou');
+    Route::get('orders', 'orders')->name('orders');
 });

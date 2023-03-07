@@ -46,4 +46,14 @@ class MypageController extends Controller
     {
         return view('frontend.thank-you');
     }
+
+    /**
+     * Show the orders.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function orders()
+    {
+        return view('frontend.orders');
+    }
 }

@@ -32,13 +32,20 @@
                             @if (!Auth::check())                                
                                 <li><i class="fi-rs-key"></i><a href="{{ route('login') }}">Log In </a>  / <a href="{{ route('register') }}">Sign Up</a></li>
                             @else
-                                <li><i class="fi-rs-key"></i>
-                                <a href="{{ route('logout') }}" 
-                                onclick="event.preventDefault(); 
-                                document.getElementById('logout-form').submit();"> {{ __('Logout') }}</a></li>
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                    @csrf
-                                </form>
+                                <li>
+                                    <a class="language-dropdown-active" href="#"> {{ auth()->user()->name }} <i class="fi-rs-angle-small-down"></i></a>
+                                    <ul class="language-dropdown">
+                                        <li><a href="{{ route('frontend.mypage.orders') }}">Orders</a></li>
+                                        <li class="mt-10">
+                                            <a href="{{ route('logout') }}" 
+                                            onclick="event.preventDefault(); 
+                                            document.getElementById('logout-form').submit();"> {{ __('Logout') }}</a></li>
+                                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                                @csrf
+                                            </form>
+                                        </li>
+                                    </ul>
+                                </li>
                             @endif
                         </ul>
                     </div>
