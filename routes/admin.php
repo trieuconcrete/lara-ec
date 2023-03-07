@@ -49,3 +49,7 @@ Route::controller(SliderController::class)->prefix('sliders')->name('slider.')->
     Route::get('/{slider}/edit', 'edit')->name('edit');
     Route::put('/{slider}/update', 'update')->name('update');
 });
+
+Route::controller(OrderController::class)->prefix('orders')->name('order.')->group(function () {
+    Route::get('/', 'index')->name('index');
+});
