@@ -36,4 +36,14 @@ class MypageController extends Controller
     {
         return view('frontend.checkout');
     }
+
+    /**
+     * Show the thankYou.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function thankYou()
+    {
+        return view('frontend.thank-you');
+    }
 }

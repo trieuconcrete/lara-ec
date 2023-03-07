@@ -12,7 +12,14 @@ use Illuminate\Support\Facades\DB;
 class Checkout extends Component
 {
 
-    public $carts, $first_name, $last_name, $billing_address, $billing_address2, $city, $country, $zipcode, $phone, $email, $status_message, $notes, $payment_mode = NULL, $payment_id = NULL;
+    public $carts, $first_name, $last_name, $billing_address, $billing_address2, $city, $country, $zipcode, $phone, $email, $status_message, $notes, $payment_mode, $payment_id = NULL;
+
+    protected $listeners = ['validationForAll'];
+
+    public function validationForAll()
+    {
+        $this->validate();
+    }
 
     public function rules()
     {
@@ -22,7 +29,8 @@ class Checkout extends Component
             'phone' => 'required|string',
             'email' => 'required|string',
             'zipcode' => 'required|string',
-            'billing_address' => 'required|string'
+            'billing_address' => 'required|string',
+            // 'payment_mode' => 'required|string'
         ];
     }
 
@@ -48,15 +56,22 @@ class Checkout extends Component
             ]);
             $orderItemsData = [];
             foreach($this->carts as $item) {
-                $orderItemsData[] = [
+                $orderItemsData = [
                     'product_id' => $item->product_id,
                     'product_color_id' => $item->product_color_id ?? null,
                     'quantity' => $item->quantity,
                     'price' => $item->product->selling_price
                 ];
+                // create order items
+                $order->orderItems()->create($orderItemsData);
+                // update quantity in stock
+                if ($item->product_color_id !== null) {
+                    $item->productColors()->where('id', $item->product_color_id)->decrement('quantity', $item->quantity);
+                } else {
+                    $item->product()->where('id', $item->product_id)->decrement('quantity', $item->quantity);
+                }
             }
-            // create order items
-            $order->orderItems()->createMany($orderItemsData);
+            
             return $order;
         } catch(\Exception $e) {
             return false;
@@ -67,16 +82,17 @@ class Checkout extends Component
     {
         $this->validate();
         DB::beginTransaction();
-        $this->payment_mode = 'Cash On Delivery';
         $order = $this->placeOrder();
         if ($order) {
             Cart::where('user_id', auth()->user()->id)->delete();
-            $this->emit('cartAddedUpdate');
+            session()->flash('message', 'Order Placed Successfully');
             $this->dispatchBrowserEvent('message', [
                 'text' => 'Order Placed Successfully',
                 'type' => 'success',
                 'status' => 200
             ]);
+            DB::commit();
+            return redirect()->to('mypage/thank-you');
         } else {
             $this->dispatchBrowserEvent('message', [
                 'text' => 'Something went error',
@@ -85,7 +101,6 @@ class Checkout extends Component
             ]);
             DB::rollBack();
         }
-        DB::commit();
     }
 
     public function render()
