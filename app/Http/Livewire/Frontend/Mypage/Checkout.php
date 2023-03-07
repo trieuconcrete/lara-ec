@@ -14,7 +14,7 @@ class Checkout extends Component
 
     public $carts, $first_name, $last_name, $billing_address, $billing_address2, $city, $country, $zipcode, $phone, $email, $status_message, $notes, $payment_mode, $payment_id = NULL;
 
-    protected $listeners = ['validationForAll'];
+    protected $listeners = ['validationForAll', 'createOrder'];
 
     public function validationForAll()
     {
