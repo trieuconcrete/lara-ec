@@ -117,8 +117,8 @@
                                 <span wire:loading.remove wire.target="createOrder">Place Order</span>
                                 <span wire:loading wire.target="createOrder">Placing Order...</span>
                             </button>
-                            <div class="btn btn-fill-out btn-block mt-30">
-                                <div id="paypal-button-container"></div>
+                            <div class="btn-fill-out btn-block mt-30">
+                                <div id="paypal-button-container0"></div>
                             </div>
                         </div>
                     </div>
