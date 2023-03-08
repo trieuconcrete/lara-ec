@@ -23798,5 +23798,11 @@ dl li {
     outline: 1px solid slategrey;
 }
 
+.table td img {
+    width: 48px;
+    height: 48px;
+    border-radius: unset;
+}
+
 
 /*# sourceMappingURL=maps/style.css.map */

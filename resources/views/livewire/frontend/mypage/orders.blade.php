@@ -7,24 +7,31 @@
                     <h1 class="modal-title fs-5" id="orderDetailLabel">Order Details</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
+                <div wire:loading class="p-2">
+                    <div class="d-flex justify-content-center text-primary">
+                        <div class="spinner-border" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </div>
+                </div>
                 <div class="modal-body">
                     <div wire:loading.remove>
                         @if ($this->order)
                         <div class="row">
                             <div class="col-6">
-                                <span class="fs-6 fw-bolder">Order Id:</span> {{ $this->order->id }} <br>
-                                <span class="fs-6 fw-bolder">Tracking No:</span> {{ $this->order->tracking_no }} <br>
-                                <span class="fs-6 fw-bolder">Order Date:</span> {{ $this->order->created_at }} <br>
-                                <span class="fs-6 fw-bolder">Payment Method:</span> {{ $this->order->payment_mode }} <br>
-                                <span class="fs-6 fw-bolder">Payment Status:</span> {{ $this->order->payment_mode == 'Paid By Paypal' ? 'Paid' : 'UnPaid' }} <br>
-                                <span class="fs-6 fw-bolder text-success">Order Stauts Message: {{ $this->order->status_message }}</span>
+                                <span class="fs-6 fw-bolder lh-base">Order Id:</span> {{ $this->order->id }} <br>
+                                <span class="fs-6 fw-bolder lh-base">Tracking No:</span> {{ $this->order->tracking_no }} <br>
+                                <span class="fs-6 fw-bolder lh-base">Order Date:</span> {{ $this->order->created_at }} <br>
+                                <span class="fs-6 fw-bolder lh-base">Payment Method:</span> {{ $this->order->payment_mode }} <br>
+                                <span class="fs-6 fw-bolder lh-base">Payment Status:</span> {{ $this->order->payment_mode == 'Paid By Paypal' ? 'Paid' : 'UnPaid' }} <br>
+                                <span class="fs-6 fw-bolder lh-base text-success">Order Stauts Message: {{ $this->order->status_message }}</span>
                             </div>
                             <div class="col-6">
-                                <span class="fs-6 fw-bolder">Full Name:</span> {{ $this->order->full_name }} <br>
-                                <span class="fs-6 fw-bolder">Phone:</span> {{ $this->order->phone }} <br>
-                                <span class="fs-6 fw-bolder">Email:</span> {{ $this->order->email }} <br>
-                                <span class="fs-6 fw-bolder">Address:</span> {{ $this->order->billing_address }} <br>
-                                <span class="fs-6 fw-bolder">Zipcode:</span> {{ $this->order->zipcode }}
+                                <span class="fs-6 fw-bolder lh-base">Full Name:</span> {{ $this->order->full_name }} <br>
+                                <span class="fs-6 fw-bolder lh-base">Phone:</span> {{ $this->order->phone }} <br>
+                                <span class="fs-6 fw-bolder lh-base">Email:</span> {{ $this->order->email }} <br>
+                                <span class="fs-6 fw-bolder lh-base">Address:</span> {{ $this->order->billing_address }} <br>
+                                <span class="fs-6 fw-bolder lh-base">Zipcode:</span> {{ $this->order->zipcode }}
                             </div>
                             <div class="col-12">
                                 <hr class="mt-10 mb-10">

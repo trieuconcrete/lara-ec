@@ -1,4 +1,5 @@
 <div>
+    @include('livewire.admin.order.modal-detail')
     <div class="row">
         <div class="col-md-12 grid-margin">
             @include('layouts.includes.admin.breadcrumb', [
@@ -16,10 +17,21 @@
                 ]
             ])
         </div>
+    </div>
+    @include('livewire.admin.order.search-form')
+    <div wire:loading class="p-2" wire:target="searchOrder">
+        <div class="d-flex justify-content-center text-primary">
+            <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+    </div>
+    <div class="row" wire:ignore.self>
         <div class="col-md-12 grid-margin">
             <div class="card">
                 <div class="card-header">
-                    <h3>List</h3>
+                    <span class="fs-5">List</span>
+                    <span class="float-end">{{ $orders->total() ?? 0 }} items</span>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -45,11 +57,11 @@
                                         <td>{{ $item->billing_address }}</td>
                                         <td>{{ $item->payment_mode }}</td>
                                         <td>{{ $item->payment_mode == 'Paid By Paypal' ? 'Paid' : 'UnPaid' }}</td>
-                                        <td>{{ $item->status_message }}</td>
+                                        <td>{{ \Str::title(str_replace('-', ' ', $item->status_message)) }}</td>
                                         <td>{{ $item->orderItems->sum('sub_total_price') }}</td>
                                         <td>{{ $item->created_at }}</td>
                                         <td class="action" data-title="View">
-                                            <a href="#" class="btn btn-inverse-success btn-fw btn-sm">
+                                            <a wire:click="orderDetailModel({{ $item->id }})" data-bs-toggle="modal" data-bs-target="#orderDetail" class="btn btn-inverse-success btn-fw btn-sm">
                                                 <span class="mdi mdi-eye"></span>
                                             </a>
                                         </td>
