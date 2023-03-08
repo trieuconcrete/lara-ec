@@ -40,6 +40,7 @@
                                 <tr>
                                     <th scope="col">ID</th>
                                     <th scope="col">Tracking No</th>
+                                    <th scope="col">Full Name</th>
                                     <th scope="col">Billing Address</th>
                                     <th scope="col">Payment Method</th>
                                     <th scope="col">Payment Status</th>
@@ -54,15 +55,19 @@
                                     <tr>
                                         <td>{{ $item->id }}</td>
                                         <td>{{ $item->tracking_no }}</td>
+                                        <td>{{ $item->full_name }}</td>
                                         <td>{{ $item->billing_address }}</td>
                                         <td>{{ $item->payment_mode }}</td>
                                         <td>{{ $item->payment_mode == 'Paid By Paypal' ? 'Paid' : 'UnPaid' }}</td>
                                         <td>{{ \Str::title(str_replace('-', ' ', $item->status_message)) }}</td>
                                         <td>{{ $item->orderItems->sum('sub_total_price') }}</td>
                                         <td>{{ $item->created_at }}</td>
-                                        <td class="action" data-title="View">
+                                        <td class="action d-inline-block" data-title="View">
                                             <a wire:click="orderDetailModel({{ $item->id }})" data-bs-toggle="modal" data-bs-target="#orderDetail" class="btn btn-inverse-success btn-fw btn-sm">
                                                 <span class="mdi mdi-eye"></span>
+                                            </a>
+                                            <a wire:click="downloadOrder({{ $item->id }})" class="btn btn-inverse-primary btn-fw btn-sm ">
+                                                <span class="mdi mdi-download"></span>
                                             </a>
                                         </td>
                                     </tr>

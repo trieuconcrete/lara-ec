@@ -8,6 +8,10 @@
         <input type="date" name="order_to" wire:model.defer="order_to" value="" class="form-control" placeholder="To"/>
     </div>
     <div class="col-md-3 mb-3 form-group">
+        <label for="Order date">Tracking No</label>
+        <input type="text" name="tracking_no" wire:model.defer="tracking_no" value="" class="form-control" placeholder="Tracking No"/>
+    </div>
+    <div class="col-md-3 mb-3 form-group">
         <label for="Order date">Status</label>
         <select name="status_message" wire:model.defer="status_message" class="form-select form-control-lm">
             <option value=""></option>

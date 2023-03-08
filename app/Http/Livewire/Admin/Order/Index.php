@@ -5,13 +5,14 @@ namespace App\Http\Livewire\Admin\Order;
 use Livewire\Component;
 use App\Models\Order;
 use Livewire\WithPagination;
+use PDF;
 
 class Index extends Component
 {
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
     
-    public $orderId, $order, $order_from, $order_to, $status_message, $order_status;
+    public $orderId, $order, $order_from, $order_to, $status_message, $order_status, $tracking_no;
     protected $orders, $queryString = [];
 
     public function searchOrder()
@@ -19,7 +20,8 @@ class Index extends Component
         $this->queryString = array_merge([
             'order_from' => ['except' => ''],
             'order_to' => ['except' => ''],
-            'status_message' => ['except' => '', 'as' => 'status']
+            'status_message' => ['except' => '', 'as' => 'status'],
+            'tracking_no' => ['except' => '']
         ], $this->queryString);
     }
 
@@ -31,7 +33,8 @@ class Index extends Component
         $this->queryString = array_merge([
             'order_from' => ['except' => ''],
             'order_to' => ['except' => ''],
-            'status_message' => ['except' => '', 'as' => 'status']
+            'status_message' => ['except' => '', 'as' => 'status'],
+            'tracking_no' => ['except' => ''],
         ], $this->queryString);
     }
 
@@ -55,11 +58,37 @@ class Index extends Component
         $this->order_status =  $this->order->status_message;
     }
 
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function downloadOrder($orderId)
+    {
+        $this->orderId = $orderId;
+        $this->order = Order::with('orderItems', 'orderItems.product')->where([
+            'id' => $this->orderId,
+            'user_id' => auth()->user()->id
+        ])->first();
+        $data = [
+            'order' => $this->order
+        ];
+        $pdf = PDF::loadView('admin.order_detail', $data)->output();
+    
+        return response()->streamDownload(
+            fn () => print($pdf),
+            "order_detail_{$this->order->tracking_no}.pdf"
+       );
+    }
+
     public function render()
     {
         $this->orders = Order::with('orderItems')
         ->when($this->status_message, function($query) {
             $query->where('status_message', $this->status_message);
+        })
+        ->when($this->tracking_no, function($query) {
+            $query->where('tracking_no', $this->tracking_no);
         })
         ->when($this->order_from, function($query) {
             $query->whereDate('created_at', '>=', $this->order_from);
