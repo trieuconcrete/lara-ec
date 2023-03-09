@@ -9,6 +9,7 @@ use App\Models\OrderItem;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use App\Constants;
 
 class Checkout extends Component
 {
@@ -129,69 +130,20 @@ class Checkout extends Component
 
     public function createOrderVNPay()
     {
-        $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
-        $vnp_Returnurl = "http://localhost/mypage/return-vnpay";
-        $vnp_TmnCode = "BGNJM6I7";//Mã website tại VNPAY 
-        $vnp_HashSecret = "WLGKVSBLSKIAHNXNOIZUZPVMHKRRKYBZ"; //Chuỗi bí mật
-
-        $vnp_TxnRef = "1234"; //Mã đơn hàng. Trong thực tế Merchant cần insert đơn hàng vào DB và gửi mã này sang VNPAY
-        $vnp_OrderInfo = "Nap tien cho thue bao 0123456789";
-        $vnp_OrderType = "billpayment";
-        $vnp_Amount = 1000000 * 100;
-        $vnp_Locale = 'vn';
-        $vnp_IpAddr = request()->ip();
+        $order = $this->placeOrder();
+        $vnpAmount = $order->orderItems->sum('price') * 100;
+        $vnp_Url = Constants::VNPAY_URL;
+        $vnp_HashSecret = Constants::VNPAY_HASHSECRET;
         //Add Params of 2.0.1 Version
-        $vnp_ExpireDate = Carbon::now()->addDay()->format('YmdHis');
-        //Billing
-        $vnp_Bill_Mobile = "1111";
-        $vnp_Bill_Email = "test@gmail.com";
-        $fullName = "Name test xxxx";
-        if (isset($fullName) && trim($fullName) != '') {
-            $name = explode(' ', $fullName);
-            $vnp_Bill_FirstName = array_shift($name);
-            $vnp_Bill_LastName = array_pop($name);
-        }
-        $vnp_Bill_Address="Viet Nam";
-        $vnp_Bill_City="Ha Noi";
-        $vnp_Bill_Country="Viet Nam";
-        // $vnp_Bill_State=$_POST['txt_bill_state'];
-        // Invoice
-        $vnp_Inv_Phone="0905000000";
-        $vnp_Inv_Email="test_02@gmail.com";
-        $vnp_Inv_Customer="tesst xxxxx";
-        $vnp_Inv_Address="Viet Nam";
-        $vnp_Inv_Company="Tesst";
-        // $vnp_Inv_Taxcode=$_POST['txt_inv_taxcode'];
-        // $vnp_Inv_Type=$_POST['cbo_inv_type'];
-        $inputData = array(
-            "vnp_Version" => "2.1.0",
-            "vnp_TmnCode" => $vnp_TmnCode,
-            "vnp_Amount" => $vnp_Amount,
-            "vnp_Command" => "pay",
+        // $vnp_ExpireDate = Carbon::now()->addMinutes(Constants::VNPAY_TIMEOUT_EXPIRE)->format('YmdHis');
+        $inputData = array_merge(Constants::VNPAY, [
+            "vnp_Amount" => (int) $vnpAmount,
+            "vnp_OrderInfo" => Constants::VNPAY_ORDER_INFOR . $order->id,
+            "vnp_TxnRef" => $order->id,
+            // "vnp_ExpireDate" => $vnp_ExpireDate,
             "vnp_CreateDate" => date('YmdHis'),
-            "vnp_CurrCode" => "vnd",
-            "vnp_IpAddr" => $vnp_IpAddr,
-            "vnp_Locale" => $vnp_Locale,
-            "vnp_OrderInfo" => $vnp_OrderInfo,
-            "vnp_OrderType" => $vnp_OrderType,
-            "vnp_ReturnUrl" => $vnp_Returnurl,
-            "vnp_TxnRef" => $vnp_TxnRef,
-            "vnp_ExpireDate"=>$vnp_ExpireDate,
-            "vnp_Bill_Mobile"=>$vnp_Bill_Mobile,
-            "vnp_Bill_Email"=>$vnp_Bill_Email,
-            "vnp_Bill_FirstName"=>$vnp_Bill_FirstName,
-            "vnp_Bill_LastName"=>$vnp_Bill_LastName,
-            "vnp_Bill_Address"=>$vnp_Bill_Address,
-            "vnp_Bill_City"=>$vnp_Bill_City,
-            "vnp_Bill_Country"=>$vnp_Bill_Country,
-            "vnp_Inv_Phone"=>$vnp_Inv_Phone,
-            "vnp_Inv_Email"=>$vnp_Inv_Email,
-            "vnp_Inv_Customer"=>$vnp_Inv_Customer,
-            "vnp_Inv_Address"=>$vnp_Inv_Address,
-            "vnp_Inv_Company"=>$vnp_Inv_Company,
-            // "vnp_Inv_Taxcode"=>$vnp_Inv_Taxcode,
-            // "vnp_Inv_Type"=>$vnp_Inv_Type
-        );
+            "vnp_IpAddr" => request()->ip(),
+        ]);
 
         if (isset($vnp_BankCode) && $vnp_BankCode != "") {
             $inputData['vnp_BankCode'] = $vnp_BankCode;
@@ -200,7 +152,6 @@ class Checkout extends Component
             $inputData['vnp_Bill_State'] = $vnp_Bill_State;
         }
 
-        //var_dump($inputData);
         ksort($inputData);
         $query = "";
         $i = 0;
@@ -217,12 +168,10 @@ class Checkout extends Component
 
         $vnp_Url = $vnp_Url . "?" . $query;
         if (isset($vnp_HashSecret)) {
-           // $vnpSecureHash = md5($vnp_HashSecret . $hashdata);
-            $vnpSecureHash = hash('sha256', $vnp_HashSecret . $hashdata);
-            $vnp_Url .= 'vnp_SecureHashType=SHA256&vnp_SecureHash=' . $vnpSecureHash;
+            $vnpSecureHash =   hash_hmac('sha512', $hashdata, $vnp_HashSecret);//  
+            $vnp_Url .= 'vnp_SecureHash=' . $vnpSecureHash;
         }
 
-        dd($vnp_Url);
         return redirect($vnp_Url);
 	// vui lòng tham khảo thêm tại code demo
     }
