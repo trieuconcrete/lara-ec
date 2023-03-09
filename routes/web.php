@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 use App\Http\Controllers\Auth\AdminLoginController;
+use Illuminate\Support\Str;
 
 Route::get('/welcome', function () {
     return view('welcome');
