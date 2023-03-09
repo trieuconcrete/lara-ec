@@ -25,4 +25,5 @@ Route::controller(MypageController::class)->prefix('mypage')->name('mypage.')->m
     Route::get('checkout', 'checkout')->name('checkout');
     Route::get('thank-you', 'thankYou')->name('thankyou');
     Route::get('orders', 'orders')->name('orders');
+    Route::get('return-vnpay', 'returnVnpay')->name('returnVnpay');
 });

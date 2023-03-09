@@ -56,4 +56,16 @@ class MypageController extends Controller
     {
         return view('frontend.orders');
     }
+
+    public function returnVnpay(\Request $request)
+    {
+        dd('ddd');
+        // $url = session('url_prev','/');
+        // if($request->vnp_ResponseCode == "00") {
+        //     $this->apSer->thanhtoanonline(session('cost_id'));
+        //     return redirect($url)->with('success' ,'Đã thanh toán phí dịch vụ');
+        // }
+        // session()->forget('url_prev');
+        // return redirect($url)->with('errors' ,'Lỗi trong quá trình thanh toán phí dịch vụ');
+    }
 }
