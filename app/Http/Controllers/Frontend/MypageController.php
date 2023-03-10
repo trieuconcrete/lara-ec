@@ -4,9 +4,23 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Constants;
+use App\Services\FrontEnd\OrderService;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class MypageController extends Controller
 {
+    protected $orderService;
+
+    /**
+     * OrderService $orderService
+     */
+    public function __construct(OrderService $orderService)
+    {
+        $this->orderService = $orderService;
+    }
+
     /**
      * Show the wishlist.
      *
@@ -57,15 +71,35 @@ class MypageController extends Controller
         return view('frontend.orders');
     }
 
-    public function returnVnpay(\Request $request)
+    /**
+     * process complate vnpay
+     */
+    public function returnVnpay(Request $request)
     {
-        dd('ddd');
-        // $url = session('url_prev','/');
-        // if($request->vnp_ResponseCode == "00") {
-        //     $this->apSer->thanhtoanonline(session('cost_id'));
-        //     return redirect($url)->with('success' ,'Đã thanh toán phí dịch vụ');
-        // }
-        // session()->forget('url_prev');
-        // return redirect($url)->with('errors' ,'Lỗi trong quá trình thanh toán phí dịch vụ');
+        DB::beginTransaction();
+        try {
+            if ($this->orderService->complateProcessOrderVNPay($request->all())) {
+                DB::commit();
+                return redirect()->to('mypage/thank-you');
+            }
+
+            // case error
+            $this->dispatchBrowserEvent('message', [
+                'text' => 'Something went error',
+                'type' => 'error',
+                'status' => 500
+            ]);
+            DB::rollBack();
+            return redirect()->to('mypage/cart');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::error('Order by VNPAY error: '. $e->getMessage());
+            
+            $this->dispatchBrowserEvent('message', [
+                'text' => 'Something went error',
+                'type' => 'error',
+                'status' => 500
+            ]);
+        }
     }
 }

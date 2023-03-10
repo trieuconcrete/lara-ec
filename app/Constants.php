@@ -18,4 +18,5 @@ class Constants
         "vnp_OrderType" => 200000,
         "vnp_ReturnUrl" => "http://localhost/mypage/return-vnpay",
     ];
+    public const VNPAY_STATUS_CODE_OK = "00";
 }
