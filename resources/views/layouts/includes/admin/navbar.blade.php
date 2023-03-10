@@ -12,8 +12,9 @@
     </div>  
 </div>
 <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
-    <a class="fs-4" href="{{ route('frontend.home') }}" target="_blank" title="shop">
-        <span class="mdi mdi-web"></span>
+    <a class="text-decoration-none" href="{{ route('frontend.home') }}" target="_blank" title="shop">
+        <span class="mdi mdi-web fs-5 position-relative" style="top:5px"></span>
+        <small>Websites</small>
     </a>
     <ul class="navbar-nav navbar-nav-right">
         <li class="nav-item dropdown me-1">

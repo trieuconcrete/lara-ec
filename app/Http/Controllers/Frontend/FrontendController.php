@@ -20,8 +20,10 @@ class FrontendController extends Controller
     {
         $sliders = Slider::where('status', 1)->get();
         $brands = Brand::where('status', 1)->get();
-        $products = Product::with('productImages', 'category')->where('status', 1)->take(8)->get();
-        return view('frontend.index', compact('sliders', 'brands', 'products'));
+        $query = Product::with('productImages', 'category')->where('status', 1);
+        $products = $query->where('trending', 1)->latest()->take(8)->get();
+        $productNewArrivals = $query->latest()->take(12)->get();
+        return view('frontend.index', compact('sliders', 'brands', 'products', 'productNewArrivals'));
     }
 
     /**
