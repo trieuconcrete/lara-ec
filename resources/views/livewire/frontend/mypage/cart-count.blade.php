@@ -1,6 +1,6 @@
 <div>
     <div class="header-action-icon-2">
-        <a class="mini-cart-icon" href="#">
+        <a class="mini-cart-icon" href="{{ route('frontend.mypage.cart') }}">
             <img alt="Surfside Media" src="{{ asset('frontend/assets/imgs/theme/icons/icon-cart.svg') }}">
             @if ($cartCount)
             <span class="pro-count blue">{{ $cartCount }}</span>

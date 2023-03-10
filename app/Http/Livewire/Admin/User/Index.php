@@ -11,6 +11,21 @@ class Index extends Component
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
 
+    public $userId;
+
+    public function deleteUser($id)
+    {
+        $this->userId = $id;
+    }
+
+    public function destroyUser()
+    {
+        $user = User::find($this->userId);
+        $user->delete();
+
+        session()->flash('message', 'Deleted successfully!');
+        $this->dispatchBrowserEvent('close-modal');
+    }
     public function render()
     {
         $users = User::where('user_type', 1)->paginate(10);

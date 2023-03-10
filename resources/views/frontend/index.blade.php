@@ -15,7 +15,7 @@
                                 <h2 class="animated fw-900">{{ $slider->title_md }}</h2>
                                 <h1 class="animated fw-900 text-brand">{{ $slider->title }}</h1>
                                 <p class="animated">{{ $slider->description }}</p>
-                                <a class="animated btn btn-brush btn-brush-3" href="{{ route('frontend.product.detail', 123) }}"> Shop Now </a>
+                                <a class="animated btn btn-brush btn-brush-3" href="{{ route('frontend.product.list') }}"> Shop Now </a>
                             </div>
                         </div>
                         <div class="col-lg-7 col-md-6">

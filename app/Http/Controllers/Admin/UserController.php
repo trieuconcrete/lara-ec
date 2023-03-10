@@ -30,7 +30,8 @@ class UserController extends Controller
             $user->email = $request->email;
             $user->password = Hash::make($request->password);
             $user->user_type = 1;
-
+            $user->status = 1;
+            
             $user->save();
             return redirect(route('admin.user.index'))->with('message', 'User Added Successfully!');
         } catch(\Exception $e) {
@@ -50,9 +51,12 @@ class UserController extends Controller
             $user = User::findOrFail($user);
             $user->name = $request->name;
             $user->email = $request->email;
-            $user->password = Hash::make($request->password);
+            $user->status = $request->status;
+            if ($request->password) {
+                $user->password = Hash::make($request->password);
+            }
             
-            $category->update();
+            $user->update();
             return redirect(route('admin.user.index'))->with('message', 'User Updated Successfully!');
         } catch(\Exception $e) {
             return redirect()->back()->with('error', "Oops an error occurred!</br>".$e->getMessage());

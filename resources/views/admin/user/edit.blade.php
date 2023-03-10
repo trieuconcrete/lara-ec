@@ -37,12 +37,18 @@
                         </div>
                         <div class="col-md-6 mb-3 form-group">
                             <label for="password">Password</label>
-                            <input type="password" name="password" class="form-control" placeholder="Password" required autocomplete="new-password"/>
+                            <input type="password" name="password" class="form-control" placeholder="Password" autocomplete="new-password"/>
                             @error('password') <small class="text-danger">{{ $message }}</small>@enderror
                         </div>
                         <div class="col-md-6 mb-3 form-group">
                             <label for="password">Password</label>
-                            <input type="password" name="password_confirmation" class="form-control" placeholder="Confirm password" required autocomplete="new-password" />
+                            <input type="password" name="password_confirmation" class="form-control" placeholder="Confirm password" autocomplete="new-password" />
+                        </div>
+                        <div class="col-md-6 mb-3 form-group">
+                            <label for="form-check-label">
+                                Status
+                            </label>
+                            <input type="checkbox" name="status" value="1" class="form-check-input" {{ $user->status == 1 ? 'checked' : '' }} />
                         </div>
                         <div class="col-md-12 mb-3 form-group">
                             <button type="submit" class="btn btn-primary">Save</button>
