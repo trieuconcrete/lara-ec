@@ -26,3 +26,8 @@ Route::controller(MypageController::class)->prefix('mypage')->name('mypage.')->m
     Route::get('thank-you', 'thankYou')->name('thankyou');
     Route::get('orders', 'orders')->name('orders');
 });
+
+Route::controller(UserController::class)->prefix('user')->name('user.')->middleware('auth')->group(function () {
+    Route::get('profile', 'profile')->name('profile');
+    Route::put('update', 'update')->name('update');
+});

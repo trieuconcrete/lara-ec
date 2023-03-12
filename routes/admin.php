@@ -61,3 +61,9 @@ Route::controller(UserController::class)->prefix('users')->name('user.')->group(
     Route::get('{user}/edit', 'edit')->name('edit');
     Route::put('{user}/update', 'update')->name('update');
 });
+
+
+Route::controller(SettingController::class)->prefix('settings')->name('setting.')->group(function () {
+    Route::get('/', 'index')->name('index');
+    Route::post('setting', 'setting')->name('save');
+});

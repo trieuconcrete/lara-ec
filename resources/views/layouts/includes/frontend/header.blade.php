@@ -35,7 +35,8 @@
                                 <li>
                                     <a class="language-dropdown-active" href="#"> {{ auth()->user()->name }} <i class="fi-rs-angle-small-down"></i></a>
                                     <ul class="language-dropdown">
-                                        <li><a href="{{ route('frontend.mypage.orders') }}">Orders</a></li>
+                                        <li><a href="{{ route('frontend.user.profile') }}">Profile</a></li>
+                                        <li class="mt-10"><a href="{{ route('frontend.mypage.orders') }}">Orders</a></li>
                                         <li class="mt-10">
                                             <a href="{{ route('logout') }}" 
                                             onclick="event.preventDefault(); 

@@ -85,7 +85,16 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                @if ($this->order)
+                <button wire:click="sendInvoiceOrderMail({{ $this->order->id }})" type="button" class="btn btn-inverse-success">
+                    <span wire:remove wire:target="sendInvoiceOrderMail({{ $this->order->id }})">Send Invoice Order</span>
+                    <span wire:loading wire:target="sendInvoiceOrderMail({{ $this->order->id }})">Sending</span>
+                </button>
+                <a wire:click="downloadOrder({{ $this->order->id }})" class="btn btn-inverse-primary btn-fw btn-sm ">
+                    <span class="mdi mdi-download"></span>
+                </a>
+                @endif
+                <button type="button" class="btn btn-inverse-secondary" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
     </div>

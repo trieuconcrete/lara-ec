@@ -47,4 +47,12 @@ class Order extends Model
     {
         return $this->first_name . ' ' . $this->last_name;
     }
+
+    /**
+     * Get full name
+     */
+    public function getTotalPriceAttribute()
+    {
+        return $this->orderItems->sum('sub_total_price');
+    }
 }

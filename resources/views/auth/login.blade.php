@@ -15,6 +15,9 @@
             <div class="row">
                 <div class="col-lg-10 m-auto">
                     <div class="row">
+                        @if(session('message'))
+                            <h5 class="alert alert-success">{{ session('message') }}</h5>
+                        @endif
                         <div class="col-lg-5">
                             <div class="login_wrap widget-taber-content p-30 background-white border-radius-10 mb-md-5 mb-lg-0 mb-sm-5">
                                 <div class="padding_eight_all bg-white">

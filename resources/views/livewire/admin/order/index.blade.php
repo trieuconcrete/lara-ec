@@ -62,7 +62,7 @@
                                         <td>{{ \Str::title(str_replace('-', ' ', $item->status_message)) }}</td>
                                         <td>{{ $item->orderItems->sum('sub_total_price') }}</td>
                                         <td>{{ $item->created_at }}</td>
-                                        <td class="action d-inline-block" data-title="View">
+                                        <td>
                                             <a wire:click="orderDetailModel({{ $item->id }})" data-bs-toggle="modal" data-bs-target="#orderDetail" class="btn btn-inverse-success btn-fw btn-sm">
                                                 <span class="mdi mdi-eye"></span>
                                             </a>

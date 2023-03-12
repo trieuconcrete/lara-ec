@@ -71,7 +71,7 @@
         </a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="{{ route('admin.setting.index') }}">
             <i class="mdi mdi-cogs menu-icon"></i>
             <span class="menu-title">Site Setting</span>
         </a>

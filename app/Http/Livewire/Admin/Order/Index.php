@@ -2,10 +2,12 @@
 
 namespace App\Http\Livewire\Admin\Order;
 
-use Livewire\Component;
-use App\Models\Order;
-use Livewire\WithPagination;
 use PDF;
+use App\Models\Order;
+use Livewire\Component;
+use Livewire\WithPagination;
+use App\Mail\InvoiceOrderMailable;
+use Illuminate\Support\Facades\Mail;
 
 class Index extends Component
 {
@@ -67,8 +69,7 @@ class Index extends Component
     {
         $this->orderId = $orderId;
         $this->order = Order::with('orderItems', 'orderItems.product')->where([
-            'id' => $this->orderId,
-            'user_id' => auth()->user()->id
+            'id' => $this->orderId
         ])->first();
         $data = [
             'order' => $this->order
@@ -79,6 +80,20 @@ class Index extends Component
             fn () => print($pdf),
             "order_detail_{$this->order->tracking_no}.pdf"
        );
+    }
+
+    public function sendInvoiceOrderMail($orderId)
+    {
+        $this->orderId = $orderId;
+        $this->order = Order::with('user', 'orderItems', 'orderItems.product')->where([
+            'id' => $this->orderId
+        ])->first();
+        Mail::to($this->order->user->email)->send(new InvoiceOrderMailable($this->order));
+        $this->dispatchBrowserEvent('message', [
+            'text' => 'Send Invoice Order Successfully',
+            'type' => 'success',
+            'status' => 200
+        ]);
     }
 
     public function render()

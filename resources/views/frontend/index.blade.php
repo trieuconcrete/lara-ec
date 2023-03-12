@@ -138,9 +138,9 @@
                     @foreach($categories as $cat)
                     <div class="card-1">
                         <figure class=" img-hover-scale overflow-hidden">
-                            <a href="{{ route('frontend.product.list', $cat->slug) }}"><img src="{{ $cat->getImage() }}" alt=""></a>
+                            <a href="{{ route('frontend.product.list', ['category' => $cat->slug]) }}"><img src="{{ $cat->getImage() }}" alt=""></a>
                         </figure>
-                        <h5><a href="{{ route('frontend.product.list', $cat->slug) }}">{{ $cat->name }}</a></h5>
+                        <h5><a href="{{ route('frontend.product.list', ['category' => $cat->slug]) }}">{{ $cat->name }}</a></h5>
                     </div>
                     @endforeach
                 </div>
