@@ -32,9 +32,9 @@ class SettingSeeder extends Seeder
                 'updated_at' => now()
             ],
             [
-                'key' => 'addres',
+                'key' => 'address',
                 'value' => env('SITE_ADDRESS', '111 Wellington Road'),
-                'comment' => 'Addres',
+                'comment' => 'Address',
                 'created_at' => now(),
                 'updated_at' => now()
             ],

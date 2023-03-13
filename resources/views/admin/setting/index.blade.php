@@ -17,24 +17,19 @@
             <div class="card-body">
                 <form action="{{ route('admin.setting.save') }}" method="post" enctype="multipart/form-data">
                     @csrf
-                    <div class="row">
-                        <div class="col-md-3 mb-3">
-                            <label class="fs-6" for="">Key</label>
-                        </div>
-                        <div class="col-md-4 mb-3">
-                            <label class="fs-6" for="">Value</label>
-                        </div>
-                        <div class="col-md-5 mb-3">
-                            <label class="fs-6" for="">Comment</label>
-                        </div>
-                    </div>
                     @foreach($settings as $set)
                     <div class="row">
                         <div class="col-md-3 mb-3 form-group">
+                            @if($loop->first)
+                            <label class="fs-6" for="">Keys</label>
+                            @endif
                             <input type="text" name="keys[]" class="form-control" placeholder="Key" readonly value="{{ $set['key'] }}" autocomplete="name"/>
                             @error('key[]') <small class="text-danger">{{ $message }}</small>@enderror
                         </div>
                         <div class="col-md-4 mb-3 form-group">
+                            @if($loop->first)
+                            <label class="fs-6" for="">Values</label>
+                            @endif
                             @if($set['key'] == 'logo_header' || $set['key'] == 'logo_footer')
                                 <input type="file" name="values[{{ $set['key'] }}]" class="form-control mb-2" placeholder="Value" value="{{ $set['value'] }}" />
                             @else
@@ -46,6 +41,9 @@
                             @endif
                         </div>
                         <div class="col-md-5 mb-3 form-group">
+                            @if($loop->first)
+                            <label class="fs-6" for="">Comments</label>
+                            @endif
                             <textarea name="comments[{{ $set['key'] }}]" class="form-control" placeholder="Comment" rows="1">{{ $set['comment'] }}</textarea>
                             @error('comment[]') <small class="text-danger">{{ $message }}</small>@enderror
                         </div>
