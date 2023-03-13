@@ -3,17 +3,6 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-xl-3 col-lg-4">
-                    <div class="header-info">
-                        <ul>
-                            <li>
-                                <a class="language-dropdown-active" href="#"> <i class="fi-rs-world"></i> English <i class="fi-rs-angle-small-down"></i></a>
-                                <ul class="language-dropdown">
-                                    <li><a href="#"><img src="{{ asset('frontend/assets/imgs/theme/flag-fr.png') }}" alt="">Vietname</a></li>
-                                    <li><a href="#"><img src="{{ asset('frontend/assets/imgs/theme/flag-dt.png') }}" alt="">Japan</a></li>
-                                </ul>
-                            </li>                                
-                        </ul>
-                    </div>
                 </div>
                 <div class="col-xl-6 col-lg-4">
                     <div class="text-center">
@@ -58,7 +47,7 @@
         <div class="container">
             <div class="header-wrap">
                 <div class="logo logo-width-1">
-                    <a href="{{ route('frontend.home') }}"><img src="https://laravel.com/img/logotype.min.svg" alt="logo"></a>
+                    <a href="{{ route('frontend.home') }}"><img src="{{ \Storage::url($settings['logo_header']) }}" alt="logo"></a>
                 </div>
                 <div class="header-right">
                     <div class="search-style-1">
@@ -108,7 +97,7 @@
                     </div>
                 </div>
                 <div class="hotline d-none d-lg-block">
-                    <p><i class="fi-rs-smartphone"></i><span>Toll Free</span> (+1) 0000-000-000 </p>
+                    <p><i class="fi-rs-smartphone"></i><span>Phone</span> {{ $settings['phone'] }} </p>
                 </div>
                 <p class="mobile-promotion">Happy <span class="text-brand">Mother's Day</span>. Big Sale Up to 40%</p>
                 <div class="header-action-right d-block d-lg-none">
