@@ -11,6 +11,9 @@ class BaseController extends Controller
 {
     public function uploadImage($path, $file, $filePath = null)
     {
+        if(!Storage::exists($path)) {
+            Storage::makeDirectory($path, 0775, true); //creates directory
+        }
         if ($file) {
             // remove file
             if ($filePath) {
