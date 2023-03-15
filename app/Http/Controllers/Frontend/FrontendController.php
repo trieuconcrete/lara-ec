@@ -33,7 +33,10 @@ class FrontendController extends Controller
      */
     public function getProductDetail($id)
     {
-        $product = Product::with('productImages', 'productColors')->find($id);
+        $product = Product::with('category', 'productImages', 'productColors')
+        ->with(['category.products' => function($query) use ($id) {
+            return $query->where('id', '<>', $id);
+        }])->find($id);
         return view('frontend.product_detail', compact('product'));
     }
 
