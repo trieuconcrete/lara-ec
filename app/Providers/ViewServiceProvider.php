@@ -34,7 +34,9 @@ class ViewServiceProvider extends ServiceProvider
             'frontend.thank-you',
             'frontend.profile',
             'auth.login',
-            'auth.register'
+            'auth.admin_login',
+            'auth.register',
+            'admin.dashboard'
         ], CategoryComposer::class);
     }
 }

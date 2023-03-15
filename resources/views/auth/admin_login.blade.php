@@ -26,7 +26,7 @@
                 <div class="col-lg-4 mx-auto">
                 <div class="auth-form-light text-left py-5 px-4 px-sm-5">
                     <div class="brand-logo text-center">
-                        <img src="https://laravel.com/img/logotype.min.svg" alt="logo"/></a>
+                        <img src="{{ isset($settings['logo_header']) ? \Storage::url($settings['logo_header']) : asset('assets/images/logo.png') }}" alt="logo"/></a>
                     </div>
                     <span class="fs-4 mb-5">Sign in to Admin Panel</span>
                     <form method="POST" action="{{ route('login') }}" class="pt-3">
