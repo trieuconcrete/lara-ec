@@ -98,8 +98,8 @@
                                     <span wire:loading.remove wire.target="codOrder">Cash On Delivery</span>
                                     <span wire:loading wire.target="codOrder">Placing Order...</span>
                                 </button>
-                                <button type="button" wire:click="createOrderVNPay" wire.loading.attr="disabled" class="btn btn-fill-out w-100 mt-30">
-                                    <span wire:loading.remove wire.target="createOrderVNPay">VNPAY</span>
+                                <button style="height:47px;background-image:url({{ asset('frontend/assets/imgs/Logo-VNPAY-QR.png') }});background-size: contain;background-repeat: no-repeat;background-position: center;background-color: #fff;" wire:click="createOrderVNPay" wire.loading.attr="disabled" class="btn btn-fill-out w-100 mt-30">
+                                    <span wire:loading.remove wire.target="createOrderVNPay"></span>
                                     <span wire:loading wire.target="createOrderVNPay">Placing Order...</span>
                                 </button>
                                 <div id="paypal-button-container" class="mt-20"></div>
