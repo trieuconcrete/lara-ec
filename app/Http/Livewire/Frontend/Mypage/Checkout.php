@@ -8,13 +8,16 @@ use Livewire\Component;
 use App\Models\OrderItem;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
+use App\Constants;
+use Illuminate\Support\Facades\Log;
 
 class Checkout extends Component
 {
 
     public $carts, $first_name, $last_name, $billing_address, $billing_address2, $city, $country, $zipcode, $phone, $email, $status_message, $notes, $payment_mode, $payment_id = NULL;
 
-    protected $listeners = ['validationForAll', 'transactionEmit' => 'paidOnlineOrder'];
+    protected $listeners = ['validationForAll', 'createOrder', 'createOrderVNPay', 'transactionEmit' => 'paidOnlineOrder'];
 
     public function validationForAll()
     {
@@ -80,6 +83,8 @@ class Checkout extends Component
             
             return $order;
         } catch(\Exception $e) {
+            Log::error('order error: '. $e->getMessage());
+            
             return false;
         }
     }
@@ -125,4 +130,64 @@ class Checkout extends Component
             'email' => $this->email,
         ]);
     }
+
+    public function createOrderVNPay()
+    {
+        DB::beginTransaction();
+        try {
+            $order = $this->placeOrder();
+            $vnpAmount = $order->orderItems->sum('price') * 100;
+            $vnp_Url = Constants::VNPAY_URL;
+            $vnp_HashSecret = Constants::VNPAY_HASHSECRET;
+            //Add Params of 2.0.1 Version
+            $inputData = array_merge(Constants::VNPAY, [
+                "vnp_Amount" => (int) $vnpAmount,
+                "vnp_OrderInfo" => Constants::VNPAY_ORDER_INFOR . $order->id,
+                "vnp_TxnRef" => $order->id,
+                "vnp_CreateDate" => date('YmdHis'),
+                "vnp_IpAddr" => request()->ip(),
+            ]);
+    
+            if (isset($vnp_BankCode) && $vnp_BankCode != "") {
+                $inputData['vnp_BankCode'] = $vnp_BankCode;
+            }
+            if (isset($vnp_Bill_State) && $vnp_Bill_State != "") {
+                $inputData['vnp_Bill_State'] = $vnp_Bill_State;
+            }
+    
+            ksort($inputData);
+            $query = "";
+            $i = 0;
+            $hashdata = "";
+            foreach ($inputData as $key => $value) {
+                if ($i == 1) {
+                    $hashdata .= '&' . urlencode($key) . "=" . urlencode($value);
+                } else {
+                    $hashdata .= urlencode($key) . "=" . urlencode($value);
+                    $i = 1;
+                }
+                $query .= urlencode($key) . "=" . urlencode($value) . '&';
+            }
+    
+            $vnp_Url = $vnp_Url . "?" . $query;
+            if (isset($vnp_HashSecret)) {
+                $vnpSecureHash =   hash_hmac('sha512', $hashdata, $vnp_HashSecret);//  
+                $vnp_Url .= 'vnp_SecureHash=' . $vnpSecureHash;
+            }
+    
+            DB::commit();
+
+            return redirect($vnp_Url);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::error('Order by VNPAY error: '. $e->getMessage());
+            
+            $this->dispatchBrowserEvent('message', [
+                'text' => 'Something went error',
+                'type' => 'error',
+                'status' => 500
+            ]);
+        }
+    }
+
 }
