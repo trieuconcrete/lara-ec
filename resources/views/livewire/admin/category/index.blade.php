@@ -50,6 +50,7 @@
                                     <th>Image</th>
                                     <th>Name</th>
                                     <th>Status</th>
+                                    <th>Product Number</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -68,6 +69,7 @@
                                                 <label class="badge bg-success">Visible</label>
                                             @endif
                                         </td>
+                                        <td>{{ $item->products_count }}</td>
                                         <td>
                                             <a href="{{ route('admin.category.edit', $item->id) }}" class="btn btn-inverse-success btn-fw btn-sm">
                                                 <span class="mdi mdi-pencil"></span>

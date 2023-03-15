@@ -32,7 +32,9 @@ class Index extends Component
 
     public function render()
     {
-        $categories = Category::orderBy('id', 'DESC')->paginate(10);
+        $categories = Category::withCount(['products' => function($query) {
+            return $query->where('status', true);
+        }])->orderBy('id', 'DESC')->paginate(10);
         return view('livewire.admin.category.index', ['categories' => $categories]);
     }
 }
