@@ -112,7 +112,7 @@
     </main>
 </div>
 @push('script')
-<script src="https://www.paypal.com/sdk/js?client-id=AW1G1I2yEOpb8udW_TNGVCcHR39Wd4rxVStaz-fCE8hycwtSK5Ddtl8Fq2cjjlZo8MKC_EH6wJ7aqDrO&currency=USD"></script>
+<script src="https://www.paypal.com/sdk/js?client-id=AcWeV7MOEmYO-kFZX8My89ywgOiYzI9oTo5jXfUDJVFqyR6poxRQr9W1O_nHfBfeaTMhsbMIjcqKMgI1&currency=USD"></script>
 <script>
     paypal.Buttons({
         // onClick is called when the button is clicked
