@@ -24,8 +24,7 @@ class CategoryController extends BaseController
 
     public function create()
     {
-        $categories = Category::select('id', 'name')
-        ->get();
+        $categories = Category::select('id', 'name')->get();
         return view('admin.category.create', ['categories' => $categories]);
     }
 
