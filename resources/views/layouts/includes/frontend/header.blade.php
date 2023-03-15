@@ -47,7 +47,7 @@
         <div class="container">
             <div class="header-wrap">
                 <div class="logo logo-width-1">
-                    <a href="{{ route('frontend.home') }}"><img src="{{ \Storage::url($settings['logo_header']) }}" alt="logo"></a>
+                    <a href="{{ route('frontend.home') }}"><img src="{{ isset($settings['logo_header']) ? \Storage::url($settings['logo_header']) : asset('assets/images/logo.png') }}" alt="logo"></a>
                 </div>
                 <div class="header-right">
                     <div class="search-style-1">
@@ -121,7 +121,7 @@
     <div class="mobile-header-wrapper-inner">
         <div class="mobile-header-top">
             <div class="mobile-header-logo">
-                <a href="index.html"><img src="https://laravel.com/img/logotype.min.svg" alt="logo"></a>
+                <a href="{{ route('frontend.home') }}"><img src="{{ isset($settings['logo_footer']) ? \Storage::url($settings['logo_header']) : asset('assets/images/logo.png') }}" alt="logo"></a></a>
             </div>
             <div class="mobile-menu-close close-style-wrap close-style-position-inherit">
                 <button class="close-style search-close">
@@ -159,7 +159,7 @@
                 <!-- mobile menu start -->
                 <nav>
                     <ul class="mobile-menu">
-                        <li class="menu-item-has-children"><span class="menu-expand"></span><a href="index.html">Home</a></li>
+                        <li class="menu-item-has-children"><span class="menu-expand"></span><a href="{{ route('frontend.home') }}">Home</a></li>
                         <li class="menu-item-has-children"><span class="menu-expand"></span><a href="shop.html">shop</a></li>
                         <li class="menu-item-has-children"><span class="menu-expand"></span><a href="#">Our Collections</a>
                             <ul class="dropdown">
