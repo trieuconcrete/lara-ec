@@ -73,3 +73,13 @@ jobs:
           ssh_known_hosts: "${{ secrets.SSH_KNOWN_HOSTS }}"
           php_executable: "php"
         run: tar -xf artifacts.tar.gz .github/deployment/prepare.sh -O | bash -se -- "$base_directory" "$ssh_user" "$ssh_host" "$ssh_port" "$private_ssh_key" "$ssh_known_hosts" "$php_executable"
+
+    slackNotification:
+      name: Slack Notification
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v2
+        - name: Slack Notification
+          uses: rtCamp/action-slack-notify@v2
+          env:
+            SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
