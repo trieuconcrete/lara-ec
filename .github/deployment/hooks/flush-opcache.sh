@@ -52,12 +52,12 @@ app_url=$("$php_executable" artisan tinker --execute "echo rtrim(config('app.url
 
 echo "Pinging \"$app_url\" to flush OPCache."
 
-curl "$app_url/$opcache_reset_script_file_name" \
-    --silent \
-    --show-error \
-    --fail \
-    --retry 5 \
-    --max-time 5 \
-    --retry-max-time 60
+# curl "$app_url/$opcache_reset_script_file_name" \
+#     --silent \
+#     --show-error \
+#     --fail \
+#     --retry 5 \
+#     --max-time 5 \
+#     --retry-max-time 60
 
 has_flushed_opcache=true
