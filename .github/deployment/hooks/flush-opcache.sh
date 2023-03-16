@@ -6,7 +6,7 @@ php_executable=$1
 current_release_directory_path=$2
 previous_release_directory_path=$3
 
-has_flushed_opcache=false
+has_flushed_opcache=true
 
 opcache_reset_script_file_name="$(head -c 512 /dev/urandom | tr -dc 0-9a-f | head -c 8).php"
 
