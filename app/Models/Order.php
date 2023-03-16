@@ -27,7 +27,9 @@ class Order extends Model
         'status_message',
         'notes',
         'payment_mode',
-        'payment_id'
+        'payment_id',
+        'total_price',
+        'order_date'
     ];
 
     public function user()

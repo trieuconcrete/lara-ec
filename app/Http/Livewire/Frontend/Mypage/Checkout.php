@@ -46,7 +46,7 @@ class Checkout extends Component
     public function placeOrder()
     {
         try {
-            $order = Order::create([
+            $orderData = [
                 'user_id' => auth()->user()->id,
                 'tracking_no' => Str::random(12),
                 'first_name' => $this->first_name,
@@ -61,9 +61,12 @@ class Checkout extends Component
                 'notes' => $this->notes,
                 'status_message' => 'in progress',
                 'payment_mode' => $this->payment_mode,
-                'payment_id' => $this->payment_id
-            ]);
+                'payment_id' => $this->payment_id,
+                'order_date' => now()
+            ];
+            $order = Order::create($orderData);
             $orderItemsData = [];
+            $totalPrice = 0;
             foreach($this->carts as $item) {
                 $orderItemsData = [
                     'product_id' => $item->product_id,
@@ -71,6 +74,7 @@ class Checkout extends Component
                     'quantity' => $item->quantity,
                     'price' => $item->product->selling_price
                 ];
+                $totalPrice += (int) $item->quantity * (int) $item->product->selling_price;
                 // create order items
                 $order->orderItems()->create($orderItemsData);
                 // update quantity in stock
@@ -80,8 +84,7 @@ class Checkout extends Component
                     $item->product()->where('id', $item->product_id)->decrement('quantity', $item->quantity);
                 }
             }
-            
-            return $order;
+            return $order->update(['total_price' => $totalPrice]);
         } catch(\Exception $e) {
             Log::error('order error: '. $e->getMessage());
             
