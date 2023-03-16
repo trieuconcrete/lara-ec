@@ -5,16 +5,16 @@
 php_executable=$1
 new_release_directory=$2
 
-on_exit() {
-    script_status_code=$?
+# on_exit() {
+#     script_status_code=$?
 
-    if [[ "$script_status_code" -ne 0 ]]; then
-        echo "::warning::For more information about file permissions, please visit: https://sjorso.com/laravel-file-permissions"
-    fi
+#     if [[ "$script_status_code" -ne 0 ]]; then
+#         echo "::warning::For more information about file permissions, please visit: https://sjorso.com/laravel-file-permissions"
+#     fi
 
-    # Exit this trap with the original status code.
-    exit "$script_status_code"
-}
+#     # Exit this trap with the original status code.
+#     exit "$script_status_code"
+# }
 # This "trap" command will call the "on_exit" function when we exit this script.
 trap on_exit INT EXIT TERM
 
