@@ -150,11 +150,11 @@ cd "$new_release_directory" || exit 1
 
 tar --extract --file="$artifacts_path"
 
-# if ! [[ $("$php_executable" artisan tinker --help) =~ "--execute" ]]; then
-#     echo "::error::Laravel Tinker is not installed, or you are using an outdated version. Laravel Tinker version ^2.0 is required."
+if ! [[ $("$php_executable" artisan tinker --help) =~ "--execute" ]]; then
+    echo "::error::Laravel Tinker is not installed, or you are using an outdated version. Laravel Tinker version ^2.0 is required."
 
-#     exit 1
-# fi
+    exit 1
+fi
 
 run_hook "set-file-permissions.sh" "$new_release_directory"
 
