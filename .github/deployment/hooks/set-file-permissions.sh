@@ -16,7 +16,7 @@ new_release_directory=$2
 #     exit "$script_status_code"
 # }
 # This "trap" command will call the "on_exit" function when we exit this script.
-trap on_exit INT EXIT TERM
+# trap on_exit INT EXIT TERM
 
 deployment_user=$(whoami)
 
