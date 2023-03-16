@@ -156,7 +156,7 @@ tar --extract --file="$artifacts_path"
 #     exit 1
 # fi
 
-run_hook "set-file-permissions.sh" "$new_release_directory"
+# run_hook "set-file-permissions.sh" "$new_release_directory"
 
 run_hook "before-activation.sh"
 
