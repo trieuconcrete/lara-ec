@@ -60,7 +60,7 @@
                                         <td>{{ $item->payment_mode }}</td>
                                         <td>{{ $item->payment_mode == 'Paid By Paypal' ? 'Paid' : 'UnPaid' }}</td>
                                         <td>{{ \Str::title(str_replace('-', ' ', $item->status)) }}</td>
-                                        <td>{{ $item->orderItems->sum('sub_total_price') }}</td>
+                                        <td>{{ $item->total_price }}</td>
                                         <td>{{ $item->created_at }}</td>
                                         <td>
                                             <a wire:click="orderDetailModel({{ $item->id }})" data-bs-toggle="modal" data-bs-target="#orderDetail" class="btn btn-inverse-success btn-fw btn-sm">

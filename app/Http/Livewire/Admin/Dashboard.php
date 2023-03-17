@@ -23,15 +23,14 @@ class Dashboard extends Component
         $totalBrands = Brand::count();
 
         $totalClients = User::where('user_type', 0)->count();
-        $totalOrders = Order::with('orderItems')->orderBy('created_at', 'DESC')->get();
-        $todayOrders = Order::with('orderItems')->whereDate('created_at', $today)->get();
-        $thisMonthOrders = Order::with('orderItems')->whereMonth('created_at', $today)->get();
-        $thisYearOrders = Order::with('orderItems')->whereYear('created_at', $today)->get();
+        $totalOrders = Order::with('orderItems')->orderBy('order_date', 'DESC')->get();
+        $todayOrders = Order::with('orderItems')->whereDate('order_date', $today)->get();
+        $thisMonthOrders = Order::with('orderItems')->whereMonth('order_date', $today)->get();
+        $thisYearOrders = Order::with('orderItems')->whereYear('order_date', $today)->get();
 
-
-        $orders = Order::with('orderItems')->whereYear('created_at', $today)
-        ->selectRaw("DATE_FORMAT(created_at, '%Y-%m') as order_date, sum(total_price) AS total_order_price")
-        ->groupBy(\DB::raw("DATE_FORMAT(created_at, '%Y-%m')"))
+        $orders = Order::with('orderItems')->whereYear('order_date', $today)
+        ->selectRaw("DATE_FORMAT(order_date, '%Y-%m') as order_date, sum(total_price) AS total_order_price")
+        ->groupBy(\DB::raw("DATE_FORMAT(order_date, '%Y-%m')"))
         ->orderBy('order_date', 'ASC')
         ->get()->toArray();
         $orderDates = Arr::keyBy($orders, 'order_date');
@@ -41,7 +40,6 @@ class Dashboard extends Component
             $orderDate = date('Y') . '-' . $month;
             $amounts[] = array_key_exists($orderDate, $orderDates) ? $orderDates[$orderDate]['total_order_price'] : 0;
         }
-        // dd(array_values($amounts));
         return view('livewire.admin.dashboard', [
             'totalProducts' => $totalProducts,
             'totalCategories' => $totalCategories,
