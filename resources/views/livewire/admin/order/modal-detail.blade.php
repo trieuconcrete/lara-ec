@@ -35,11 +35,11 @@
                             <span class="fs-6 fw-bolder lh-base text-success">Order Stauts Message: </span>
                             <select name="order_status" wire:model="order_status" wire:change="updateOrderStatus({{ $this->order->id }})" class="form-select form-control-lm w-25 d-inline-block">
                                 <option value=""></option>
-                                <option value="in-progress" {{ $this->order->status_message == 'in-progress' ? 'selected' : '' }}>In Progress</option>
-                                <option value="completed" {{ $this->order->status_message == 'completed' ? 'selected' : '' }}>Completed</option>
-                                <option value="pending" {{ $this->order->status_message == 'pending' ? 'selected' : '' }}>Pending</option>
-                                <option value="cancelled" {{ $this->order->status_message == 'cancelled' ? 'selected' : '' }}>Cancelled</option>
-                                <option value="out-for-delivery" {{ $this->order->status_message == 'out-for-delivery' ? 'selected' : '' }}>Out For Delivery</option>
+                                <option value="in-progress" {{ $this->order->status == 'in-progress' ? 'selected' : '' }}>In Progress</option>
+                                <option value="completed" {{ $this->order->status == 'completed' ? 'selected' : '' }}>Completed</option>
+                                <option value="pending" {{ $this->order->status == 'pending' ? 'selected' : '' }}>Pending</option>
+                                <option value="cancelled" {{ $this->order->status == 'cancelled' ? 'selected' : '' }}>Cancelled</option>
+                                <option value="out-for-delivery" {{ $this->order->status == 'out-for-delivery' ? 'selected' : '' }}>Out For Delivery</option>
                             </select>
                         </div>
                         <div class="col-12">

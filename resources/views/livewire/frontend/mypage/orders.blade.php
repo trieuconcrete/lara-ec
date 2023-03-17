@@ -24,7 +24,7 @@
                                 <span class="fs-6 fw-bolder lh-base">Order Date:</span> {{ $this->order->created_at }} <br>
                                 <span class="fs-6 fw-bolder lh-base">Payment Method:</span> {{ $this->order->payment_mode }} <br>
                                 <span class="fs-6 fw-bolder lh-base">Payment Status:</span> {{ $this->order->payment_mode == 'Paid By Paypal' ? 'Paid' : 'UnPaid' }} <br>
-                                <span class="fs-6 fw-bolder lh-base text-success">Order Stauts Message: {{ $this->order->status_message }}</span>
+                                <span class="fs-6 fw-bolder lh-base text-success">Order Stauts Message: {{ $this->order->status }}</span>
                             </div>
                             <div class="col-6">
                                 <span class="fs-6 fw-bolder lh-base">Full Name:</span> {{ $this->order->full_name }} <br>
@@ -108,7 +108,7 @@
                                     <td>{{ $item->billing_address }}</td>
                                     <td>{{ $item->payment_mode }}</td>
                                     <td>{{ $item->payment_mode == 'Paid By Paypal' ? 'Paid' : 'UnPaid' }}</td>
-                                    <td>{{ $item->status_message }}</td>
+                                    <td>{{ $item->status }}</td>
                                     <td>{{ $item->orderItems->sum('sub_total_price') }}</td>
                                     <td>{{ $item->created_at }}</td>
                                     <td class="action" data-title="View">

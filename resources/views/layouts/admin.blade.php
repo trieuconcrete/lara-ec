@@ -57,7 +57,7 @@
     
     <!-- endinject -->
     <!-- Plugin js for this page-->
-    <script src="{{ asset('admin/vendors/chart.js/Chart.min.js') }}"></script>
+    {{-- <script src="{{ asset('admin/vendors/chart.js/Chart.min.js') }}"></script> --}}
     <script src="{{ asset('admin/vendors/datatables.net/jquery.dataTables.js') }}"></script>
     <script src="{{ asset('admin/vendors/datatables.net-bs4/dataTables.bootstrap4.js') }}"></script>
     <!-- End plugin js for this page-->
@@ -76,6 +76,8 @@
     <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 
     @livewireScripts
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
     <script>
         $(function() {
             $('.generate-slug').keyup(function(e) {
