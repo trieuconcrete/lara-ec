@@ -6,7 +6,9 @@ use App\Models\Brand;
 use App\Models\Product;
 use Livewire\Component;
 use App\Models\Category;
+use App\Models\WishList;
 use Livewire\WithPagination;
+use Illuminate\Support\Facades\Auth;
 
 class Index extends Component
 {
@@ -14,7 +16,7 @@ class Index extends Component
 
     protected $paginationTheme = 'bootstrap';
 
-    public $category, $brandInputs = [], $sortPrice, $priceFrom = 100, $priceTo = 500;
+    public $productId, $category, $brandInputs = [], $sortPrice, $priceFrom = 100, $priceTo = 500;
     protected $products, $brands;
     protected $queryString = [
         'brandInputs' => ['except' => '', 'as' => 'brand'],
@@ -37,6 +39,38 @@ class Index extends Component
         ], $this->queryString);
     }
 
+    public function addToWishList($productId)
+    {
+        $this->productId = $productId;
+        if (Auth::check()) {
+            if (WishList::where([
+                'user_id' => auth()->user()->id,
+                'product_id' => $this->productId
+            ])->exists()) {
+                $message = 'Already Added to wishlist';
+                $type = 'warning';
+                $status = 200;
+            } else {
+                $wishlist = WishList::create([
+                    'user_id' => auth()->user()->id,
+                    'product_id' => $this->productId
+                ]);
+                $this->emit('wishListAddedUpdate');
+                $message = 'Wishlist Added Successfuly';
+                $type = 'success';
+                $status = 200;
+            }
+        } else {
+            $message = 'Please login to continue';
+            $type = 'message';
+            $status = 401;
+        }
+        $this->dispatchBrowserEvent('message', [
+            'text' => $message,
+            'type' => $type,
+            'status' => $status
+        ]);
+    }
     public function render()
     {
         $this->products = Product::with('productImages', 'category', 'brand')
