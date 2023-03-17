@@ -59,7 +59,7 @@
                                         <td>{{ $item->billing_address }}</td>
                                         <td>{{ $item->payment_mode }}</td>
                                         <td>{{ $item->payment_mode == 'Paid By Paypal' ? 'Paid' : 'UnPaid' }}</td>
-                                        <td>{{ \Str::title(str_replace('-', ' ', $item->status_message)) }}</td>
+                                        <td>{{ \Str::title(str_replace('-', ' ', $item->status)) }}</td>
                                         <td>{{ $item->orderItems->sum('sub_total_price') }}</td>
                                         <td>{{ $item->created_at }}</td>
                                         <td>

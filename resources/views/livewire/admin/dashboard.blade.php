@@ -172,7 +172,7 @@
                                     {{ $item->full_name }}
                                 </td>
                                 <td>
-                                    {{ $item->status_message }}
+                                    {{ $item->status }}
                                 </td>
                                 <td>
                                     {{ $item->total_price }}

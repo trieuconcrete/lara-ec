@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::table('orders', function (Blueprint $table) {
             $table->float('total_price')->nullable()->default(0)->after('payment_id');
             $table->dateTime('order_date')->nullable()->after('payment_id');
+            $table->renameColumn('status', 'status');
         });
     }
 
@@ -27,7 +28,8 @@ return new class extends Migration
     public function down()
     {
         Schema::table('orders', function (Blueprint $table) {
-            $table->dropColumns(['total_price', 'order_date']);
+            $table->dropColumn(['total_price', 'order_date']);
+            $table->renameColumn('status', 'status');
         });
     }
 };

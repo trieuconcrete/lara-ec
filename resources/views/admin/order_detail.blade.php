@@ -129,7 +129,7 @@
             </tr>
             <tr>
                 <td>Order Status:</td>
-                <td>{{ $order->status_message }}</td>
+                <td>{{ $order->status }}</td>
 
                 <td>Pin code:</td>
                 <td>{{ $order->zipcode }}</td>
