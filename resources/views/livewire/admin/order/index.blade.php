@@ -1,5 +1,5 @@
 <div>
-    @include('livewire.admin.order.modal-detail')
+    @include('livewire.admin.order.modal_detail')
     <div class="row">
         <div class="col-md-12 grid-margin">
             @include('layouts.includes.admin.breadcrumb', [
@@ -18,7 +18,7 @@
             ])
         </div>
     </div>
-    @include('livewire.admin.order.search-form')
+    @include('livewire.admin.order.search_form')
     <div wire:loading class="p-2" wire:target="searchOrder">
         <div class="d-flex justify-content-center text-primary">
             <div class="spinner-border" role="status">

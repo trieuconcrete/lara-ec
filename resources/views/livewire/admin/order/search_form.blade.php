@@ -1,4 +1,4 @@
-<div wire:ignore.self class="row search-form">
+<div wire:ignore.self class="row search_form">
     <div class="col-md-3 mb-3 form-group">
         <label for="Order from">Order From</label>
         <input type="date" name="order_from" wire:model.defer="order_from" value="" class="form-control" placeholder="From"/>

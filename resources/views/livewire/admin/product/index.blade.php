@@ -36,10 +36,21 @@
                 ]
             ])
         </div>
+    </div>
+    @include('livewire.admin.product.search_form')
+    <div wire:loading class="p-2" wire:target="searchProduct">
+        <div class="d-flex justify-content-center text-primary">
+            <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
         <div class="col-md-12 grid-margin">
             <div class="card">
                 <div class="card-header">
-                    <h3>List</h3>
+                    <span class="fs-5">List</span>
+                    <span class="float-end">{{ $products->total() ?? 0 }} items</span>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">

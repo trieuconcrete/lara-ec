@@ -9,7 +9,6 @@ use App\Models\Order;
 use App\Models\Product;
 use Livewire\Component;
 use App\Models\Category;
-use Asantibanez\LivewireCharts\Models\ColumnChartModel;
 use Illuminate\Support\Arr;
 
 class Dashboard extends Component
