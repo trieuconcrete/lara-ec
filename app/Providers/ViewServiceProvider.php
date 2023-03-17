@@ -28,6 +28,7 @@ class ViewServiceProvider extends ServiceProvider
             'frontend.product_detail',
             'frontend.product_list',
             'frontend.wishlist',
+            'livewire.frontend.home.index',
             'frontend.cart',
             'frontend.checkout',
             'frontend.orders',
