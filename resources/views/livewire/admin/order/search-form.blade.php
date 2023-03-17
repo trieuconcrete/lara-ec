@@ -13,7 +13,7 @@
     </div>
     <div class="col-md-3 mb-3 form-group">
         <label for="Order date">Status</label>
-        <select name="status_message" wire:model.defer="status_message" class="form-select form-control-lm">
+        <select name="status" wire:model.defer="status" class="form-select form-control-lm">
             <option value=""></option>
             <option value="in-progress">In Progress</option>
             <option value="completed">Completed</option>
