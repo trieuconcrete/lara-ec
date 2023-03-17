@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Log;
 class Checkout extends Component
 {
 
-    public $carts, $first_name, $last_name, $billing_address, $billing_address2, $city, $country, $zipcode, $phone, $email, $status_message, $notes, $payment_mode, $payment_id = NULL;
+    public $carts, $first_name, $last_name, $billing_address, $billing_address2, $city, $country, $zipcode, $phone, $email, $status, $notes, $payment_mode, $payment_id = NULL;
 
     protected $listeners = ['validationForAll', 'createOrder', 'createOrderVNPay', 'transactionEmit' => 'paidOnlineOrder'];
 
@@ -59,7 +59,7 @@ class Checkout extends Component
                 'city' => $this->city,
                 'country' => $this->country,
                 'notes' => $this->notes,
-                'status_message' => 'in progress',
+                'status' => 'in progress',
                 'payment_mode' => $this->payment_mode,
                 'payment_id' => $this->payment_id
             ]);

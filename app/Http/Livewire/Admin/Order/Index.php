@@ -14,7 +14,7 @@ class Index extends Component
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
     
-    public $orderId, $order, $order_from, $order_to, $status_message, $order_status, $tracking_no;
+    public $orderId, $order, $order_from, $order_to, $status, $order_status, $tracking_no;
     protected $orders, $queryString = [];
 
     public function searchOrder()
@@ -22,7 +22,7 @@ class Index extends Component
         $this->queryString = array_merge([
             'order_from' => ['except' => ''],
             'order_to' => ['except' => ''],
-            'status_message' => ['except' => '', 'as' => 'status'],
+            'status' => ['except' => '', 'as' => 'status'],
             'tracking_no' => ['except' => '']
         ], $this->queryString);
     }
@@ -31,18 +31,18 @@ class Index extends Component
     {
         $this->order_from = null;
         $this->order_to = null;
-        $this->status_message = null;
+        $this->status = null;
         $this->queryString = array_merge([
             'order_from' => ['except' => ''],
             'order_to' => ['except' => ''],
-            'status_message' => ['except' => '', 'as' => 'status'],
+            'status' => ['except' => '', 'as' => 'status'],
             'tracking_no' => ['except' => ''],
         ], $this->queryString);
     }
 
     public function updateOrderStatus($orderId)
     {
-        Order::where('id', $orderId)->update(['status_message' => $this->order_status]);
+        Order::where('id', $orderId)->update(['status' => $this->order_status]);
         $this->dispatchBrowserEvent('message', [
             'text' => 'Order Status Updated Successfully',
             'type' => 'success',
@@ -57,7 +57,7 @@ class Index extends Component
             'id' => $this->orderId,
             'user_id' => auth()->user()->id
         ])->first();
-        $this->order_status =  $this->order->status_message;
+        $this->order_status =  $this->order->status;
     }
 
     /**
@@ -99,8 +99,8 @@ class Index extends Component
     public function render()
     {
         $this->orders = Order::with('orderItems')
-        ->when($this->status_message, function($query) {
-            $query->where('status_message', $this->status_message);
+        ->when($this->status, function($query) {
+            $query->where('status', $this->status);
         })
         ->when($this->tracking_no, function($query) {
             $query->where('tracking_no', $this->tracking_no);

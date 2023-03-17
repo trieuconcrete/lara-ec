@@ -24,7 +24,7 @@ class Order extends Model
         'city',
         'country',
         'state',
-        'status_message',
+        'status',
         'notes',
         'payment_mode',
         'payment_id'
