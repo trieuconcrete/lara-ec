@@ -143,9 +143,116 @@
     </div>
 
     <div class="shadow rounded p-4 border bg-white flex-1" style="height: 32rem;">
-        <livewire:livewire-column-chart
-            key="{{ $columnChartModel->reactiveKey() }}"
-            :column-chart-model="$columnChartModel"
-        />
+        <div class="row">
+            <div class="col-7" id="chart"></div>
+            <div class="col-5">
+                <p class="fs-5 text-center">Recently order</p>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr class="text-center">
+                                <th>
+                                    User
+                                </th>
+                                <th>
+                                    Status
+                                </th>
+                                <th>
+                                    Amount
+                                </th>
+                                <th>
+                                    Date
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($totalOrders->take(20)->values()->all() as $item)
+                            <tr>
+                                <td>
+                                    {{ $item->full_name }}
+                                </td>
+                                <td>
+                                    {{ $item->status_message }}
+                                </td>
+                                <td>
+                                    {{ $item->total_price }}
+                                </td>
+                                <td>
+                                    {{ $item->order_date }}
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
+@push('script')
+    <script>
+        var options = {
+            series: [{
+                data: {{ $amounts }}
+            }],
+            chart: {
+                type: 'bar',
+                height: 450
+            },
+            plotOptions: {
+                bar: {
+                    horizontal: false,
+                    columnWidth: '55%',
+                    endingShape: 'rounded'
+                },
+            },
+            dataLabels: {
+                enabled: false
+            },
+            stroke: {
+                show: true,
+                width: 2,
+                colors: ['transparent']
+            },
+            xaxis: {
+                categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+            },
+            fill: {
+                opacity: 1
+            },
+            tooltip: {
+                y: {
+                    formatter: function(val) {
+                        return "$ " + val
+                    }
+                }
+            },
+            title: {
+                text: "Sale {{ date('Y') }} ",
+                align: 'center',
+                margin: 10,
+                offsetX: 0,
+                offsetY: 0,
+                floating: false,
+                style: {
+                    fontSize: '16px',
+                    fontWeight: 'bold',
+                    fontFamily: undefined,
+                    color: '#263238'
+                },
+            }
+        };
+
+        var chart = new ApexCharts(document.querySelector("#chart"), options);
+        chart.render();
+    </script>
+@endpush
+@push('style')
+<style>
+    .table > tbody {
+        height: 25rem;
+        display: table-caption;
+        overflow-y: scroll;
+    }
+</style>
+@endpush

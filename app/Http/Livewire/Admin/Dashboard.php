@@ -23,10 +23,11 @@ class Dashboard extends Component
         $totalBrands = Brand::count();
 
         $totalClients = User::where('user_type', 0)->count();
-        $totalOrders = Order::with('orderItems')->get();
+        $totalOrders = Order::with('orderItems')->orderBy('created_at', 'DESC')->get();
         $todayOrders = Order::with('orderItems')->whereDate('created_at', $today)->get();
         $thisMonthOrders = Order::with('orderItems')->whereMonth('created_at', $today)->get();
         $thisYearOrders = Order::with('orderItems')->whereYear('created_at', $today)->get();
+
 
         $orders = Order::with('orderItems')->whereYear('created_at', $today)
         ->selectRaw("DATE_FORMAT(created_at, '%Y-%m') as order_date, sum(total_price) AS total_order_price")
@@ -34,14 +35,13 @@ class Dashboard extends Component
         ->orderBy('order_date', 'ASC')
         ->get()->toArray();
         $orderDates = Arr::keyBy($orders, 'order_date');
-        $columnChartModel = (new ColumnChartModel())
-                ->setTitle("Order " . date('Y'))
-                ->withoutLegend();
+        $amounts = [];
         for ($i = 1; $i <= 12; $i++) {
             $month = ($i < 10) ? '0' . $i : $i;
             $orderDate = date('Y') . '-' . $month;
-            $columnChartModel = $columnChartModel->addColumn($orderDate, array_key_exists($orderDate, $orderDates) ? $orderDates[$orderDate]['total_order_price'] : 0, '#90cdf4');
+            $amounts[] = array_key_exists($orderDate, $orderDates) ? $orderDates[$orderDate]['total_order_price'] : 0;
         }
+        // dd(array_values($amounts));
         return view('livewire.admin.dashboard', [
             'totalProducts' => $totalProducts,
             'totalCategories' => $totalCategories,
@@ -51,7 +51,7 @@ class Dashboard extends Component
             'todayOrders' => $todayOrders,
             'thisMonthOrders' => $thisMonthOrders,
             'thisYearOrders' => $thisYearOrders,
-            'columnChartModel' => $columnChartModel
+            'amounts' => json_encode($amounts)
         ]);
     }
 }
