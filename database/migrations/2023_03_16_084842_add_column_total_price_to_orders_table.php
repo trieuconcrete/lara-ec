@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('orders', function (Blueprint $table) {
-            $table->float('total_price')->nullable()->default(0)->after('payment_id');
+            $table->float('total_price')->nullable()->default(rand(10000,200000))->after('payment_id');
             $table->dateTime('order_date')->nullable()->default(now())->after('payment_id');
             $table->renameColumn('status_message', 'status');
         });
