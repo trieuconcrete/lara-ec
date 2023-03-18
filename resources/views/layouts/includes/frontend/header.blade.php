@@ -51,9 +51,7 @@
                 </div>
                 <div class="header-right">
                     <div class="search-style-1">
-                        <form action="#">                                
-                            <input type="text" placeholder="Search for items...">
-                        </form>
+                        @livewire('frontend.home.form-search')
                     </div>
                     <div class="header-action-right">
                         <div class="header-action-2">

@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Carbon\Carbon;
+use Illuminate\Support\Str;
 
 class Product extends Model
 {
@@ -13,6 +15,7 @@ class Product extends Model
     protected $talbe = 'products';
 
     protected $fillable = [
+        'product_code',
         'category_id',
         'brand_id',
         'name',
@@ -23,6 +26,7 @@ class Product extends Model
         'selling_price',
         'quantity',
         'trending',
+        'featured',
         'status',
         'meta_title',
         'meta_keyword',
@@ -71,5 +75,12 @@ class Product extends Model
     protected function getSalePercentAttribute()
     {
         return $this->sale_off ? '↓'.$this->sale_off.'%' : null;
+    }
+
+    protected static function booted()
+    {
+        static::creating(function ($model) {
+            $model->product_code = Str::upper(Str::random(4)).Carbon::now()->format('Ymd');
+        });
     }
 }

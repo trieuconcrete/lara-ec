@@ -68,7 +68,8 @@ class Index extends Component
 
         $this->products = Product::with('productImages', 'category', 'brand')
         ->when($this->keyword, function($query) {
-            $query->where('name', 'like', '%'.$this->keyword.'%');
+            $query->where('name', 'like', '%'.$this->keyword.'%')
+            ->orWhere('product_code', 'like', '%'.$this->keyword.'%');
         })
         ->when(in_array($this->status, ['0', '1']), function($query) {
             $query->where('status', $this->status);

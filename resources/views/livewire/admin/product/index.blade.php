@@ -57,7 +57,7 @@
                         <table class="table table-bordered table-striped">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
+                                    <th>Product Code</th>
                                     <th>Image</th>
                                     <th>Name</th>
                                     <th>Category</th>
@@ -71,7 +71,7 @@
                             <tbody>
                                 @foreach ($products as $item)
                                     <tr>
-                                        <td>{{ $item->id }}</td>
+                                        <td>{{ $item->product_code }}</td>
                                         <td>
                                             <x-image :path="$item->getImage()" />
                                         </td>
