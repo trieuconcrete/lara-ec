@@ -141,6 +141,13 @@
                                     </div>
                                     <div class="col-md-4 mb-3 form-group">
                                         <label for="form-check-label">
+                                            Featured
+                                        </label>
+                                        <input type="checkbox" value="1" name="featured"
+                                            class="form-check-input" />
+                                    </div>
+                                    <div class="col-md-4 mb-3 form-group">
+                                        <label for="form-check-label">
                                             Status
                                         </label>
                                         <input type="checkbox" value="1" name="status" class="form-check-input" />

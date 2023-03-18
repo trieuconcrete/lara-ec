@@ -47,7 +47,8 @@ class ProductController extends BaseController
                 'meta_keyword' => $request->meta_keyword ?? null,
                 'meta_description' => $request->meta_description ?? null,
                 'status' => $request->status ?? null,
-                'trending' => $request->trending ?? null
+                'trending' => $request->trending ?? null,
+                'featured' => $request->featured ?? null
             ];
             // insert product
             $product = $category->products()->create($data);
@@ -108,7 +109,8 @@ class ProductController extends BaseController
                     'meta_keyword' => $request->meta_keyword ?? null,
                     'meta_description' => $request->meta_description ?? null,
                     'status' => $request->status ?? null,
-                    'trending' => $request->trending ?? null
+                    'trending' => $request->trending ?? null,
+                    'featured' => $request->featured ?? null
                 ];
                 $product->update($data);
                 // upload product images
