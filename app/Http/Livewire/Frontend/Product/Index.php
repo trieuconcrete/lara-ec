@@ -16,12 +16,19 @@ class Index extends Component
 
     protected $paginationTheme = 'bootstrap';
 
-    public $productId, $category, $brandInputs = [], $sortPrice, $priceFrom = 100, $priceTo = 500;
-    protected $products, $brands;
+    public $productId, $category, $brandInputs = [], $sortPrice, $priceFrom = 100, $priceTo = 500, $keyword;
+    protected $products, $brands, $listeners = ['productListSearch' => 'searchProduct'];
+
     protected $queryString = [
         'brandInputs' => ['except' => '', 'as' => 'brand'],
-        'category' => ['except' => '', 'as' => 'category']
+        'category' => ['except' => '', 'as' => 'category'],
+        'keyword' => ['except' => '', 'as' => 'keyword']
     ];
+
+    public function searchProduct($keyword)
+    {
+        $this->keyword = $keyword;
+    }
 
     public function sortBy($sortPrice)
     {
@@ -31,11 +38,11 @@ class Index extends Component
         ], $this->queryString);
     }
 
-    public function fillterProduct()
+    public function filterProduct()
     {
         $this->queryString = array_merge([
             'priceFrom' => ['except' => '', 'as' => 'price-from'],
-            'priceTo' => ['except' => '', 'as' => 'price-to'],
+            'priceTo' => ['except' => '', 'as' => 'price-to']
         ], $this->queryString);
     }
 
@@ -71,9 +78,13 @@ class Index extends Component
             'status' => $status
         ]);
     }
+
     public function render()
     {
         $this->products = Product::with('productImages', 'category', 'brand')
+        ->when($this->keyword, function($query) {
+            $query->where('name', 'like', '%'.$this->keyword.'%');
+        })
         ->when($this->brandInputs, function($q) {
             $q->whereIn('brand_id', $this->brandInputs);
         })

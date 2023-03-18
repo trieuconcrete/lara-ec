@@ -128,7 +128,7 @@
                                 </div>
                             </div>
                         </div>
-                        <button wire:click="fillterProduct()" class="btn btn-sm btn-default"><i class="fi-rs-filter mr-5"></i> Fillter</button>
+                        <button wire:click="filterProduct()" class="btn btn-sm btn-default"><i class="fi-rs-filter mr-5"></i> Fillter</button>
                     </div>
                     <!-- Product sidebar Widget -->
                     <div class="sidebar-widget product-sidebar  mb-30 p-30 bg-grey border-radius-10">
