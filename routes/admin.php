@@ -62,6 +62,10 @@ Route::controller(UserController::class)->prefix('users')->name('user.')->group(
     Route::put('{user}/update', 'update')->name('update');
 });
 
+Route::controller(ClientController::class)->prefix('clients')->name('client.')->group(function () {
+    Route::get('/', 'index')->name('index');
+});
+
 
 Route::controller(SettingController::class)->prefix('settings')->name('setting.')->group(function () {
     Route::get('/', 'index')->name('index');

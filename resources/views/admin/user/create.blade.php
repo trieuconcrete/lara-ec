@@ -40,6 +40,15 @@
                             @error('password') <small class="text-danger">{{ $message }}</small>@enderror
                         </div>
                         <div class="col-md-6 mb-3 form-group">
+                            <label for="role">Roles</label>
+                            <select name="role" class="form-control form-control-sm">
+                                <option value=""></option>
+                                @foreach ($roles as $role)
+                                    <option value="{{ $role->id }}">{{ $role->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-md-6 mb-3 form-group">
                             <label for="password">Password</label>
                             <input type="password" name="password_confirmation" class="form-control" placeholder="Confirm password" required autocomplete="new-password" />
                         </div>

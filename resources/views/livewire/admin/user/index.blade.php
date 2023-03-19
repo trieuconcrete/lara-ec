@@ -43,6 +43,7 @@
                             <thead>
                                 <tr>
                                     <th>ID</th>
+                                    <th>Avatar</th>
                                     <th>Name</th>
                                     <th>Email</th>
                                     <th>Role</th>
@@ -54,9 +55,12 @@
                                 @foreach ($users as $item)
                                     <tr>
                                         <td>{{ $item->id }}</td>
+                                        <td>
+                                            <img src="{{ asset($item->avatar) }}" alt="">
+                                        </td>
                                         <td>{{ $item->name }}</td>
                                         <td>{{ $item->email }}</td>
-                                        <td></td>
+                                        <td>{{ $item->getRoleNames()->implode(',') }}</td>
                                         <td>
                                             @if ($item->status)
                                                 <label class="badge bg-success">Active</label>

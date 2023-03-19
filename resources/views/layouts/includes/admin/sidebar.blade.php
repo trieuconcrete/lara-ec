@@ -52,17 +52,10 @@
         </a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" data-bs-toggle="collapse" href="#user" aria-expanded="false" aria-controls="auth">
-            <i class="mdi mdi-account-multiple-plus menu-icon"></i>
-            <span class="menu-title">Users</span>
-            <i class="menu-arrow"></i>
+        <a class="nav-link" href="{{ route('admin.client.index') }}">
+            <i class="mdi mdi-account-multiple-outline menu-icon"></i>
+            <span class="menu-title">Clients</span>
         </a>
-        <div class="collapse" id="user">
-            <ul class="nav flex-column sub-menu">
-            <li class="nav-item"> <a class="nav-link" href="{{ route('admin.user.create') }}">Add</a></li>
-            <li class="nav-item"> <a class="nav-link" href="{{ route('admin.user.index') }}">List</a></li>
-            </ul>
-        </div>
     </li>
     <li class="nav-item">
         <a class="nav-link" href="{{ route('admin.slider.index') }}">
@@ -74,6 +67,12 @@
         <a class="nav-link" href="{{ route('admin.setting.index') }}">
             <i class="mdi mdi-cogs menu-icon"></i>
             <span class="menu-title">Site Setting</span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('admin.user.index') }}">
+            <i class="mdi mdi-account-multiple-plus menu-icon"></i>
+            <span class="menu-title">Users</span>
         </a>
     </li>
 </ul>
