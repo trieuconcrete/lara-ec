@@ -71,3 +71,11 @@ Route::controller(SettingController::class)->prefix('settings')->name('setting.'
     Route::get('/', 'index')->name('index');
     Route::post('setting', 'setting')->name('save');
 });
+
+Route::controller(ProjectController::class)->prefix('projects')->name('project.')->group(function () {
+    Route::get('/', 'index')->name('index');
+    Route::get('create', 'create')->name('create');
+    Route::post('create', 'save')->name('save');
+    Route::get('{project}/edit', 'edit')->name('edit');
+    Route::put('{project}/update', 'update')->name('update');
+});

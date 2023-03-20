@@ -70,9 +70,21 @@
         </a>
     </li>
     <li class="nav-item">
+        <a class="nav-link" href="#">
+            <i class="mdi mdi-bank menu-icon"></i>
+            <span class="menu-title fs-5">HRM</span>
+        </a>
+    </li>
+    <li class="nav-item">
         <a class="nav-link" href="{{ route('admin.user.index') }}">
             <i class="mdi mdi-account-multiple-plus menu-icon"></i>
             <span class="menu-title">Users</span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('admin.project.index') }}">
+            <i class="mdi mdi-briefcase-account menu-icon"></i>
+            <span class="menu-title">Projects</span>
         </a>
     </li>
 </ul>
