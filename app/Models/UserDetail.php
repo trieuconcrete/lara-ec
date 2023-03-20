@@ -23,6 +23,11 @@ class UserDetail extends Model
         'city',
         'state',
         'country',
+        'birthday',
+        'gender',
+        'contract_type',
+        'position_id',
+        'branch_id'
     ];
     public function user()
     {

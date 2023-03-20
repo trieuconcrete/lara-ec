@@ -18,7 +18,7 @@ class ProductImage extends Model
 
     public function getImage()
     {
-        $url = $this->image ? Storage::disk('local')->url($this->image) : null;
-        return $url ? asset($url) : null;
+        $url = $this->image ? Storage::disk('local')->url($this->image) : 'no_img.png';
+        return asset($url);
     }
 }

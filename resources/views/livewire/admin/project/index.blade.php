@@ -4,10 +4,10 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="deleteModalLabel">User Delete</h5>
+                    <h5 class="modal-title" id="deleteModalLabel">Project Delete</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form wire:submit.prevent="destroyUser">
+                <form wire:submit.prevent="destroyProject">
                     <div class="modal-body">
                         <h6>Are you sure want to delete?</h6>
                     </div>
@@ -23,11 +23,11 @@
         <div class="col-md-12 grid-margin">
             @include('layouts.includes.admin.breadcrumb', [
                 'icon' => 'mdi-view-list',
-                'title' => 'User',
+                'title' => 'Project',
                 'functions' => [
                     [
                         'icon' => 'mdi-plus',
-                        'route' => route('admin.user.create'),
+                        'route' => route('admin.project.create'),
                     ]
                 ]
             ])
@@ -36,44 +36,44 @@
             <div class="card">
                 <div class="card-header">
                     <span class="fs-5">List</span>
-                    <span class="float-end">{{ $users->total() ?? 0 }} users</span>
+                    <span class="float-end">{{ $projects->total() ?? 0 }} projects</span>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
                         <table class="table table-bordered table-striped">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
-                                    <th>Avatar</th>
-                                    <th>Name</th>
-                                    <th>Email</th>
-                                    <th>Role</th>
+                                    <th>Image</th>
+                                    <th>Project code</th>
+                                    <th>Name En</th>
+                                    <th>Name JP 1</th>
+                                    <th>Name JP 2</th>
                                     <th>Status</th>
+                                    <th>Type</th>
+                                    <th>Start Date</th>
+                                    <th>End Date</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($users as $item)
+                                @foreach ($projects as $item)
                                     <tr>
-                                        <td>{{ $item->id }}</td>
                                         <td>
-                                            <img src="{{ asset($item->avatar) }}" alt="">
+                                            <img src="{{ asset($item->project_image) }}" alt="">
                                         </td>
-                                        <td>{{ $item->name }}</td>
-                                        <td>{{ $item->email }}</td>
-                                        <td>{{ $item->getRoleNames()->implode(',') }}</td>
+                                        <td>{{ $item->project_code }}</td>
+                                        <td>{{ $item->name_en }}</td>
+                                        <td>{{ $item->name_jp_1 }}</td>
+                                        <td>{{ $item->name_jp_2 }}</td>
+                                        <td>{{ $item->status }}</td>
+                                        <td>{{ $item->type }}</td>
+                                        <td>{{ $item->start_date }}</td>
+                                        <td>{{ $item->end_date }}</td>
                                         <td>
-                                            @if ($item->status)
-                                                <label class="badge bg-success">Active</label>
-                                            @else
-                                                <label class="badge bg-danger">InActive</label>
-                                            @endif
-                                        </td>
-                                        <td>
-                                            <a href="{{ route('admin.user.edit', $item->id) }}" class="btn btn-inverse-success btn-fw btn-sm">
+                                            <a href="{{ route('admin.project.edit', $item->id) }}" class="btn btn-inverse-success btn-fw btn-sm">
                                                 <span class="mdi mdi-pencil"></span>
                                             </a>
-                                            <a href="#" wire:click="deleteUser({{$item->id}})" data-bs-toggle="modal" data-bs-target="#deleteModal" class="btn btn-inverse-danger btn-fwb btn-sm">
+                                            <a href="#" wire:click="deleteProject({{$item->id}})" data-bs-toggle="modal" data-bs-target="#deleteModal" class="btn btn-inverse-danger btn-fwb btn-sm">
                                                 <span class="mdi mdi-trash-can"></span>
                                             </a>
                                         </td>
@@ -82,7 +82,7 @@
                             </tbody>
                         </table>
                         <div class="mt-3 ">
-                            {{ $users->links() }}
+                            {{ $projects->links() }}
                         </div>
                     </div>
                 </div>

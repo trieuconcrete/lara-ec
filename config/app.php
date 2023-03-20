@@ -187,6 +187,7 @@ return [
          */
         // Barryvdh\Debugbar\ServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
+        Spatie\Permission\PermissionServiceProvider::class,
 
         /*
          * Application Service Providers...

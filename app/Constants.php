@@ -19,4 +19,22 @@ class Constants
         "vnp_ReturnUrl" => "http://localhost/mypage/return-vnpay",
     ];
     public const VNPAY_STATUS_CODE_OK = "00";
+
+    public const PROJECT_STATUS = [
+        '1' => 'Opening',
+        '2' => 'In Progress',
+        '3' => 'Completed',
+        '4' => 'Closed',
+        '5' => 'Pending',
+        '99' => 'Other'
+    ];
+
+    public const PROJECT_TYPE = [
+        '1' => 'Outsource',
+        '2' => 'Mainten',
+        '3' => 'Lab',
+        '4' => 'Internal',
+        '5' => 'Common',
+        '99' => 'Other'
+    ];
 }
