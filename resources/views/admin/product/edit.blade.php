@@ -17,7 +17,7 @@
         <div class="col-md-12 grid-margin">
             <div class="card">
                 <div class="card-header">
-                    <h3>Create</h3>
+                    <span class="fs-5">Edit</span>
                 </div>
                 <div class="card-body">
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -40,11 +40,6 @@
                         <li class="nav-item" role="presentation">
                             <button class="nav-link" id="image-tab" data-bs-toggle="tab" data-bs-target="#image-tab-pane"
                                 type="button" role="tab" aria-controls="image-tab-pane" aria-selected="false">Product Images
-                            </button>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="color-tab" data-bs-toggle="tab" data-bs-target="#color-tab-pane"
-                                type="button" role="tab" aria-controls="color-tab-pane" aria-selected="false">Product Colors
                             </button>
                         </li>
                     </ul>
@@ -192,57 +187,14 @@
                                     @endif
                                 </div>
                             </div>
-                            <div class="tab-pane fade mb-3" id="color-tab-pane" role="tabpanel"
-                                aria-labelledby="color-tab" tabindex="0">
-                                <div class="row">
-                                    @foreach($colors as $item)
-                                    <div class="col-md-3">
-                                        <div class="p-3 border mb-3">
-                                            Color: <input type="checkbox" name="product_colors[{{ $item->id }}]" value="{{ $item->id }}" class="form-check-input"/>
-                                            {{ $item->name }}
-                                            <br>
-                                            Quantity: <input type="text" name="quantities[{{ $item->id }}]" value="" class="" style="width:60px"/>
-                                        </div>
-                                    </div>
-                                    @endforeach
-                                    <div class="table-responsive">
-                                        <table class="table table-sm table-bordered">
-                                            <thead>
-                                                <tr>
-                                                    <th>Color Name</th>
-                                                    <th>Color Code</th>
-                                                    <th>Quantity</th>
-                                                    <th>Delete</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @foreach($product->productColors as $item)
-                                                <tr class="pro-color-tr">
-                                                    <td>{{ $item->color->name }}</td>
-                                                    <td>{{ $item->color->code }}</td>
-                                                    <td>
-                                                        <div class="input-group mb-3" style="width:150px">
-                                                            <input type="text" value="{{ $item->quantity }}" class="prod-color-qty form-control form-control-sm" />
-                                                            <button type="button" value="{{ $item->id }}" class="btnUpdateProductColor btn btn-primary">Update</button>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <button type="button" class="btnDeleteProductColor btn btn-danger">Delete</button>
-                                                    </td>
-                                                </tr>
-                                                @endforeach
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
                             <div class="col-md-12 mb-3 form-group">
-                                <button type="submit" class="btn btn-primary">Save</button>
+                                <button type="submit" class="btn btn-inverse-primary">Update</button>
                             </div>
                         </div>
                     </form>
                 </div>
             </div>
+            @livewire('admin.product.edit', ['product' => $product])
         </div>
     </div>
 @endsection

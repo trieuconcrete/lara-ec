@@ -29,6 +29,8 @@ class Constants
         '99' => 'Other'
     ];
 
+    public const PRODUCT_SIZES = ['XS', 'S', 'M', 'L', 'XL', 'XXL', 'XXXL', 'XXXXL'];
+
     public const PROJECT_TYPE = [
         '1' => 'Outsource',
         '2' => 'Mainten',

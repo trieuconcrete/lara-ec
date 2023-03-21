@@ -42,11 +42,6 @@
                                 type="button" role="tab" aria-controls="image-tab-pane" aria-selected="false">Product Images
                             </button>
                         </li>
-                        <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="color-tab" data-bs-toggle="tab" data-bs-target="#color-tab-pane"
-                                type="button" role="tab" aria-controls="color-tab-pane" aria-selected="false">Product Colors
-                            </button>
-                        </li>
                     </ul>
                     <form action="{{ route('admin.product.save') }}" method="post" enctype="multipart/form-data">
                         @csrf
@@ -179,21 +174,6 @@
                                         <input type="file" name="product_images[]" class="form-control" multiple/>
                                         @error('product_images') <small class="text-danger">{{ $message }}</small>@enderror
                                     </div>
-                                </div>
-                            </div>
-                            <div class="tab-pane fade mb-3" id="color-tab-pane" role="tabpanel"
-                                aria-labelledby="color-tab" tabindex="0">
-                                <div class="row">
-                                    @foreach($colors as $item)
-                                    <div class="col-md-3">
-                                        <div class="p-3 border mb-3">
-                                            Color: <input type="checkbox" name="product_colors[{{ $item->id }}]" value="{{ $item->id }}" class="form-check-input"/>
-                                            {{ $item->name }}
-                                            <br>
-                                            Quantity: <input type="text" name="quantities[{{ $item->id }}]" class="" style="width:60px"/>
-                                        </div>
-                                    </div>
-                                    @endforeach
                                 </div>
                             </div>
                             <div class="col-md-12 mb-3 form-group">
