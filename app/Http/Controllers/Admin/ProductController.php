@@ -2,16 +2,19 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
-use App\Http\Requests\ProductFormRequest;
-use App\Models\Category;
+use App\Constants;
 use App\Models\Brand;
-use App\Models\Product;
 use App\Models\Color;
-use App\Models\ProductImage;
-use App\Models\ProductColor;
+use App\Models\Product;
+use App\Models\Category;
 use Illuminate\Support\Str;
+use App\Models\ProductColor;
+use App\Models\ProductOptionValue;
+use App\Models\ProductImage;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\ProductFormRequest;
+use App\Http\Requests\ProductOptionValueRequest;
 
 class ProductController extends BaseController
 {
@@ -62,16 +65,6 @@ class ProductController extends BaseController
                     ]);
                 }
             }
-            // insert product colors
-            if ($request->product_colors) {
-                foreach($request->product_colors as $key => $color) {
-                    $product->productColors()->create([
-                        'product_id' => $product->id,
-                        'color_id' => $color,
-                        'quantity' => $request->quantities[$key] ?? 0
-                    ]);
-                }
-            }
 
             return redirect(route('admin.product.index'))->with('message', 'Product Added Successfully!');
         } catch (\Exception $e) {
@@ -83,10 +76,9 @@ class ProductController extends BaseController
     {
         $categories = Category::select('id', 'name')->get();
         $brands = Brand::select('id', 'name')->get();
-        $product = Product::with('productImages', 'productColors')->findOrFail($id);
-        $productColors = $product->productColors->pluck('color_id')->toArray();
-        $colors = Color::select('id', 'name', 'code')->whereNotIn('id', $productColors)->get();
-        return view('admin.product.edit', compact('product', 'categories', 'brands', 'colors', 'productColors'));
+        $product = Product::with('productImages', 'productColors', 'productOptionValues')->findOrFail($id);
+
+        return view('admin.product.edit', compact('product', 'categories', 'brands'));
     }
 
     public function update(ProductFormRequest $request, int $product_id)
@@ -123,16 +115,6 @@ class ProductController extends BaseController
                         ]);
                     }
                 }
-                // insert product colors
-                if ($request->product_colors) {
-                    foreach($request->product_colors as $key => $color) {
-                        $product->productColors()->create([
-                            'product_id' => $product->id,
-                            'color_id' => $color,
-                            'quantity' => $request->quantities[$key] ?? 0
-                        ]);
-                    }
-                }
             } else {
                 return redirect()->back()->with('error', "Product Not Found!");
             }
@@ -164,5 +146,42 @@ class ProductController extends BaseController
         $productColor = Product::findOrFail($request->product_id)->productColors()->where('id', $productColorId)->first();
         $productColor->delete();
         return response()->json(['message' => 'Product Color Qty Deleted Successfuly!']);
+    }
+
+    public function updateProductOptionValues(ProductOptionValueRequest $request, $product)
+    {
+        try {
+            foreach ($request->datas as $key => $value) {
+                // define data
+                $data = [
+                    'product_id' => $product,
+                    'color_id' => $request->colors[$key],
+                    'size' => $request->sizes[$key] ?? null,
+                    'quantity' => $request->quantitys[$key] ?? null,
+                    'price' => $request->prices[$key] ?? null
+                ];
+                // upload image
+                $path = 'uploads/product/option_values/';
+                $file =  $request->images[$key] ?? null;
+                if ($file) {
+                    $data['image'] = $this->uploadImage($path, $file);
+                }
+                if ($value == 'insert') {
+                    if (!ProductOptionValue::where([
+                        'product_id' => $product,
+                        'color_id' => $request->colors[$key],
+                        'size' => $request->sizes[$key] ?? null,
+                    ])->exists()) {
+                        ProductOptionValue::create($data);
+                    }
+                }
+                if ($value == 'update') {
+                    ProductOptionValue::where('id', $key)->update($data);
+                }
+            }
+            return redirect()->back()->with('message', 'Product Option Value Updated Successfully!');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', "Oops an error occurred!</br>" . $e->getMessage());
+        }
     }
 }

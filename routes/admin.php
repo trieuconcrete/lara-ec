@@ -36,6 +36,7 @@ Route::controller(ProductController::class)->prefix('products')->name('product.'
     Route::get('{image_id}/image', 'removeImage')->name('remove.image');
     Route::post('color/{product_color_id}/quantity', 'updateQuantity')->name('color.update.quantity');
     Route::post('color/{product_color_id}', 'deleteColor')->name('color.delete');
+    Route::put('product-option-values/{product}', 'updateProductOptionValues')->name('option_values.update');
 });
 
 Route::controller(ColorController::class)->prefix('colors')->name('color.')->group(function () {

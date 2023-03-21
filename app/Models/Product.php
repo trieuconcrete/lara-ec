@@ -54,6 +54,11 @@ class Product extends Model
         return $this->hasMany(ProductColor::class, 'product_id', 'id');
     }
 
+    public function productOptionValues()
+    {
+        return $this->hasMany(ProductOptionValue::class, 'product_id', 'id');
+    }
+
     public function getImage($index = 0)
     {
         $url = isset($this->productImages[$index]) ? Storage::disk('local')->url($this->productImages[$index]['image']) : 'no_img.png';
@@ -81,6 +86,10 @@ class Product extends Model
     {
         static::creating(function ($model) {
             $model->product_code = Str::upper(Str::random(4)).Carbon::now()->format('Ymd');
+        });
+
+        static::created(function ($model) {
+            ProductOptionValue::create(['product_id' => $model->id]);
         });
     }
 }
