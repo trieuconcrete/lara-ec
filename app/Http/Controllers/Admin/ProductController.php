@@ -152,29 +152,31 @@ class ProductController extends BaseController
     {
         try {
             foreach ($request->datas as $key => $value) {
+                // define data
+                $data = [
+                    'product_id' => $product,
+                    'color_id' => $request->colors[$key],
+                    'size' => $request->sizes[$key] ?? null,
+                    'quantity' => $request->quantitys[$key] ?? null,
+                    'price' => $request->prices[$key] ?? null
+                ];
+                // upload image
                 $path = 'uploads/product/option_values/';
                 $file =  $request->images[$key] ?? null;
                 if ($file) {
-                    $image = $this->uploadImage($path, $file);
+                    $data['image'] = $this->uploadImage($path, $file);
                 }
                 if ($value == 'insert') {
-                    ProductOptionValue::create([
+                    if (!ProductOptionValue::where([
                         'product_id' => $product,
                         'color_id' => $request->colors[$key],
                         'size' => $request->sizes[$key] ?? null,
-                        'quantity' => $request->quantitys[$key] ?? null,
-                        'price' => $request->prices[$key] ?? null,
-                        'image' => $image ?? null
-                    ]);
+                    ])->exists()) {
+                        ProductOptionValue::create($data);
+                    }
                 }
                 if ($value == 'update') {
-                    ProductOptionValue::where('id', $key)->update([
-                        'color_id' => $request->colors[$key],
-                        'size' => $request->sizes[$key] ?? null,
-                        'quantity' => $request->quantitys[$key] ?? null,
-                        'price' => $request->prices[$key] ?? null,
-                        'image' => $image ?? null
-                    ]);
+                    ProductOptionValue::where('id', $key)->update($data);
                 }
             }
             return redirect()->back()->with('message', 'Product Option Value Updated Successfully!');

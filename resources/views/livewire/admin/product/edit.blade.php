@@ -51,9 +51,7 @@
                                     <x-image :path="$value->path_image" :class="'me-4 border'" :width="86" :height="86" />
                                 </td>
                                 <td>
-                                    @if (!$loop->first)
                                     <button type="button" class="btn btn-inverse-danger btn-fwb btn-sm"><span class="mdi mdi-trash-can"></span></button>
-                                    @endif
                                 </td>
                             </tr>
                             @endforeach
