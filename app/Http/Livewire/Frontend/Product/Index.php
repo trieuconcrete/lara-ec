@@ -96,7 +96,7 @@ class Index extends Component
             $query->whereHas('category', function($where) {
                 $where->where('slug', $this->category);
             });
-        })->paginate(12);
+        })->paginate(18);
         $this->brands = Brand::where('status', 1)->get();
         return view('livewire.frontend.product.index', [
             'products' => $this->products,

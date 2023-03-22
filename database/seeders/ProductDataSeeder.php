@@ -7,8 +7,6 @@ use Illuminate\Database\Seeder;
 use App\Models\Category;
 use App\Models\Brand;
 use App\Models\Product;
-use App\Models\Order;
-use App\Models\OrderItem;
 use App\Models\User;
 
 class ProductDataSeeder extends Seeder
