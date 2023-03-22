@@ -22,9 +22,46 @@ class UserSeeder extends Seeder
         Role::create(['name' => 'Manager']);
         Role::create(['name' => 'Developer']);
         Role::create(['name' => 'User']);
+        Role::create(['name' => 'Customer']); // user_type = 0
 
         $dataUsers = [
             [
+                'name' => 'Customer 01',
+                'email' => 'customer1@gmail.com',
+                'password' => \Hash::make('password@123'),
+                'status' => 1,
+                'user_type' => 0,
+                'role' => 'Customer',
+                'user_details' => [
+                    'first_name' => 'Customer',
+                    'last_name' => '',
+                    'gender' => 1
+                ]
+            ], [
+                'name' => 'Customer 02',
+                'email' => 'customer2@gmail.com',
+                'password' => \Hash::make('password@123'),
+                'status' => 1,
+                'user_type' => 0,
+                'role' => 'Customer',
+                'user_details' => [
+                    'first_name' => 'Customer 01',
+                    'last_name' => '',
+                    'gender' => 1
+                ]
+            ], [
+                'name' => 'Customer 03',
+                'email' => 'customer3@gmail.com',
+                'password' => \Hash::make('password@123'),
+                'status' => 1,
+                'user_type' => 0,
+                'role' => 'Customer',
+                'user_details' => [
+                    'first_name' => 'Customer 03',
+                    'last_name' => '',
+                    'gender' => 1
+                ]
+            ], [
                 'name' => 'Administrator',
                 'email' => 'super-admin@gmail.com',
                 'password' => \Hash::make('password@123'),
