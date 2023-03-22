@@ -30,7 +30,7 @@ class FrontendController extends Controller
     {
         $product = Product::with('category', 'productImages', 'productColors')
         ->with(['category.products' => function($query) use ($id) {
-            return $query->where('id', '<>', $id);
+            return $query->where('id', '<>', $id)->limit(8);
         }])->find($id);
         return view('frontend.product_detail', compact('product'));
     }
