@@ -1,4 +1,24 @@
 <div>
+    <!-- Modal -->
+    <div wire:ignore.self class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalLabel">Category Delete</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form wire:submit.prevent="removeProductOption">
+                    <div class="modal-body">
+                        <h6>Are you sure want to delete?</h6>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Yes, Delete</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
     <div class="card mt-5">
         <div class="card-header">
             <span class="fs-5">Product Option Values</span>
@@ -20,12 +40,11 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @if($product->productOptionValues->isNotEmpty())
-                            @foreach($product->productOptionValues as $key => $value)
+                            @foreach($productOptionValues as $key => $value)
                             <tr class="product-option-tr">
                                 <input type="text" name="datas[{{ $value->id }}]" class="d-none" value="update">
                                 <td>
-                                    <select name="colors[{{ $value->id }}]"  class="form-control form-control-sm js-example-basic-single">
+                                    <select name="colors[{{ $value->id }}]" class="form-control form-control-sm js-example-basic-single">
                                         <option value=""></option>
                                         @foreach($colorList as $item)
                                         <option value="{{ $item->id }}" {{ $value->color_id == $item->id ? 'selected' : null }}>{{ $item->name }}</option>
@@ -33,7 +52,7 @@
                                     </select>
                                 </td>
                                 <td>
-                                    <select name="sizes[{{ $value->id }}]"  class="form-control js-example-basic-single">
+                                    <select name="sizes[{{ $value->id }}]" class="form-control js-example-basic-single">
                                         <option value=""></option>
                                         @foreach($sizeList as $item)
                                         <option value="{{ $item }}" {{ $value->size == $item ? 'selected' : null }}>{{ $item }}</option>
@@ -51,11 +70,12 @@
                                     <x-image :path="$value->path_image" :class="'me-4 border'" :width="86" :height="86" />
                                 </td>
                                 <td>
-                                    <button type="button" class="btn btn-inverse-danger btn-fwb btn-sm"><span class="mdi mdi-trash-can"></span></button>
+                                    <button wire:click="deleteProductOption({{ $value->id }})" type="button" data-bs-toggle="modal" data-bs-target="#deleteModal" class="btn btn-inverse-danger btn-fwb btn-sm">
+                                        <span class="mdi mdi-trash-can"></span>
+                                    </button>
                                 </td>
                             </tr>
                             @endforeach
-                            @endif
                             @foreach ($inputs as $key => $value)
                             <tr wire:key="key-{{ $key }}" class="product-option-tr">
                                 <input type="text" name="datas[]" class="d-none" value="insert">

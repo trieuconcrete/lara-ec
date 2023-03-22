@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Admin\Product;
 use Livewire\Component;
 use App\Models\Color;
 use App\Models\Product;
+use App\Models\ProductOptionValue;
 use App\Constants;
 
 class Edit extends Component
@@ -12,6 +13,7 @@ class Edit extends Component
     public $product, $colors, $sizes, $quantitys, $prices, $images;
     public $inputs = [];
     public $row = 1;
+    public $productOptionValueId;
 
     public function mount($product)
     {
@@ -40,12 +42,28 @@ class Edit extends Component
         unset($this->inputs[$row]);
     }
 
+    public function deleteProductOption($productOptionValueId)
+    {
+        $this->productOptionValueId = $productOptionValueId;
+    }
+
+    public function removeProductOption()
+    {
+        ProductOptionValue::findOrFail($this->productOptionValueId)->delete();
+        $this->dispatchBrowserEvent('message', [
+            'text' => 'Deleted Successfully',
+            'type' => 'success',
+            'status' => 200
+        ]);
+    }
+
     public function render()
     {
         $colorList = Color::select('id', 'name', 'code')->get();
         $sizeList = Constants::PRODUCT_SIZES;
+        $productOptionValues = Product::with('productImages', 'productColors', 'productOptionValues')->findOrFail($this->product->id)->productOptionValues;
         return view('livewire.admin.product.edit', [
-            'product' => $this->product,
+            'productOptionValues' => $productOptionValues,
             'colorList' => $colorList,
             'sizeList' => $sizeList
         ]);
