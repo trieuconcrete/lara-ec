@@ -306,15 +306,17 @@ class UserSeeder extends Seeder
             ]
         ];
         foreach ($dataUsers as $data) {
-            $userDetail = $data['user_details'];
-            $user = User::create(Arr::except($data, ['user_details', 'role']));
-            if (isset($data['role'])) {
-                $user->assignRole($data['role']);
-            } else {
-                $user->assignRole('Developer');
+            if (!User::where('email', $data['email'])->exists()) {
+                $userDetail = $data['user_details'];
+                $user = User::create(Arr::except($data, ['user_details', 'role']));
+                if (isset($data['role'])) {
+                    $user->assignRole($data['role']);
+                } else {
+                    $user->assignRole('Developer');
+                }
+                $userDetail['user_id'] = $user->id;
+                UserDetail::create($userDetail);
             }
-            $userDetail['user_id'] = $user->id;
-            UserDetail::create($userDetail);
         }
     }
 }
