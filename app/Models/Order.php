@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Str;
+use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Order extends Model
 {
@@ -56,5 +58,12 @@ class Order extends Model
     public function getTotalPriceAttribute()
     {
         return $this->orderItems->sum('sub_total_price');
+    }
+
+    protected static function booted()
+    {
+        static::creating(function ($model) {
+            $model->tracking_no = Str::upper(Str::random(5)).Carbon::now()->format('Ymd');
+        });
     }
 }

@@ -86,6 +86,7 @@ class Product extends Model
     {
         static::creating(function ($model) {
             $model->product_code = Str::upper(Str::random(4)).Carbon::now()->format('Ymd');
+            $model->slug = Str::slug($model->slug);
         });
 
         static::created(function ($model) {
