@@ -14,6 +14,7 @@ class OrderItem extends Model
     protected $fillable = [
         'order_id',
         'product_id',
+        'product_option_value_id',
         'product_color_id',
         'quantity',
         'price',
@@ -32,6 +33,11 @@ class OrderItem extends Model
     public function productColor()
     {
         return $this->belongsTo(ProductColor::class);
+    }
+
+    public function productOptionValue()
+    {
+        return $this->belongsTo(ProductOptionValue::class);
     }
 
     /**
