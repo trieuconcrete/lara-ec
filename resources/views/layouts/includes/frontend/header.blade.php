@@ -95,7 +95,7 @@
                     </div>
                 </div>
                 <div class="hotline d-none d-lg-block">
-                    <p><i class="fi-rs-smartphone"></i><span>Phone</span> {{ $settings['phone'] }} </p>
+                    <p><i class="fi-rs-smartphone"></i><span>Phone</span> {{ $settings['phone'] ?? null }} </p>
                 </div>
                 <p class="mobile-promotion">Happy <span class="text-brand">Mother's Day</span>. Big Sale Up to 40%</p>
                 <div class="header-action-right d-block d-lg-none">
