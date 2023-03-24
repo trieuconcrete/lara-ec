@@ -18,11 +18,11 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        Role::create(['name' => 'Administrator']);
-        Role::create(['name' => 'Manager']);
-        Role::create(['name' => 'Developer']);
-        Role::create(['name' => 'User']);
-        Role::create(['name' => 'Customer']); // user_type = 0
+        Role::updateOrCreate(['name' => 'Administrator']);
+        Role::updateOrCreate(['name' => 'Manager']);
+        Role::updateOrCreate(['name' => 'Developer']);
+        Role::updateOrCreate(['name' => 'User']);
+        Role::updateOrCreate(['name' => 'Customer']); // user_type = 0
 
         $dataUsers = [
             [

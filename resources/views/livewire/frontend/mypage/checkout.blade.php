@@ -92,7 +92,9 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <div class="bt-1 border-color-1 mt-30 mb-30"></div>
+                            <div class="bt-1 border-color-1 mt-30 mb-5 text-center">
+                                <span class="fs-4">Payment Method</span>
+                            </div>
                             <div class="payment_method" wire:ignore>
                                 <button type="button" wire:click="codOrder" wire.loading.attr="disabled" class="btn btn-fill-out w-100 mt-30">
                                     <span wire:loading.remove wire.target="codOrder">Cash On Delivery</span>

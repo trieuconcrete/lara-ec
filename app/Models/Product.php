@@ -31,7 +31,10 @@ class Product extends Model
         'meta_title',
         'meta_keyword',
         'meta_description',
-        'discount'
+        'discount',
+        'views',
+        'likes',
+        'sku'
     ];
 
     public function category()
