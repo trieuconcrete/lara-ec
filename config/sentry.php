@@ -78,4 +78,7 @@ return [
     // @see: https://docs.sentry.io/platforms/php/guides/laravel/configuration/options/#traces-sample-rate
     'traces_sample_rate' => env('SENTRY_TRACES_SAMPLE_RATE') === null ? null : (float)env('SENTRY_TRACES_SAMPLE_RATE'),
 
+    'traces_sampler' => function (\Sentry\Tracing\SamplingContext $context): float {
+        // return a number between 0 and 1
+    },
 ];
