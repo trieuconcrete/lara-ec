@@ -31,7 +31,7 @@ class Product extends Model
         'meta_title',
         'meta_keyword',
         'meta_description',
-        'sale_off'
+        'discount'
     ];
 
     public function category()
@@ -70,7 +70,7 @@ class Product extends Model
      */
     protected function getSalePriceAttribute()
     {
-        $salePrice = ($this->selling_price * $this->sale_off)/100;
+        $salePrice = ($this->selling_price * $this->discount)/100;
         return $this->selling_price - $salePrice;
     }
 
@@ -79,7 +79,7 @@ class Product extends Model
      */
     protected function getSalePercentAttribute()
     {
-        return $this->sale_off ? '↓'.$this->sale_off.'%' : null;
+        return $this->discount ? '↓'.$this->discount.'%' : null;
     }
 
     protected static function booted()
