@@ -31,7 +31,7 @@
             <div class="card">
                 <div class="card-header">
                     <span class="fs-5">List</span>
-                    <span class="float-end">{{ $orders->total() ?? 0 }} items</span>
+                    <span class="float-end">{{ number_format($orders->total()) ?? 0 }} items</span>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -60,7 +60,7 @@
                                         <td>{{ $item->payment_mode }}</td>
                                         <td>{{ $item->payment_mode == 'Paid By Paypal' ? 'Paid' : 'UnPaid' }}</td>
                                         <td>{{ \Str::title(str_replace('-', ' ', $item->status)) }}</td>
-                                        <td>{{ $item->total_price }}</td>
+                                        <td>{{ number_format($item->total_price) }}</td>
                                         <td>{{ $item->created_at }}</td>
                                         <td>
                                             <a wire:click="orderDetailModel({{ $item->id }})" data-bs-toggle="modal" data-bs-target="#orderDetail" class="btn btn-inverse-success btn-fw btn-sm">

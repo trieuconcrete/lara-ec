@@ -114,8 +114,8 @@
                                         @enderror
                                     </div>
                                     <div class="col-md-3 mb-3 form-group">
-                                        <label for="sale_off">Sale Off</label>
-                                        <input type="text" name="sale_off" class="form-control" value="{{ old('sale_off') }}" />
+                                        <label for="discount">Discount</label>
+                                        <input type="text" name="discount" class="form-control" value="{{ old('discount') }}" />
                                         @error('selling_price')
                                             <small class="text-danger">{{ $message }}</small>
                                         @enderror

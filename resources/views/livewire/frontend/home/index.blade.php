@@ -98,7 +98,7 @@
                             <h2><a href="{{ route('frontend.product.detail', $prod->id) }}">{{ $prod->name }}</a></h2>
                             <div class="product-price">
                                 <span>${{ $prod->sale_price }}</span>
-                                @if($prod->sale_off)
+                                @if($prod->discount)
                                     <span class="old-price">${{ $prod->selling_price }}</span>
                                     <small>{{ $prod->sale_percent }}</small>
                                 @endif
@@ -157,7 +157,7 @@
                     <div class="banner-img wow fadeIn animated">
                         <img src="{{ asset('frontend/assets/imgs/banner/banner-2.png') }}" alt="">
                         <div class="banner-text">
-                            <span>Sale off</span>
+                            <span>Discount</span>
                             <h4>Great Summer <br>Collection</h4>
                             <a href="shop.html">Shop Now <i class="fi-rs-arrow-right"></i></a>
                         </div>
