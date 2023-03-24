@@ -142,15 +142,15 @@
                     </a>
                     <div class="categori-dropdown-wrap categori-dropdown-active-small">
                         <ul>
-                            <li><a href="shop.html"><i class="surfsidemedia-font-dress"></i>Women's Clothing</a></li>
-                            <li><a href="shop.html"><i class="surfsidemedia-font-tshirt"></i>Men's Clothing</a></li>
-                            <li> <a href="shop.html"><i class="surfsidemedia-font-smartphone"></i> Cellphones</a></li>
-                            <li><a href="shop.html"><i class="surfsidemedia-font-desktop"></i>Computer & Office</a></li>
-                            <li><a href="shop.html"><i class="surfsidemedia-font-cpu"></i>Consumer Electronics</a></li>
-                            <li><a href="shop.html"><i class="surfsidemedia-font-home"></i>Home & Garden</a></li>
-                            <li><a href="shop.html"><i class="surfsidemedia-font-high-heels"></i>Shoes</a></li>
-                            <li><a href="shop.html"><i class="surfsidemedia-font-teddy-bear"></i>Mother & Kids</a></li>
-                            <li><a href="shop.html"><i class="surfsidemedia-font-kite"></i>Outdoor fun</a></li>
+                            <li><a href="#"><i class="surfsidemedia-font-dress"></i>Women's Clothing</a></li>
+                            <li><a href="#"><i class="surfsidemedia-font-tshirt"></i>Men's Clothing</a></li>
+                            <li> <a href="#"><i class="surfsidemedia-font-smartphone"></i> Cellphones</a></li>
+                            <li><a href="#"><i class="surfsidemedia-font-desktop"></i>Computer & Office</a></li>
+                            <li><a href="#"><i class="surfsidemedia-font-cpu"></i>Consumer Electronics</a></li>
+                            <li><a href="#"><i class="surfsidemedia-font-home"></i>Home & Garden</a></li>
+                            <li><a href="#"><i class="surfsidemedia-font-high-heels"></i>Shoes</a></li>
+                            <li><a href="#"><i class="surfsidemedia-font-teddy-bear"></i>Mother & Kids</a></li>
+                            <li><a href="#"><i class="surfsidemedia-font-kite"></i>Outdoor fun</a></li>
                         </ul>
                     </div>
                 </div>
@@ -158,7 +158,7 @@
                 <nav>
                     <ul class="mobile-menu">
                         <li class="menu-item-has-children"><span class="menu-expand"></span><a href="{{ route('frontend.home') }}">Home</a></li>
-                        <li class="menu-item-has-children"><span class="menu-expand"></span><a href="shop.html">shop</a></li>
+                        <li class="menu-item-has-children"><span class="menu-expand"></span><a href="#">shop</a></li>
                         <li class="menu-item-has-children"><span class="menu-expand"></span><a href="#">Our Collections</a>
                             <ul class="dropdown">
                                 <li class="menu-item-has-children"><span class="menu-expand"></span><a href="#">Women's Fashion</a>
@@ -202,13 +202,13 @@
             </div>
             <div class="mobile-header-info-wrap mobile-header-border">
                 <div class="single-mobile-header-info mt-30">
-                    <a href="contact.html"> Our location </a>
+                    <a href="#"> Our location </a>
                 </div>
                 <div class="single-mobile-header-info">
-                    <a href="login.html">Log In </a>                        
+                    <a href="#">Log In </a>                        
                 </div>
                 <div class="single-mobile-header-info">                        
-                    <a href="register.html">Sign Up</a>
+                    <a href="#">Sign Up</a>
                 </div>
                 <div class="single-mobile-header-info">
                     <a href="#">(+1) 0000-000-000 </a>

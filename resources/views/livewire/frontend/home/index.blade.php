@@ -73,19 +73,24 @@
         <div class="container">
             <h3 class="section-title mb-20"><span>Trending</span> Products</h3>
             <div class="row product-grid-4">
-                @foreach($products as $prod)
+                @foreach($products as $val)
                 <div class="col-lg-3 col-md-4 col-sm-6 col-xs-6 col-6">
                     <div class="product-cart-wrap mb-30">
                         <div class="product-img-action-wrap">
                             <div class="product-img product-img-zoom">
-                                <a href="{{ route('frontend.product.detail', $prod->id) }}">
-                                    <img class="default-img" src="{{ $prod->getImage() }}" alt="">
-                                    <img class="hover-img" src="{{ $prod->getImage(1) }}" alt="">
+                                <a href="{{ route('frontend.product.detail', $val->id) }}">
+                                    <img class="default-img" src="{{ $val->getImage() }}" alt="">
+                                    <img class="hover-img" src="{{ $val->getImage(1) }}" alt="">
                                 </a>
                             </div>
                             <div class="product-action-1">
                                 <a aria-label="Quick view" class="action-btn hover-up" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a>
-                                <a wire:click="addToWishList({{ $prod->id }})" aria-label="Add To Wishlist" class="action-btn hover-up"><i class="fi-rs-heart"></i></a>
+                                <a wire:loading.remove wire:target="addToWishList({{ $val->id }})" wire:click="addToWishList({{ $val->id }})" aria-label="Add To Wishlist" class="action-btn hover-up">
+                                    <i class="fi-rs-heart"></i>
+                                </a>
+                                <div wire:loading wire:target="addToWishList({{ $val->id }})" class="spinner-grow text-warning" role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
                             </div>
                             <div class="product-badges product-badges-position product-badges-mrg">
                                 <span class="hot">Hot</span>
@@ -93,14 +98,14 @@
                         </div>
                         <div class="product-content-wrap">
                             <div class="product-category">
-                                <a href="{{ route('frontend.product.list', optional($prod->category)->slug ) }}">{{ optional($prod->category)->name }}</a>
+                                <a href="{{ route('frontend.product.list', optional($val->category)->slug ) }}">{{ optional($val->category)->name }}</a>
                             </div>
-                            <h2><a href="{{ route('frontend.product.detail', $prod->id) }}">{{ $prod->name }}</a></h2>
+                            <h2><a href="{{ route('frontend.product.detail', $val->id) }}">{{ $val->name }}</a></h2>
                             <div class="product-price">
-                                <span>${{ $prod->sale_price }}</span>
-                                @if($prod->discount)
-                                    <span class="old-price">${{ $prod->selling_price }}</span>
-                                    <small>{{ $prod->sale_percent }}</small>
+                                <span>${{ $val->sale_price }}</span>
+                                @if($val->discount)
+                                    <span class="old-price">${{ $val->selling_price }}</span>
+                                    <small>{{ $val->sale_percent }}</small>
                                 @endif
                             </div>
                         </div>
@@ -117,7 +122,7 @@
                 <div class="banner-text d-md-block d-none">
                     <h4 class="mb-15 mt-40 text-brand">Repair Services</h4>
                     <h1 class="fw-600 mb-20">We're an Apple <br>Authorised Service Provider</h1>
-                    <a href="shop.html" class="btn">Learn More <i class="fi-rs-arrow-right"></i></a>
+                    <a href="#" class="btn">Learn More <i class="fi-rs-arrow-right"></i></a>
                 </div>
             </div>
         </div>
@@ -149,7 +154,7 @@
                         <div class="banner-text">
                             <span>Smart Offer</span>
                             <h4>Save 20% on <br>Woman Bag</h4>
-                            <a href="shop.html">Shop Now <i class="fi-rs-arrow-right"></i></a>
+                            <a href="#">Shop Now <i class="fi-rs-arrow-right"></i></a>
                         </div>
                     </div>
                 </div>
@@ -159,7 +164,7 @@
                         <div class="banner-text">
                             <span>Discount</span>
                             <h4>Great Summer <br>Collection</h4>
-                            <a href="shop.html">Shop Now <i class="fi-rs-arrow-right"></i></a>
+                            <a href="#">Shop Now <i class="fi-rs-arrow-right"></i></a>
                         </div>
                     </div>
                 </div>
@@ -169,7 +174,7 @@
                         <div class="banner-text">
                             <span>New Arrivals</span>
                             <h4>Shop Today’s <br>Deals & Offers</h4>
-                            <a href="shop.html">Shop Now <i class="fi-rs-arrow-right"></i></a>
+                            <a href="#">Shop Now <i class="fi-rs-arrow-right"></i></a>
                         </div>
                     </div>
                 </div>

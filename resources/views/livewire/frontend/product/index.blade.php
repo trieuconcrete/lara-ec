@@ -47,20 +47,25 @@
                     </div>
                     <div class="row product-grid-3">
                         @if($products)
-                            @foreach($products as $prod)
+                            @foreach($products as $val)
                                 <div class="col-lg-4 col-md-4 col-6 col-sm-6">
                                     <div class="product-cart-wrap mb-30">
                                         <div class="product-img-action-wrap">
                                             <div class="product-img product-img-zoom">
-                                                <a href="{{ route('frontend.product.detail', $prod->id) }}">
-                                                    <img class="default-img" src="{{ $prod->getImage() }}" alt="">
-                                                    <img class="hover-img" src="{{ $prod->getImage(1) }}" alt="">
+                                                <a href="{{ route('frontend.product.detail', $val->id) }}">
+                                                    <img class="default-img" src="{{ $val->getImage() }}" alt="">
+                                                    <img class="hover-img" src="{{ $val->getImage(1) }}" alt="">
                                                 </a>
                                             </div>
                                             <div class="product-action-1">
                                                 <a aria-label="Quick view" class="action-btn hover-up" data-bs-toggle="modal" data-bs-target="#quickViewModal">
                                                     <i class="fi-rs-search"></i></a>
-                                                <a wire:click="addToWishList({{ $prod->id }})" aria-label="Add To Wishlist" class="action-btn hover-up"><i class="fi-rs-heart"></i></a>
+                                                <a wire:loading.remove wire:target="addToWishList({{ $val->id }})" wire:click="addToWishList({{ $val->id }})" aria-label="Add To Wishlist" class="action-btn hover-up">
+                                                    <i class="fi-rs-heart"></i>
+                                                </a>
+                                                <div wire:loading wire:target="addToWishList({{ $val->id }})" class="spinner-grow text-warning" role="status">
+                                                    <span class="visually-hidden">Loading...</span>
+                                                </div>
                                             </div>
                                             <div class="product-badges product-badges-position product-badges-mrg">
                                                 <span class="hot">Hot</span>
@@ -68,14 +73,14 @@
                                         </div>
                                         <div class="product-content-wrap">
                                             <div class="product-category">
-                                                <a href="{{ route('frontend.product.list', optional($prod->category)->slug ) }}">{{ optional($prod->category)->name }}</a>
+                                                <a href="{{ route('frontend.product.list', optional($val->category)->slug ) }}">{{ optional($val->category)->name }}</a>
                                             </div>
-                                            <h2><a href="{{ route('frontend.product.detail', $prod->id) }}">{{ $prod->name }}</a></h2>
+                                            <h2><a href="{{ route('frontend.product.detail', $val->id) }}">{{ $val->name }}</a></h2>
                                             <div class="product-price">
-                                                <span>${{ $prod->sale_price }}</span>
-                                                @if($prod->discount)
-                                                    <span class="old-price">${{ $prod->selling_price }}</span>
-                                                    <small>{{ $prod->sale_percent }}</small>
+                                                <span>${{ $val->sale_price }}</span>
+                                                @if($val->discount)
+                                                    <span class="old-price">${{ $val->selling_price }}</span>
+                                                    <small>{{ $val->sale_percent }}</small>
                                                 @endif
                                             </div>
                                         </div>
@@ -141,7 +146,7 @@
                                 <img src="{{ asset('frontend/assets/imgs/shop/thumbnail-3.jpg') }}" alt="#">
                             </div>
                             <div class="content pt-10">
-                                <h5><a href="{{ route('frontend.product.detail', 123) }}l">Chen Cardigan</a></h5>
+                                <h5><a href="#">Chen Cardigan</a></h5>
                                 <p class="price mb-0 mt-5">$99.50</p>
                                 <div class="product-rate">
                                     <div class="product-rating" style="width:90%"></div>
@@ -153,7 +158,7 @@
                                 <img src="{{ asset('frontend/assets/imgs/shop/thumbnail-4.jpg') }}" alt="#">
                             </div>
                             <div class="content pt-10">
-                                <h6><a href="{{ route('frontend.product.detail', 123) }}l">Chen Sweater</a></h6>
+                                <h6><a href="#">Chen Sweater</a></h6>
                                 <p class="price mb-0 mt-5">$89.50</p>
                                 <div class="product-rate">
                                     <div class="product-rating" style="width:80%"></div>
@@ -165,7 +170,7 @@
                                 <img src="{{ asset('frontend/assets/imgs/shop/thumbnail-5.jpg') }}" alt="#">
                             </div>
                             <div class="content pt-10">
-                                <h6><a href="{{ route('frontend.product.detail', 123) }}l">Colorful Jacket</a></h6>
+                                <h6><a href="#">Colorful Jacket</a></h6>
                                 <p class="price mb-0 mt-5">$25</p>
                                 <div class="product-rate">
                                     <div class="product-rating" style="width:60%"></div>
@@ -178,7 +183,7 @@
                         <div class="banner-text">
                             <span>Women Zone</span>
                             <h4>Save 17% on <br>Office Dress</h4>
-                            <a href="shop.html">Shop Now <i class="fi-rs-arrow-right"></i></a>
+                            <a href="#">Shop Now <i class="fi-rs-arrow-right"></i></a>
                         </div>
                     </div>
                 </div>
