@@ -102,9 +102,9 @@
                             </div>
                             <h2><a href="{{ route('frontend.product.detail', $val->id) }}">{{ $val->name }}</a></h2>
                             <div class="product-price">
-                                <span>${{ $val->sale_price }}</span>
+                                <span>${{ number_format($val->sale_price) }}</span>
                                 @if($val->discount)
-                                    <span class="old-price">${{ $val->selling_price }}</span>
+                                    <span class="old-price">${{ number_format($val->selling_price) }}</span>
                                     <small>{{ $val->sale_percent }}</small>
                                 @endif
                             </div>
