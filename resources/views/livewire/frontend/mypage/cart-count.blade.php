@@ -12,11 +12,11 @@
                 @foreach($carts as $item)
                 <li>
                     <div class="shopping-cart-img">
-                        <a href="#"><img alt="Surfside Media" src="{{ $item->product->getImage() }}"></a>
+                        <a href="#"><img alt="Surfside Media" src="{{ optional($item->product)->getImage() }}"></a>
                     </div>
                     <div class="shopping-cart-title">
-                        <h4><a href="{{ route('frontend.product.detail', $item->product_id) }}">{{ substr($item->product->name, 0, 20) }}...</a></h4>
-                        <h4><span>{{ $item->quantity }} × </span>${{ $item->product->selling_price }}</h4>
+                        <h4><a href="{{ route('frontend.product.detail', $item->product_id) }}">{{ substr(optional($item->product)->name, 0, 20) }}...</a></h4>
+                        <h4><span>{{ $item->quantity }} × </span>${{ optional($item->product)->selling_price }}</h4>
                     </div>
                     <div class="shopping-cart-delete">
                         <a href="#"><i class="fi-rs-cross-small"></i></a>
