@@ -15,6 +15,7 @@
                             </thead>
                             <tbody>
                                 @foreach ($wishlist as $item)
+                                @if ($item->product)
                                 <tr>
                                     <td class="image product-thumbnail">
                                         <img src="{{ $item->product->getImage() }}" alt="#">
@@ -32,6 +33,7 @@
                                         </span>
                                     </td>
                                 </tr>
+                                @endif
                                 @endforeach
                                 <tr>
                                     <td colspan="4" class="text-end">
