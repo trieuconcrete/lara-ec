@@ -29,10 +29,13 @@
                         <img src="{{ isset($settings['logo_header']) ? \Storage::url($settings['logo_header']) : asset('assets/images/logo.png') }}" alt="logo"/></a>
                     </div>
                     <span class="fs-4 mb-5">Sign in to Admin Panel</span>
+                    @if(session('message'))
+                        <span class="fs-5 alert alert-success">{{ session('message') }}</span>
+                    @endif
                     <form method="POST" action="{{ route('login') }}" class="pt-3">
                         @csrf
                         <div class="form-group">
-                            <input type="email" value="admin@gmail.com" @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" class="form-control form-control-lg" id="exampleInputEmail1" placeholder="Email">
+                            <input type="email" value="" @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" class="form-control form-control-lg" id="exampleInputEmail1" placeholder="Email">
                             @error('email')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -40,7 +43,7 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                            <input type="password" value="password" @error('password') is-invalid @enderror" name="password" class="form-control form-control-lg" id="exampleInputPassword1" placeholder="Password">
+                            <input type="password" value="" @error('password') is-invalid @enderror" name="password" class="form-control form-control-lg" id="exampleInputPassword1" placeholder="Password">
                             @error('password')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>

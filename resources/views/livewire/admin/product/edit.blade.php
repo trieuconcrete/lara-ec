@@ -21,7 +21,7 @@
     </div>
     <div class="card mt-5">
         <div class="card-header">
-            <span class="fs-5">Product Option Values</span>
+            <span class="fs-5">Product Variants</span>
         </div>
         <div class="card-body">
             <form  action="{{ route('admin.product.product_variants.update', $product) }}" method="post" enctype="multipart/form-data">
