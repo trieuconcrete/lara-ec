@@ -140,7 +140,8 @@ class Checkout extends Component
     {
         DB::beginTransaction();
         try {
-            $order = $this->placeOrder();
+            $this->placeOrder();
+            $order = Order::where('user_id', auth()->user()->id)->first();
             $vnpAmount = $order->orderItems ? $order->orderItems->sum('price') * 100 : 0;
             $vnp_Url = Constants::VNPAY_URL;
             $vnp_HashSecret = Constants::VNPAY_HASHSECRET;
