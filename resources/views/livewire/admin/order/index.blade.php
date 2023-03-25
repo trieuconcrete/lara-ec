@@ -44,7 +44,7 @@
                                     <th scope="col">Billing Address</th>
                                     <th scope="col">Payment Method</th>
                                     <th scope="col">Payment Status</th>
-                                    <th scope="col">Status Message</th>
+                                    <th scope="col">Status</th>
                                     <th scope="col">Total Price</th>
                                     <th scope="col">Order Date</th>
                                     <th scope="col">Action</th>

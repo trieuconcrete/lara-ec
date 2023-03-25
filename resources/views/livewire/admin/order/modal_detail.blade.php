@@ -33,7 +33,7 @@
                         </div>
                         <div class="col-12">
                             <span class="fs-6 fw-bolder lh-base text-success">Order Stauts Message: </span>
-                            <select name="order_status" wire:model="order_status" wire:change="updateOrderStatus({{ $this->order->id }})" class="form-select form-control-lm w-25 d-inline-block">
+                            <select name="status" wire:model="status" wire:change="updateOrderStatus({{ $this->order->id }})" class="form-select form-control-lm w-25 d-inline-block">
                                 <option value=""></option>
                                 <option value="in-progress" {{ $this->order->status == 'in-progress' ? 'selected' : '' }}>In Progress</option>
                                 <option value="completed" {{ $this->order->status == 'completed' ? 'selected' : '' }}>Completed</option>
@@ -86,11 +86,13 @@
             </div>
             <div class="modal-footer">
                 @if ($this->order)
-                <button wire:click="sendInvoiceOrderMail({{ $this->order->id }})" type="button" class="btn btn-inverse-success">
-                    <span wire:remove wire:target="sendInvoiceOrderMail({{ $this->order->id }})">Send Invoice Order</span>
-                    <span wire:loading wire:target="sendInvoiceOrderMail({{ $this->order->id }})">Sending</span>
+                <a wire:loading.remove wire:target="sendMailInvoiceOrder({{ $this->order->id }})" wire:click="sendMailInvoiceOrder({{ $this->order->id }})" class="btn btn-inverse-success">
+                    <span>Send Mail Invoice Order</span>
+                </a>
+                <button wire:loading wire:target="sendMailInvoiceOrder({{ $this->order->id }})" class="btn btn-inverse-success" type="button" disabled>
+                    <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>Sending...
                 </button>
-                <a wire:click="downloadOrder({{ $this->order->id }})" class="btn btn-inverse-primary btn-fw btn-sm ">
+                <a wire:click="downloadOrder({{ $this->order->id }})" class="btn btn-inverse-primary">
                     <span class="mdi mdi-download"></span>
                 </a>
                 @endif
