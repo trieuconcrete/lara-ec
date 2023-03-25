@@ -58,6 +58,7 @@
                                 </thead>
                                 <tbody>
                                     @foreach($this->order->orderItems as $item)
+                                    @if($item->product)
                                     <tr>
                                         <td>{{ $item->id }}</td>
                                         <td class="image product-thumbnail">
@@ -68,6 +69,7 @@
                                         <td>{{ $item->quantity }}</td>
                                         <td>{{ $item->sub_total_price }}</td>
                                     </tr>
+                                    @endif
                                     @endforeach
                                     <tr>
                                         <th colspan="5" class="text-right">Shipping</th>
