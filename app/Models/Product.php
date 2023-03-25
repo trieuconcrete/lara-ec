@@ -73,7 +73,10 @@ class Product extends Model
      */
     protected function getSalePriceAttribute()
     {
-        $salePrice = ($this->selling_price * $this->discount)/100;
+        $salePrice = $this->selling_price;
+        if ($this->selling_price) {
+            $salePrice = ($this->selling_price * $this->discount)/100;
+        }
         return $this->selling_price - $salePrice;
     }
 
