@@ -185,7 +185,7 @@ class Checkout extends Component
             return redirect($vnp_Url);
         } catch (\Exception $e) {
             DB::rollBack();
-            Log::error('Order by VNPAY error: '. $e->getMessage());
+            Log::error($e);
             
             $this->dispatchBrowserEvent('message', [
                 'text' => 'Something went error',
