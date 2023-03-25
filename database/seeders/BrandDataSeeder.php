@@ -4,9 +4,9 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\Category;
+use App\Models\Brand;
 
-class CategorySeeder extends Seeder
+class BrandDataSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -16,8 +16,8 @@ class CategorySeeder extends Seeder
     public function run()
     {
         for($i = 0; $i <= 10; $i++) {
-            Category::create([
-                'name' => "Cat " . sprintf('%02d', $i),
+            Brand::create([
+                'name' => "Brand " . sprintf('%02d', $i),
                 'status' => 1
             ]);
         }

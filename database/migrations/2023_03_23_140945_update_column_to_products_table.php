@@ -17,8 +17,8 @@ return new class extends Migration
             $table->renameColumn('sale_off', 'discount');
             $table->unsignedInteger('supplier_id')->nullable()->after('brand_id');
             $table->integer('sku')->nullable();
-            $table->integer('views')->default(0);
-            $table->integer('likes')->default(0);
+            $table->integer('views')->nullable()->default(0);
+            $table->integer('likes')->nullable()->default(0);
         });
     }
 

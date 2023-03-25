@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class ProductOptionValue extends Model
+class ProductVariant extends Model
 {
     use HasFactory;
 
-    protected $table = 'product_option_values';
+    protected $table = 'product_variants';
 
     protected $fillable = [
         'product_id',

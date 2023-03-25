@@ -6,7 +6,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Order;
 
-class UpdateOrderSeeder extends Seeder
+class UpdateOrderDataSeeder extends Seeder
 {
     /**
      * Run the database seeds.

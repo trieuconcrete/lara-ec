@@ -57,9 +57,9 @@ class Product extends Model
         return $this->hasMany(ProductColor::class, 'product_id', 'id');
     }
 
-    public function productOptionValues()
+    public function productVariants()
     {
-        return $this->hasMany(ProductOptionValue::class, 'product_id', 'id');
+        return $this->hasMany(ProductVariant::class, 'product_id', 'id');
     }
 
     public function getImage($index = 0)
@@ -96,7 +96,7 @@ class Product extends Model
         });
 
         static::created(function ($model) {
-            ProductOptionValue::create(['product_id' => $model->id]);
+            ProductVariant::create(['product_id' => $model->id]);
         });
     }
 }

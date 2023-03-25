@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('carts', function (Blueprint $table) {
-            $table->bigInteger('product_option_value_id')->nullable()->after('product_id');
+            $table->bigInteger('product_variant_id')->nullable()->after('product_id');
         });
     }
 
@@ -26,7 +26,7 @@ return new class extends Migration
     public function down()
     {
         Schema::table('carts', function (Blueprint $table) {
-            $table->dropColumn('product_option_value_id');
+            $table->dropColumn('product_variant_id');
         });
     }
 };
