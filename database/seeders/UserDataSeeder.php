@@ -37,6 +37,19 @@ class UserDataSeeder extends Seeder
                     'last_name' => '',
                     'gender' => 1
                 ]
+            ], 
+            [
+                'name' => 'Admin Demo',
+                'email' => 'demo-admin@gmail.com',
+                'password' => \Hash::make('password@123'),
+                'status' => 1,
+                'user_type' => 99,
+                'role' => 'Administrator',
+                'user_details' => [
+                    'first_name' => 'Admin Demo',
+                    'last_name' => '',
+                    'gender' => 1
+                ]
             ], [
                 'name' => 'Trieu 01',
                 'email' => 'trieunb+01@concrete-corp.com',
