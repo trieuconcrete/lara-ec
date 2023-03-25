@@ -69,7 +69,7 @@
             <span class="menu-title">Site Setting</span>
         </a>
     </li>
-    <li class="nav-item">
+    {{-- <li class="nav-item">
         <a class="nav-link" href="#">
             <i class="mdi mdi-bank menu-icon"></i>
             <span class="menu-title fs-5">HRM</span>
@@ -86,6 +86,6 @@
             <i class="mdi mdi-briefcase-account menu-icon"></i>
             <span class="menu-title">Projects</span>
         </a>
-    </li>
+    </li> --}}
 </ul>
 </nav>

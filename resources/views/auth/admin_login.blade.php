@@ -32,7 +32,7 @@
                     <form method="POST" action="{{ route('login') }}" class="pt-3">
                         @csrf
                         <div class="form-group">
-                            <input type="email" @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" class="form-control form-control-lg" id="exampleInputEmail1" placeholder="Email">
+                            <input type="email" value="admin@gmail.com" @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" class="form-control form-control-lg" id="exampleInputEmail1" placeholder="Email">
                             @error('email')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -40,7 +40,7 @@
                             @enderror
                         </div>
                         <div class="form-group">
-                            <input type="password" @error('password') is-invalid @enderror" name="password" class="form-control form-control-lg" id="exampleInputPassword1" placeholder="Password">
+                            <input type="password" value="password" @error('password') is-invalid @enderror" name="password" class="form-control form-control-lg" id="exampleInputPassword1" placeholder="Password">
                             @error('password')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
