@@ -18,6 +18,7 @@
                             <tbody>
                                 @if($carts)
                                     @foreach($carts as $item)
+                                    @if ($item->product)
                                     <tr>
                                         <td class="image product-thumbnail">
                                             <img src="{{ $item->product->getImage() }}" alt="#">
@@ -47,6 +48,7 @@
                                             </a>
                                         </td>
                                     </tr>
+                                    @endif
                                     @endforeach
                                 @endif
                                 <tr>
