@@ -43,7 +43,7 @@ class Cart extends Model
      */
     protected function getSubTotalPriceAttribute()
     {
-        if ($this->product->selling_price) {
+        if (optional($this->product)->selling_price) {
             return $this->quantity * $this->product->selling_price;
         }
         return 0;
