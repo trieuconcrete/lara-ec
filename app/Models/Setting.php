@@ -20,13 +20,25 @@ class Setting extends Model
 
     public function getImage()
     {
-        $url = $this->value ? Storage::disk('local')->url($this->value) : null;
-        return $url ? asset($url) : null;
+        $url = ($this->key == 'logo_header' && $this->value) ? Storage::disk('local')->url($this->value) : 'no_img.png';
+        return asset($url);
+    }
+
+    public function getLogoHeader()
+    {
+        $url = ($this->key == 'logo_header' && $this->value) ? Storage::disk('local')->url($this->value) : 'logo.png';
+        return asset($url);
+    }
+
+    public function getLogoFooter()
+    {
+        $url = ($this->key == 'logo_footer' && $this->value) ? Storage::disk('local')->url($this->value) : 'logo.png';
+        return asset($url);
     }
 
     public function getImagePathAttribute()
     {
-        $url = $this->value ? Storage::disk('local')->url($this->value) : null;
-        return $url ? asset($url) : null;
+        $url = $this->value ? Storage::disk('local')->url($this->value) : 'no_img.png';
+        return asset($url);
     }
 }

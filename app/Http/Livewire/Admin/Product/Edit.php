@@ -5,7 +5,7 @@ namespace App\Http\Livewire\Admin\Product;
 use Livewire\Component;
 use App\Models\Color;
 use App\Models\Product;
-use App\Models\ProductOptionValue;
+use App\Models\ProductVariant;
 use App\Constants;
 
 class Edit extends Component
@@ -13,7 +13,7 @@ class Edit extends Component
     public $product, $colors, $sizes, $quantitys, $prices, $images;
     public $inputs = [];
     public $row = 1;
-    public $productOptionValueId;
+    public $productVariantId;
 
     public function mount($product)
     {
@@ -42,14 +42,14 @@ class Edit extends Component
         unset($this->inputs[$row]);
     }
 
-    public function deleteProductOption($productOptionValueId)
+    public function deleteProductOption($productVariantId)
     {
-        $this->productOptionValueId = $productOptionValueId;
+        $this->productVariantId = $productVariantId;
     }
 
     public function removeProductOption()
     {
-        ProductOptionValue::findOrFail($this->productOptionValueId)->delete();
+        ProductVariant::findOrFail($this->productVariantId)->delete();
         $this->dispatchBrowserEvent('message', [
             'text' => 'Deleted Successfully',
             'type' => 'success',
@@ -61,9 +61,9 @@ class Edit extends Component
     {
         $colorList = Color::select('id', 'name', 'code')->get();
         $sizeList = Constants::PRODUCT_SIZES;
-        $productOptionValues = Product::with('productImages', 'productColors', 'productOptionValues')->findOrFail($this->product->id)->productOptionValues;
+        $productVariants = Product::with('productImages', 'productColors', 'productVariants')->findOrFail($this->product->id)->productVariants;
         return view('livewire.admin.product.edit', [
-            'productOptionValues' => $productOptionValues,
+            'productVariants' => $productVariants,
             'colorList' => $colorList,
             'sizeList' => $sizeList
         ]);

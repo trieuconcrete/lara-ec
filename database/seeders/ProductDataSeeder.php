@@ -22,11 +22,16 @@ class ProductDataSeeder extends Seeder
         $categories = Category::where('status', 1)->pluck('id')->toArray();
         $brands = Brand::where('status', 1)->pluck('id')->toArray();
     
-        for($i = 0; $i <= 100000; $i++) {
+        for($i = 0; $i <= 20000; $i++) {
             $original_price = rand(100000, 1000000);
+            $trending = 0;
+            if ($i <= 16) {
+                $trending = 1;
+            }
             $product = Product::create([
-                'name' => "Product Test {$i}",
+                'name' => "Product Demo " . sprintf('%04d', $i),
                 'status' => 1,
+                'trending' => $trending,
                 'quantity' => rand(10, 50),
                 'original_price' => rand(100000, 1000000),
                 'selling_price' => $original_price*2,
@@ -34,8 +39,8 @@ class ProductDataSeeder extends Seeder
                 'brand_id' => $brands[array_rand($brands)],
                 'small_description' => 'Lorem ipsum dolor, sit amet consectetur adipisicing elit.',
                 'description' => 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aliquam rem officia, corrupti reiciendis minima nisi modi, quasi, odio minus dolore impedit fuga eum eligendi? Officia doloremque facere quia. Voluptatum, accusantium!',
-                'meta_title' => "Product Test {$i}",
-                'meta_keyword' => "Product Test {$i}",
+                'meta_title' => "Product Demo {$i}",
+                'meta_keyword' => "Product Demo {$i}",
                 'meta_description' => 'Lorem ipsum dolor, sit amet consectetur adipisicing elit.'
             ]);
         }

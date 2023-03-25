@@ -29,7 +29,7 @@ class Slider extends Model
 
     public function getImage()
     {
-        $url = $this->image ? Storage::disk('local')->url($this->image) : null;
-        return $url ? asset($url) : null;
+        $url = $this->image ? Storage::disk('local')->url($this->image) : 'default_slider.png';;
+        return asset($url);
     }
 }

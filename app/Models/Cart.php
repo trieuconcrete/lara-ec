@@ -13,7 +13,7 @@ class Cart extends Model
     protected $fillable = [
         'user_id',
         'product_id',
-        'product_option_value_id',
+        'product_variant_id',
         'product_color_id',
         'quantity',
     ];
@@ -33,9 +33,9 @@ class Cart extends Model
         return $this->belongsTo(ProductColor::class, 'product_color_id');
     }
 
-    public function productOptionValue()
+    public function ProductVariant()
     {
-        return $this->belongsTo(ProductOptionValue::class);
+        return $this->belongsTo(ProductVariant::class);
     }
 
     /**

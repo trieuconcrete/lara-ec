@@ -24,7 +24,7 @@
             <span class="fs-5">Product Option Values</span>
         </div>
         <div class="card-body">
-            <form  action="{{ route('admin.product.option_values.update', $product) }}" method="post" enctype="multipart/form-data">
+            <form  action="{{ route('admin.product.product_variants.update', $product) }}" method="post" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="table-responsive">
@@ -40,7 +40,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($productOptionValues as $key => $value)
+                            @foreach($productVariants as $key => $value)
                             <tr class="product-option-tr">
                                 <input type="text" name="datas[{{ $value->id }}]" class="d-none" value="update">
                                 <td>

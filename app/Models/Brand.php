@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class Brand extends Model
 {
@@ -30,7 +31,14 @@ class Brand extends Model
 
     public function getImage()
     {
-        $url = $this->image ? Storage::disk('local')->url($this->image) : null;
-        return $url ? asset($url) : null;
+        $url = $this->image ? Storage::disk('local')->url($this->image) : 'default_brand.png';
+        return asset($url);
+    }
+
+    protected static function booted()
+    {
+        static::creating(function ($model) {
+            $model->slug = Str::slug($model->slug);
+        });
     }
 }

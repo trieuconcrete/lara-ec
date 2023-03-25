@@ -9,12 +9,12 @@ use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Support\Str;
 use App\Models\ProductColor;
-use App\Models\ProductOptionValue;
+use App\Models\ProductVariant;
 use App\Models\ProductImage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\ProductFormRequest;
-use App\Http\Requests\ProductOptionValueRequest;
+use App\Http\Requests\ProductVariantRequest;
 
 class ProductController extends BaseController
 {
@@ -76,7 +76,7 @@ class ProductController extends BaseController
     {
         $categories = Category::select('id', 'name')->get();
         $brands = Brand::select('id', 'name')->get();
-        $product = Product::with('productImages', 'productColors', 'productOptionValues')->findOrFail($id);
+        $product = Product::with('productImages', 'productColors', 'productVariants')->findOrFail($id);
 
         return view('admin.product.edit', compact('product', 'categories', 'brands'));
     }
@@ -148,7 +148,7 @@ class ProductController extends BaseController
         return response()->json(['message' => 'Product Color Qty Deleted Successfuly!']);
     }
 
-    public function updateProductOptionValues(ProductOptionValueRequest $request, $product)
+    public function updateproductVariants(ProductVariantRequest $request, $product)
     {
         try {
             foreach ($request->datas as $key => $value) {
@@ -161,22 +161,22 @@ class ProductController extends BaseController
                     'price' => $request->prices[$key] ?? null
                 ];
                 // upload image
-                $path = 'uploads/product/option_values/';
+                $path = 'uploads/product/product_variants/';
                 $file =  $request->images[$key] ?? null;
                 if ($file) {
                     $data['image'] = $this->uploadImage($path, $file);
                 }
                 if ($value == 'insert') {
-                    if (!ProductOptionValue::where([
+                    if (!ProductVariant::where([
                         'product_id' => $product,
                         'color_id' => $request->colors[$key],
                         'size' => $request->sizes[$key] ?? null,
                     ])->exists()) {
-                        ProductOptionValue::create($data);
+                        ProductVariant::create($data);
                     }
                 }
                 if ($value == 'update') {
-                    ProductOptionValue::where('id', $key)->update($data);
+                    ProductVariant::where('id', $key)->update($data);
                 }
             }
             return redirect()->back()->with('message', 'Product Option Value Updated Successfully!');

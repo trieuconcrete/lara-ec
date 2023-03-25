@@ -9,7 +9,7 @@ use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-class UserSeeder extends Seeder
+class UserDataSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -26,6 +26,54 @@ class UserSeeder extends Seeder
 
         $dataUsers = [
             [
+                'name' => 'Administrator',
+                'email' => 'super-admin@gmail.com',
+                'password' => \Hash::make('password@123'),
+                'status' => 1,
+                'user_type' => 1,
+                'role' => 'Administrator',
+                'user_details' => [
+                    'first_name' => 'Administrator',
+                    'last_name' => '',
+                    'gender' => 1
+                ]
+            ], [
+                'name' => 'Trieu 01',
+                'email' => 'trieunb+01@concrete-corp.com',
+                'password' => \Hash::make('password@123'),
+                'status' => 1,
+                'user_type' => 0,
+                'role' => 'Customer',
+                'user_details' => [
+                    'first_name' => 'Trieu 01',
+                    'last_name' => 'Nguyen',
+                    'gender' => 1
+                ]
+            ], [
+                'name' => 'Trieu 02',
+                'email' => 'trieunb+02@concrete-corp.com',
+                'password' => \Hash::make('password@123'),
+                'status' => 1,
+                'user_type' => 0,
+                'role' => 'Customer',
+                'user_details' => [
+                    'first_name' => 'Trieu 02',
+                    'last_name' => 'Nguyen',
+                    'gender' => 1
+                ]
+            ], [
+                'name' => 'Trieu 03',
+                'email' => 'trieunb+03@concrete-corp.com',
+                'password' => \Hash::make('password@123'),
+                'status' => 1,
+                'user_type' => 0,
+                'role' => 'Customer',
+                'user_details' => [
+                    'first_name' => 'Trieu 03',
+                    'last_name' => 'Nguyen',
+                    'gender' => 1
+                ]
+            ], [
                 'name' => 'Customer 01',
                 'email' => 'customer1@gmail.com',
                 'password' => \Hash::make('password@123'),
@@ -58,18 +106,6 @@ class UserSeeder extends Seeder
                 'role' => 'Customer',
                 'user_details' => [
                     'first_name' => 'Customer 03',
-                    'last_name' => '',
-                    'gender' => 1
-                ]
-            ], [
-                'name' => 'Administrator',
-                'email' => 'super-admin@gmail.com',
-                'password' => \Hash::make('password@123'),
-                'status' => 1,
-                'user_type' => 1,
-                'role' => 'Administrator',
-                'user_details' => [
-                    'first_name' => 'Administrator',
                     'last_name' => '',
                     'gender' => 1
                 ]
