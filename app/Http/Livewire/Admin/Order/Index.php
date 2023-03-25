@@ -14,7 +14,7 @@ class Index extends Component
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
     
-    public $orderId, $order, $order_from, $order_to, $status, $order_status, $tracking_no;
+    public $orderId, $order, $order_from, $order_to, $status, $tracking_no;
     protected $orders, $queryString = [];
 
     public function searchOrder()
@@ -42,7 +42,7 @@ class Index extends Component
 
     public function updateOrderStatus($orderId)
     {
-        Order::where('id', $orderId)->update(['status' => $this->order_status]);
+        Order::where('id', $orderId)->update(['status' => $this->status]);
         $this->dispatchBrowserEvent('message', [
             'text' => 'Order Status Updated Successfully',
             'type' => 'success',
@@ -54,17 +54,11 @@ class Index extends Component
     {
         $this->orderId = $orderId;
         $this->order = Order::with('orderItems', 'orderItems.product')->where([
-            'id' => $this->orderId,
-            'user_id' => auth()->user()->id
+            'id' => $this->orderId
         ])->first();
-        $this->order_status =  $this->order->status;
+        $this->status =  $this->order->status;
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function downloadOrder($orderId)
     {
         $this->orderId = $orderId;
@@ -82,7 +76,7 @@ class Index extends Component
        );
     }
 
-    public function sendInvoiceOrderMail($orderId)
+    public function sendMailInvoiceOrder($orderId)
     {
         $this->orderId = $orderId;
         $this->order = Order::with('user', 'orderItems', 'orderItems.product')->where([
