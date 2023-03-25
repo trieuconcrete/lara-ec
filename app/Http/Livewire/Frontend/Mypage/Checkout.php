@@ -141,7 +141,7 @@ class Checkout extends Component
         DB::beginTransaction();
         try {
             $order = $this->placeOrder();
-            $vnpAmount = $order->orderItems->sum('price') * 100;
+            $vnpAmount = $order->orderItems ? $order->orderItems->sum('price') * 100 : 0;
             $vnp_Url = Constants::VNPAY_URL;
             $vnp_HashSecret = Constants::VNPAY_HASHSECRET;
             //Add Params of 2.0.1 Version
