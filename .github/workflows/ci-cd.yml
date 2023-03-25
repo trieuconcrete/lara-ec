@@ -7,11 +7,11 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Slack Notification Start Build
-        uses: rtCamp/action-slack-notify@v2
-        env:
-          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-          SLACK_MESSAGE: 'Starting deploy :rocket:'
+      # - name: Slack Notification Start Build
+      #   uses: rtCamp/action-slack-notify@v2
+      #   env:
+      #     SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+      #     SLACK_MESSAGE: 'Starting deploy :rocket:'
 
       - name: Checkout code
         uses: actions/checkout@v3
@@ -79,8 +79,8 @@ jobs:
           ssh_known_hosts: "${{ secrets.SSH_KNOWN_HOSTS }}"
           php_executable: "php"
         run: tar -xf artifacts.tar.gz .github/deployment/prepare.sh -O | bash -se -- "$base_directory" "$ssh_user" "$ssh_host" "$ssh_port" "$private_ssh_key" "$ssh_known_hosts" "$php_executable"
-      - name: Slack Notification Success
-        uses: rtCamp/action-slack-notify@v2
-        env:
-          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-          SLACK_MESSAGE: 'Successfully deployed :tada:'
+      # - name: Slack Notification Success
+      #   uses: rtCamp/action-slack-notify@v2
+      #   env:
+      #     SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+      #     SLACK_MESSAGE: 'Successfully deployed :tada:'
