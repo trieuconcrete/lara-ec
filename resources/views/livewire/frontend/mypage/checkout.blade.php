@@ -65,6 +65,7 @@
                                     <tbody>
                                         @if($carts)
                                             @foreach($carts as $item)
+                                            @if ($item->product)
                                             <tr>
                                                 <td class="image product-thumbnail">
                                                     <img src="{{ $item->product->getImage() }}" alt="#">
@@ -75,6 +76,7 @@
                                                 </td>
                                                 <td>${{ $item->sub_total_price }}</td>
                                             </tr>
+                                            @endif
                                             @endforeach
                                         <tr>
                                             <th>SubTotal</th>
