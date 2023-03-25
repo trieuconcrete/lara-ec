@@ -16,7 +16,7 @@
                     </div>
                     <div class="shopping-cart-title">
                         <h4><a href="{{ route('frontend.product.detail', $item->product_id) }}">{{ substr(optional($item->product)->name, 0, 20) }}...</a></h4>
-                        <h4><span>{{ $item->quantity }} × </span>${{ optional($item->product)->selling_price }}</h4>
+                        <h4><span>{{ $item->quantity }} × </span>${{ optional($item->product) ? optional($item->product)->selling_price : 0 }}</h4>
                     </div>
                     <div class="shopping-cart-delete">
                         <a href="#"><i class="fi-rs-cross-small"></i></a>
