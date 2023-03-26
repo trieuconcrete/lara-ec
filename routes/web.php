@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 use App\Http\Controllers\Auth\AdminLoginController;
+use App\Http\Controllers\Auth\SocialController;
 use Illuminate\Support\Str;
 
 Route::get('/welcome', function () {
@@ -22,3 +23,10 @@ Route::get('/welcome', function () {
 Auth::routes();
 
 Route::get('admin/login', [AdminLoginController::class, 'login']);
+
+Route::controller(SocialController::class)->group(function() {
+    Route::get('auth/facebook', 'redirectToFacebook')->name('auth.facebook');
+    Route::get('auth/facebook/callback', 'handleFacebookCallback');
+    Route::get('auth/google', 'redirectToGoogle')->name('auth.google');
+    Route::get('auth/google/callback', 'handleGoogleCallback');
+});
