@@ -26,36 +26,36 @@
                         <h4>User Details</h4>
                     </div>
                     <div class="col-md-6 form-group">
-                        <input type="text" required id="first_name" name="first_name" placeholder="First name *" value="{{ optional($user->userDetail)->first_name }}">
+                        <input type="text" required id="first_name" name="first_name" placeholder="First name *" value="{{ optional($user->userDetail)->first_name ?? old('first_name') }}">
                         @error('first_name')<small class="text-danger">{{ $message }}</small>@enderror
                     </div>
                     <div class="col-md-6 form-group">
-                        <input type="text" id="last_name" name="last_name" placeholder="Last name *" value="{{ optional($user->userDetail)->last_name }}">
+                        <input type="text" id="last_name" name="last_name" placeholder="Last name *" value="{{ optional($user->userDetail)->last_name ?? old('last_name') }}">
                         @error('last_name')<small class="text-danger">{{ $message }}</small>@enderror
                     </div>
                     <div class="col-md-6 form-group">
-                        <input type="text" id="address" name="address" placeholder="Address *" value="{{ optional($user->userDetail)->address }}">
+                        <input type="text" id="address" name="address" placeholder="Address *" value="{{ optional($user->userDetail)->address ?? old('address') }}">
                         @error('address')<small class="text-danger">{{ $message }}</small>@enderror
                     </div>
                     <div class="col-md-6 form-group">
-                        <input type="text" name="city" placeholder="City / Town *" value="{{ optional($user->userDetail)->city }}">
+                        <input type="text" name="city" placeholder="City / Town *" value="{{ optional($user->userDetail)->city ?? old('city') }}">
                     </div>
                     <div class="col-md-6 form-group">
-                        <input type="text" name="state" placeholder="State *" value="{{ optional($user->userDetail)->state }}">
+                        <input type="text" name="state" placeholder="State *" value="{{ optional($user->userDetail)->state ?? old('state') }}">
                     </div>
                     <div class="col-md-6 form-group">
-                        <input type="text" name="country" placeholder="Country *" value="{{ optional($user->userDetail)->country }}">
+                        <input type="text" name="country" placeholder="Country *" value="{{ optional($user->userDetail)->country ?? old('country') }}">
                     </div>
                     <div class="col-md-6 form-group">
-                        <input type="text" id="zipcode" name="zipcode" placeholder="Postcode / ZIP *" value="{{ optional($user->userDetail)->zipcode }}">
+                        <input type="text" id="zipcode" name="zipcode" placeholder="Postcode / ZIP *" value="{{ optional($user->userDetail)->zipcode ?? old('zipcode') }}">
                         @error('zipcode')<small class="text-danger">{{ $message }}</small>@enderror
                     </div>
                     <div class="col-md-6 form-group">
-                        <input type="text" id="phone" name="phone" placeholder="Phone *" value="{{ optional($user->userDetail)->phone }}">
+                        <input type="text" id="phone" name="phone" placeholder="Phone *" value="{{ optional($user->userDetail)->phone ?? old('phone') }}">
                         @error('phone')<small class="text-danger">{{ $message }}</small>@enderror
                     </div>
                     <div class="col-md-6 form-group">
-                        <input type="text" id="email" name="email" placeholder="Email address *" value="{{ $user->email }}">
+                        <input type="text" id="email" name="email" placeholder="Email address *" value="{{ $user->email ?? old('email') }}">
                         @error('email')<small class="text-danger">{{ $message }}</small>@enderror
                     </div>
                     <div class="form-group">

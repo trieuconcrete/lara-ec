@@ -38,7 +38,7 @@ class Brand extends Model
     protected static function booted()
     {
         static::creating(function ($model) {
-            $model->slug = Str::slug($model->slug);
+            $model->slug = Str::slug($model->name);
         });
     }
 }
