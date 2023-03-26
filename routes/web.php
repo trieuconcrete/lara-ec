@@ -20,6 +20,11 @@ Route::get('/welcome', function () {
     return view('welcome');
 });
 
+Route::get('/privacy-policy', function () {
+    return view('welcome');
+});
+
+
 Auth::routes();
 
 Route::get('admin/login', [AdminLoginController::class, 'login']);
