@@ -37,8 +37,19 @@ class UserDataSeeder extends Seeder
                     'last_name' => '',
                     'gender' => 1
                 ]
-            ], 
-            [
+            ], [
+                'name' => 'Manager',
+                'email' => 'admin@gmail.com',
+                'password' => \Hash::make('password@123'),
+                'status' => 1,
+                'user_type' => 1,
+                'role' => 'Manager',
+                'user_details' => [
+                    'first_name' => 'Manager',
+                    'last_name' => '',
+                    'gender' => 1
+                ]
+            ], [
                 'name' => 'Admin Demo',
                 'email' => 'demo-admin@gmail.com',
                 'password' => \Hash::make('password@123'),
