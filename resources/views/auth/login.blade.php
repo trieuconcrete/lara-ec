@@ -1,5 +1,59 @@
 @extends('layouts.frontend')
 
+@push('style')
+<style>
+    .login-form form {        
+        margin-bottom: 15px;
+        background: #f7f7f7;
+        box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+        padding: 30px;
+    }
+    .form-control, .login-btn {
+        border-radius: 2px;
+    }
+    .input-group-prepend .fa {
+        font-size: 18px;
+    }
+    .login-btn {
+        font-size: 15px;
+        font-weight: bold;
+        min-height: 40px;
+    }
+    .social-btn .btn {
+        border: none;
+        margin: 10px 3px 0;
+        opacity: 1;
+    }
+    .social-btn .btn:hover {
+        opacity: 0.9;
+    }
+    .social-btn .btn-primary, .social-btn .btn-secondary:active {
+        background: #507cc0 !important;
+    }
+    .social-btn .btn-secondary, .social-btn .btn-secondary:active {
+        background: #507cc0 !important;
+    }
+    .social-btn .btn-info, .social-btn .btn-info:active {
+        background: #64ccf1 !important;
+    }
+    .social-btn .btn-danger, .social-btn .btn-danger:active {
+        background: #df4930 !important;
+    }
+    .or-seperator {
+        margin-top: 20px;
+        text-align: center;
+        border-top: 1px solid #ccc;
+    }
+    .or-seperator i {
+        padding: 0 10px;
+        background: #f7f7f7;
+        position: relative;
+        top: -11px;
+        z-index: 1;
+    }
+</style>
+@endpush
+
 @section('content')
 <main class="main">
     <div class="page-header breadcrumb-wrap">
@@ -63,14 +117,6 @@
                                             <a href="{{ url('auth/facebook') }}" class="btn btn-primary"><i class="fa fa-facebook"></i>&nbsp; Facebook</a>
                                             <a href="{{ url('auth/google') }}" class="btn btn-danger"><i class="fa fa-google"></i>&nbsp; Google</a>
                                         </div>
-                                        {{-- <div class="flex items-center justify-end mt-4">
-                                            <a class="ml-1 btn btn-primary" href="{{ url('auth/facebook') }}" style="margin-top: 0px !important;background: blue;color: #ffffff;padding: 5px;border-radius:7px;" id="btn-fblogin">
-                                                <i class="fa fa-facebook-square" aria-hidden="true"></i> Login with Facebook
-                                            </a>
-                                            <a href="{{ url('auth/google') }}">
-                                                <img src="https://developers.google.com/identity/images/btn_google_signin_dark_normal_web.png" style="margin-left: 3em;">
-                                            </a>
-                                        </div> --}}
                                     </form>
                                 </div>
                             </div>
