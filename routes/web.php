@@ -23,6 +23,9 @@ Route::get('/welcome', function () {
 Route::get('/privacy-policy', function () {
     return view('welcome');
 });
+Route::get('/terms-of-service', function () {
+    return view('welcome');
+});
 
 
 Auth::routes();
