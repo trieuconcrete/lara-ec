@@ -32,11 +32,8 @@ class SocialController extends Controller
             $user = Socialite::driver('facebook')->user();
             $finduser = User::where('facebook_id', $user->id)->first();
             if($finduser) {
-         
                 Auth::login($finduser);
-       
-                return redirect()->intended('dashboard');
-         
+                return redirect()->intended('/');
             } else {
                 $newUser = User::updateOrCreate(['email' => $user->email],[
                         'name' => $user->name,
@@ -45,7 +42,7 @@ class SocialController extends Controller
                     ]);
         
                 Auth::login($newUser);
-                return redirect()->intended('dashboard');
+                return redirect()->intended('/');
             }
        
         } catch (Exception $e) {
