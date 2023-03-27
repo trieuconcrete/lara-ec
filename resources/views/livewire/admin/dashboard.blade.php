@@ -144,8 +144,8 @@
 
     <div class="shadow rounded p-4 border bg-white flex-1" style="height: 32rem;">
         <div class="row">
-            <div class="col-7" id="chart"></div>
-            <div class="col-5">
+            <div class="col-12" id="chart"></div>
+            <div class="col-12">
                 <p class="fs-5 text-center">Recently order</p>
                 <div class="table-responsive">
                     <table class="table">

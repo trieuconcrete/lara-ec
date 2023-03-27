@@ -57,6 +57,11 @@ class Product extends Model
         return $this->hasMany(ProductColor::class, 'product_id', 'id');
     }
 
+    public function productReviews()
+    {
+        return $this->hasMany(ProductReview::class, 'product_id', 'id');
+    }
+
     public function productVariants()
     {
         return $this->hasMany(ProductVariant::class, 'product_id', 'id');
