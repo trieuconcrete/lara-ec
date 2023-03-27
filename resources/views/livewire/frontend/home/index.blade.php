@@ -68,7 +68,7 @@
             </div>
         </div>
     </section>
-    <section class="product-tabs section-padding position-relative wow fadeIn animated">
+    <section class="product-tabs section-padding position-relative wow fadeIn animated" wire:ignore>
         <div class="bg-square"></div>
         <div class="container">
             <h3 class="section-title mb-20"><span>Trending</span> Products</h3>
@@ -181,7 +181,7 @@
             </div>
         </div>
     </section>
-    <section class="section-padding product-new-arrivals">
+    <section class="section-padding product-new-arrivals" wire:ignore>
         <div class="container wow fadeIn animated">
             <h3 class="section-title mb-20"><span>New</span> Arrivals</h3>
             <div class="carausel-6-columns-cover position-relative">
@@ -198,8 +198,14 @@
                             </div>
                             <div class="product-action-1">
                                 <a aria-label="Quick view" class="action-btn small hover-up" data-bs-toggle="modal" data-bs-target="#quickViewModal">
-                                    <i class="fi-rs-eye"></i></a>
-                                <a wire:click="addToWishList({{ $item->id }})" aria-label="Add To Wishlist" class="action-btn small hover-up" tabindex="0"><i class="fi-rs-heart"></i></a>
+                                    <i class="fi-rs-eye"></i>
+                                </a>
+                                <a wire:loading.remove wire:target="addToWishList({{ $item->id }})" wire:click="addToWishList({{ $item->id }})" aria-label="Add To Wishlist" class="action-btn small hover-up" tabindex="0">
+                                    <i class="fi-rs-heart"></i>
+                                </a>
+                                <div wire:loading wire:target="addToWishList({{ $item->id }})" class="spinner-grow text-warning" role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
                             </div>
                             <div class="product-badges product-badges-position product-badges-mrg">
                                 <span class="hot">Hot</span>
@@ -212,8 +218,8 @@
                                 </span>
                             </div>
                             <div class="product-price">
-                                <span>${{ $item->selling_price }}</span>
-                                <span class="old-price">${{ $item->original_price }}</span>
+                                <span>${{ number_format($item->selling_price) }}</span>
+                                <span class="old-price">${{ number_format($item->original_price) }}</span>
                             </div>
                         </div>
                     </div>
