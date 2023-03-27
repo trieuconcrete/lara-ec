@@ -19,6 +19,10 @@ class Index extends Component
     
     public $productId, $sliders, $brands, $products, $productNewArrivals;
 
+    public function addToWishList2($productId)
+    {
+        $this->addToWishList($productId);
+    }
     public function addToWishList($productId)
     {
         $this->productId = $productId;

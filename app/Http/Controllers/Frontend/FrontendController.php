@@ -28,7 +28,7 @@ class FrontendController extends Controller
      */
     public function getProductDetail($id)
     {
-        $product = Product::with('category', 'productImages', 'productColors')
+        $product = Product::with('category', 'productImages', 'productColors', 'productReviews')->withCount('productReviews')
         ->with(['category.products' => function($query) use ($id) {
             return $query->where('id', '<>', $id)->limit(8);
         }])->find($id);
