@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+use App\Http\Controllers\Auth\BackendLoginController;
 use App\Http\Controllers\Auth\AdminLoginController;
 use App\Http\Controllers\Auth\SocialController;
 use Illuminate\Support\Str;
@@ -31,6 +32,7 @@ Route::get('/terms-of-service', function () {
 Auth::routes();
 
 Route::get('admin/login', [AdminLoginController::class, 'login']);
+Route::get('backend/login', [BackendLoginController::class, 'login']);
 
 Route::controller(SocialController::class)->group(function() {
     Route::get('auth/facebook', 'redirectToFacebook')->name('auth.facebook');
