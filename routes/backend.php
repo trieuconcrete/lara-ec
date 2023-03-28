@@ -14,3 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('dashboard', 'DashboardController@index')->name('dashboard');
+
+Route::controller(ProductController::class)->prefix('products')->name('product.')->group(function () {
+    Route::get('/', 'index')->name('index');
+});
