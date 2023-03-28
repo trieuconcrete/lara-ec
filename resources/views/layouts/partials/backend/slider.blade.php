@@ -44,7 +44,7 @@
                     <div class="collapse menu-dropdown" id="sidebarShops">
                         <ul class="nav nav-sm flex-column">
                             <li class="nav-item">
-                                <a href="#" class="nav-link" data-key="t-products"> {{ __('menu.products') }} </a>
+                                <a href="{{ route('backend.product.index') }}" class="nav-link" data-key="t-products"> {{ __('menu.products') }} </a>
                             </li>
                             <li class="nav-item">
                                 <a href="#" class="nav-link" data-key="t-customers"> {{ __('menu.customers') }} </a>
