@@ -13,7 +13,7 @@ class Review extends Component
 
     protected $paginationTheme = 'bootstrap';
 
-    public $product, $comment, $full_name, $email, $website;
+    public $product, $comment, $full_name, $email, $point;
 
     public function mount($product)
     {
@@ -35,9 +35,12 @@ class Review extends Component
                 'comment' => $this->comment,
                 'full_name' => $this->full_name,
                 'email' => $this->email,
+                'point' => $this->point
             ]);
             $this->comment = null;
             $this->full_name = null;
+            $this->point = 0;
+
             $message = 'Review Added Successfuly';
             $type = 'success';
             $status = 200;

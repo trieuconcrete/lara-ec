@@ -30,7 +30,7 @@ class FrontendController extends Controller
     {
         $product = Product::with('category', 'productImages', 'productColors', 'productReviews', 'productReviews.user', 'productReviews.user.userDetail')
         ->withCount('productReviews as review_count')
-        ->withAvg('productReviews as product_rating', 'point')
+        ->withAvg(['productReviews as product_rating' => fn($query) => $query->where('point', '<>', 0)], 'point')
         ->with(['category.products' => function($query) use ($id) {
             return $query->with('productImages')
             ->where('id', '<>', $id)->limit(8);

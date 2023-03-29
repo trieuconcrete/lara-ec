@@ -76,12 +76,22 @@
     <!--comment form-->
     <div class="comment-form">
         <h4 class="mb-15">Add a review</h4>
-        <div class="product-rate d-inline-block mb-30">
-        </div>
         <div class="row">
             <div class="col-lg-8 col-md-12">
                 <form class="form-contact comment_form" action="#" id="commentForm" wire:submit.prevent="saveReview()" wire:target="saveReview">
                     <div class="row">
+                        <div class="col-3">
+                            <div class="form-group">
+                                <select name="point" class="form-control w-100" wire:model.defer="point" id="">
+                                    <option value="0">Rating</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
+                            </div>
+                        </div>
                         <div class="col-12">
                             <div class="form-group">
                                 <textarea class="form-control w-100" wire:model.defer="comment" name="comment" id="comment" cols="30" rows="9" placeholder="Write Comment"></textarea>
