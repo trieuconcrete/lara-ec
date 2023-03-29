@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class Product extends Model
 {
@@ -92,6 +93,11 @@ class Product extends Model
     {
         return $this->discount ? '↓'.$this->discount.'%' : null;
     }
+
+    // protected function productRating(): Attribute
+    // {
+    //     return $this->product_reviews_avg;
+    // }
 
     protected static function booted()
     {
