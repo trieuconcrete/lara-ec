@@ -42,27 +42,27 @@
                         <div class="card-body border border-dashed border-end-0 border-start-0">
                             <form>
                                 <div class="row g-3">
-                                    <div class="col-xxl-5 col-sm-6">
+                                    <div class="col-xxl-3 col-sm-6">
                                         <div class="search-box">
                                             <input type="text" class="form-control search"
-                                                placeholder="Search for order ID, customer, order status or something...">
+                                                placeholder="Search for Product ID, name or something...">
                                             <i class="ri-search-line search-icon"></i>
                                         </div>
                                     </div>
                                     <!--end col-->
-                                    <div class="col-xxl-2 col-sm-6">
+                                    <div class="col-xxl-3 col-sm-6">
                                         <div>
                                             <input type="text" class="form-control" data-provider="flatpickr"
-                                                data-date-format="d M, Y" data-range-date="true" id="demo-datepicker"
-                                                placeholder="Select date">
+                                                data-date-format="Y-m-d" data-range-date="true" id="demo-datepicker"
+                                                placeholder="Published date">
                                         </div>
                                     </div>
                                     <!--end col-->
                                     <div class="col-xxl-2 col-sm-4">
                                         <div>
                                             <select class="form-control" data-choices data-choices-search-false
-                                                name="choices-single-default" id="idStatus">
-                                                <option value="">Status</option>
+                                                name="choices-single-default" id="idCategories">
+                                                <option value="">Categories</option>
                                                 <option value="all" selected>All</option>
                                                 <option value="Pending">Pending</option>
                                                 <option value="Inprogress">Inprogress</option>
@@ -77,8 +77,8 @@
                                     <div class="col-xxl-2 col-sm-4">
                                         <div>
                                             <select class="form-control" data-choices data-choices-search-false
-                                                name="choices-single-default" id="idPayment">
-                                                <option value="">Select Payment</option>
+                                                name="choices-single-default" id="idBrands">
+                                                <option value="">Brands</option>
                                                 <option value="all" selected>All</option>
                                                 <option value="Mastercard">Mastercard</option>
                                                 <option value="Paypal">Paypal</option>
@@ -88,11 +88,11 @@
                                         </div>
                                     </div>
                                     <!--end col-->
-                                    <div class="col-xxl-1 col-sm-4">
+                                    <div class="col-xxl-2 col-sm-4">
                                         <div>
-                                            <button type="button" class="btn btn-primary w-100" onclick="SearchData();"> <i
-                                                    class="ri-equalizer-fill me-1 align-bottom"></i>
-                                                Filters
+                                            <button type="button" class="btn btn-primary w-100" onclick="SearchData();">
+                                                <i class="ri-search-line me-1 align-bottom"></i>
+                                                Search
                                             </button>
                                         </div>
                                     </div>
@@ -119,7 +119,7 @@
                                     <li class="nav-item">
                                         <a class="nav-link py-3 Pickups" data-bs-toggle="tab" id="Pickups"
                                             href="#pickups" role="tab" aria-selected="false">
-                                            <i class="ri-truck-line me-1 align-bottom"></i> Draft <span
+                                            <i class="ri-close-circle-line me-1 align-bottom"></i> Draft <span
                                                 class="badge bg-danger align-middle ms-1">2</span>
                                         </a>
                                     </li>
@@ -161,7 +161,13 @@
                                                 <td class="stock">12</td>
                                                 <td class="price">$215.00</td>
                                                 <td class="orders">48</td>
-                                                <td class="rationg">4.2</td>
+                                                <td class="rating">
+                                                    <span>
+                                                        <span class="badge bg-light text-body fs-12 fw-medium">
+                                                            <i class="mdi mdi-star text-warning me-1"></i>4.2
+                                                        </span>
+                                                    </span>
+                                                </td>
                                                 <td class="date">20 Dec, 2021, <small class="text-muted">02:21
                                                     AM</small></td>
                                                 <td class="status"><span
