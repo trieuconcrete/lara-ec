@@ -26,6 +26,7 @@
     <!-- custom Css-->
     <link href="{{ asset('backend/assets/css/custom.min.css') }}" rel="stylesheet" type="text/css" />
 
+    @stack('style')
 </head>
 
 <body>
@@ -119,11 +120,10 @@
     <!--Swiper slider js-->
     <script src="{{ asset('backend/assets/libs/swiper/swiper-bundle.min.js') }}"></script>
 
-    <!-- Dashboard init -->
-    <script src="{{ asset('backend/assets/js/pages/dashboard-ecommerce.init.js') }}"></script>
-
     <!-- App js -->
     <script src="{{ asset('backend/assets/js/app.js') }}"></script>
+
+    @stack('script')
 </body>
 
 </html>

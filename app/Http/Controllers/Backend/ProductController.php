@@ -11,4 +11,9 @@ class ProductController extends Controller
     {
         return view('backend.products.index');
     }
+
+    public function create()
+    {
+        return view('backend.products.create');
+    }
 }
