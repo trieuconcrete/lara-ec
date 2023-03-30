@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\FrontEnd;
+namespace App\Services\Frontend;
 
 use App\Models\Order;
 use App\Models\Cart;

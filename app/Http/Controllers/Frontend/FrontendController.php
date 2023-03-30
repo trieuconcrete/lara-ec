@@ -28,7 +28,7 @@ class FrontendController extends Controller
      */
     public function getProductDetail($id)
     {
-        $product = Product::with('category', 'productImages', 'productColors', 'productReviews', 'productReviews.user', 'productReviews.user.userDetail')
+        $product = Product::with('category', 'productVariants', 'productImages', 'productReviews', 'productReviews.user', 'productReviews.user.userDetail')
         ->withCount('productReviews as review_count')
         ->withAvg(['productReviews as product_rating' => fn($query) => $query->where('point', '<>', 0)], 'point')
         ->with(['category.products' => function($query) use ($id) {

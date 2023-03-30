@@ -35,7 +35,7 @@ class Review extends Component
                 'comment' => $this->comment,
                 'full_name' => $this->full_name,
                 'email' => $this->email,
-                'point' => $this->point
+                'point' => (int) $this->point
             ]);
             $this->comment = null;
             $this->full_name = null;
