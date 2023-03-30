@@ -90,7 +90,7 @@
                 </div>
 
                 <div class="ms-1 header-item d-none d-sm-flex">
-                    <a href="{{ route('frontend.home') }}" _target="blank">
+                    <a href="{{ route('frontend.home') }}" target="_blank">
                         <i class='ri-earth-line fs-22'></i>
                     </a>
                 </div>
