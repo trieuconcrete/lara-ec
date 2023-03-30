@@ -1,22 +1,24 @@
-<div>
+<div wire:ignore>
     <div class="attr-detail attr-color mb-15">
-        @if ($product->productColors->count() > 0)
+        @if ($colors)
             <strong class="mr-10">Color</strong>
-            <ul class="list-filter color-filter">
-                @foreach($product->productColors as $item)
-                    <li class="{{ $this->colorId == $item->color_id ? 'active' : '' }}"><a wire:click="colorSelected({{ $item->color_id }})" data-color="{{ $item->color->name }}"><span class="product-color-{{ $item->color->code }}"></span></a></li>
+            <ul class="list-filter color-filter" wire:ignore>
+                @foreach($colors as $item)
+                    <li class="">
+                        <a wire:click="selectColor({{ $item->id }})" data-color="{{ $item->name }}"><span class="product-color-{{ $item->code }}"></span></a>
+                    </li>
                 @endforeach
             </ul>
         @endif
     </div>
     <div class="attr-detail attr-size">
         <strong class="mr-10">Size</strong>
-        <ul class="list-filter size-filter font-small">
-            <li><a href="#">S</a></li>
-            <li class="active"><a href="#">M</a></li>
-            <li><a href="#">L</a></li>
-            <li><a href="#">XL</a></li>
-            <li><a href="#">XXL</a></li>
+        <ul class="list-filter size-filter font-small" wire:ignore>
+            @foreach($sizes as $size)
+                <li class="" wire:click="selectSize('{{ $size }}')">
+                    <a>{{ $size }}</a>
+                </li>
+            @endforeach
         </ul>
     </div>
     <div class="bt-1 border-color-1 mt-30 mb-30"></div>

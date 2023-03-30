@@ -657,3 +657,9 @@
         <!-- container-fluid -->
     </div>
 @endsection
+
+@push('script')
+    <!-- Dashboard init -->
+    <script src="{{ asset('backend/assets/js/pages/dashboard-ecommerce.init.js') }}"></script>
+@endpush
+

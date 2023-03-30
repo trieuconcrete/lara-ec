@@ -65,7 +65,7 @@
                                         <div class="product-price primary-color float-left">
                                             <ins><span class="text-brand">${{ number_format($product->selling_price) }}</span></ins>
                                             <ins><span class="old-price font-md ml-15">${{ number_format($product->original_price) }}</span></ins>
-                                            <span class="save-price  font-md color3 ml-15">25% Off</span>
+                                            <span class="save-price  font-md color3 ml-15">{{ $product->discout . "% Off" }}</span>
                                         </div>
                                     </div>
                                     <div class="bt-1 border-color-1 mt-15 mb-15"></div>

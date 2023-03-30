@@ -1,5 +1,7 @@
 @extends('layouts.backend')
 
+@section('title', 'Product List')
+
 @section('content')
     <div class="page-content">
         <div class="container-fluid">
@@ -32,9 +34,8 @@
                                 </div>
                                 <div class="col-sm-auto">
                                     <div class="d-flex gap-1 flex-wrap">
-                                        <button type="button" class="btn btn-success add-btn" data-bs-toggle="modal"
-                                            id="create-btn" data-bs-target="#showModal"><i
-                                                class="ri-add-line align-bottom me-1"></i> Create Product</button>
+                                        <a href="{{ route('backend.product.create') }}" class="btn btn-success add-btn"><i
+                                                class="ri-add-line align-bottom me-1"></i> Create Product</a>
                                     </div>
                                 </div>
                             </div>

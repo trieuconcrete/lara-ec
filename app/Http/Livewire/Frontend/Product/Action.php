@@ -2,29 +2,31 @@
 
 namespace App\Http\Livewire\Frontend\Product;
 
+use App\Constants;
 use App\Models\Cart;
+use App\Models\Color;
+use App\Models\ProductVariant;
 use Livewire\Component;
 use App\Models\WishList;
 use Illuminate\Support\Facades\Auth;
 
 class Action extends Component
 {
-    public $product, $productId, $colorId, $productColorQtyCheck = true, $quantityCount = 1;
+    public $product, $productId, $colorId, $size, $quantityCount = 1;
 
     public function mount($product)
     {
         $this->product = $product;
     }
 
-    public function colorSelected($colorId)
+    public function selectColor($colorId)
     {
-        $this->productColorQtyCheck = true;
         $this->colorId = $colorId;
-        $productColor = $this->product->productColors()->where('color_id', $this->colorId)->first();
-        $productColorQty = $productColor->quantity;
-        if (!$productColorQty) {
-            $this->productColorQtyCheck = false;
-        }
+    }
+
+    public function selectSize($size)
+    {
+        $this->size = $size;
     }
 
     public function productQuantity($option)
@@ -75,16 +77,38 @@ class Action extends Component
         $this->productId = $productId;
         if (Auth::check()) {
             if ($this->product->where('id', $this->productId)->where('status', 1)->exists()) {
+                if (!$this->colorId) {
+                    $this->dispatchBrowserEvent('message', [
+                        'text' => 'Please select a Color!',
+                        'type' => 'warning',
+                        'status' => 404
+                    ]);
+                    return ;
+                }
+                if (!$this->size) {
+                    $this->dispatchBrowserEvent('message', [
+                        'text' => 'Please select a Size!',
+                        'type' => 'warning',
+                        'status' => 404
+                    ]);
+                    return ;
+                }
                 // check product color & product quantity
-                if ($this->product->quantity > 0) {
-                    if ($this->product->quantity < $this->quantityCount) {
+                $productVariant = ProductVariant::where([
+                    'product_id' => $this->productId,
+                    'color_id' => $this->colorId,
+                    'size' => $this->size,
+                ])->first();
+                if ($productVariant && $productVariant->quantity > 0) {
+                    if ($productVariant->quantity < $this->quantityCount) {
                         $message = 'Only ' . $this->product->quantity . ' Quantity Available';
                         $type = 'warning';
                         $status = 404;
                     } else {
                         if (Cart::where([
                             'user_id' => auth()->user()->id,
-                            'product_id' => $this->productId
+                            'product_id' => $this->productId,
+                            'product_variant_id' => $productVariant->id
                         ])->exists()) {
                             $message = 'Product Already Added to cart';
                             $type = 'warning';
@@ -93,7 +117,7 @@ class Action extends Component
                             Cart::create([
                                 'user_id' => auth()->user()->id,
                                 'product_id' => $this->productId,
-                                'product_color_id' => $this->colorId,
+                                'product_variant_id' => $productVariant->id,
                                 'quantity' => $this->quantityCount
                             ]);
                             $message = 'Product Added to cart Successfuly';
@@ -126,8 +150,12 @@ class Action extends Component
 
     public function render()
     {
+        $colors = Color::get();
+        $sizes = Constants::PRODUCT_SIZES;
         return view('livewire.frontend.product.action', [
-            'product' => $this->product
+            'product' => $this->product,
+            'colors' => $colors,
+            'sizes' => $sizes
         ]);
     }
 }

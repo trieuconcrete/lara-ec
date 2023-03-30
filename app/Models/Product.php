@@ -94,11 +94,6 @@ class Product extends Model
         return $this->discount ? '↓'.$this->discount.'%' : null;
     }
 
-    // protected function productRating(): Attribute
-    // {
-    //     return $this->product_reviews_avg;
-    // }
-
     protected static function booted()
     {
         static::creating(function ($model) {
