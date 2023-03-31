@@ -3,6 +3,7 @@
 namespace App\Providers;
  
 use App\View\Composers\CategoryComposer;
+use App\View\Composers\NewProductComposer;
 use Illuminate\Support\Facades;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\View\View;
