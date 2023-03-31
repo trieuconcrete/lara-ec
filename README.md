@@ -8,6 +8,8 @@
 </p>
 
 ## About Project
+URL: https://laraweb.top/
+Tech stack: Laravel, Livewire, AWS(lightsail), CICD(github action)
 
 ## Setup docker
 1. docker-compose build
