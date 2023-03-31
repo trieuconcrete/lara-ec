@@ -5,7 +5,7 @@
                 <div class="col-lg-9">
                     <div class="shop-product-fillter">
                         <div class="totall-product">
-                            <p> We found <strong class="text-brand">{{ $products->total() }}</strong> items for you!</p>
+                            <p> We found <strong class="text-brand">{{ number_format($products->total()) }}</strong> items for you!</p>
                         </div>
                         <div class="sort-by-product-area">
                             <div class="sort-by-cover mr-10">
@@ -141,42 +141,17 @@
                             <h5 class="widget-title mb-10">New products</h5>
                             <div class="bt-1 border-color-1"></div>
                         </div>
+                        @foreach($new_products as $product)
                         <div class="single-post clearfix">
                             <div class="image">
-                                <img src="{{ asset('frontend/assets/imgs/shop/thumbnail-3.jpg') }}" alt="#">
+                                <img src="{{ $product->getImage() }}" alt="#">
                             </div>
                             <div class="content pt-10">
-                                <h5><a href="#">Chen Cardigan</a></h5>
-                                <p class="price mb-0 mt-5">$99.50</p>
-                                <div class="product-rate">
-                                    <div class="product-rating" style="width:90%"></div>
-                                </div>
+                                <h5><a href="{{ route('frontend.product.detail', $product->id) }}">{{ $product->name }}</a></h5>
+                                <p class="price mb-0 mt-5">${{ number_format($product->selling_price) }}</p>
                             </div>
                         </div>
-                        <div class="single-post clearfix">
-                            <div class="image">
-                                <img src="{{ asset('frontend/assets/imgs/shop/thumbnail-4.jpg') }}" alt="#">
-                            </div>
-                            <div class="content pt-10">
-                                <h6><a href="#">Chen Sweater</a></h6>
-                                <p class="price mb-0 mt-5">$89.50</p>
-                                <div class="product-rate">
-                                    <div class="product-rating" style="width:80%"></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="single-post clearfix">
-                            <div class="image">
-                                <img src="{{ asset('frontend/assets/imgs/shop/thumbnail-5.jpg') }}" alt="#">
-                            </div>
-                            <div class="content pt-10">
-                                <h6><a href="#">Colorful Jacket</a></h6>
-                                <p class="price mb-0 mt-5">$25</p>
-                                <div class="product-rate">
-                                    <div class="product-rating" style="width:60%"></div>
-                                </div>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
                     <div class="banner-img wow fadeIn mb-45 animated d-lg-block d-none">
                         <img src="{{ asset('frontend/assets/imgs/banner/banner-11.jpg') }}" alt="">

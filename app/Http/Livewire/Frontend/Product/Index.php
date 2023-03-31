@@ -98,9 +98,11 @@ class Index extends Component
             });
         })->paginate(18);
         $this->brands = Brand::where('status', 1)->get();
+        $new_products = Product::with('productImages')->where('status', 1)->orderBy('created_at', 'DESC')->take(3)->get();
         return view('livewire.frontend.product.index', [
             'products' => $this->products,
-            'brands' => $this->brands
+            'brands' => $this->brands,
+            'new_products' => $new_products
         ]);
     }
 }
