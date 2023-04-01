@@ -35,7 +35,7 @@ class SocialController extends Controller
                 Auth::login($finduser);
                 return redirect()->intended('/');
             } else {
-                $newUser = User::updateOrCreate(['email' => $user->email],[
+                $newUser = User::updateOrCreate(['email' => $user->email], [
                         'name' => $user->name,
                         'facebook_id'=> $user->id,
                         'password' => encrypt('password@dummy')
