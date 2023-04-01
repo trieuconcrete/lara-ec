@@ -59,7 +59,7 @@ class Review extends Component
     public function setValueInput()
     {
         $user = Auth::user();
-        $this->full_name = $user ? $user->userDetail->full_name : null;
+        $this->full_name = $user ? optional($user->userDetail)->full_name : null;
         $this->email = $user ? $user->email : null;
     }
 
