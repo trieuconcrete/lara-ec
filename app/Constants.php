@@ -16,7 +16,7 @@ class Constants
         "vnp_CurrCode" => "VND",
         "vnp_Locale" => 'vn',
         "vnp_OrderType" => 200000,
-        "vnp_ReturnUrl" => "http://localhost/mypage/return-vnpay",
+        "vnp_ReturnUrl" => "https://laraweb.top/mypage/return-vnpay",
     ];
     public const VNPAY_STATUS_CODE_OK = "00";
 

@@ -38,6 +38,8 @@ class Product extends Model
         'sku'
     ];
 
+    protected $with = ['category'];
+
     public function category()
     {
         return $this->belongsTo(Category::class);
@@ -66,6 +68,11 @@ class Product extends Model
     public function productVariants()
     {
         return $this->hasMany(ProductVariant::class, 'product_id', 'id');
+    }
+
+    public function orderItems()
+    {
+        return $this->hasMany(OrderItem::class, 'product_id', 'id');
     }
 
     public function getImage($index = 0)
