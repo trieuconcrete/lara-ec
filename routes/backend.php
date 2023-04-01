@@ -18,4 +18,5 @@ Route::get('dashboard', 'DashboardController@index')->name('dashboard');
 Route::controller(ProductController::class)->prefix('products')->name('product.')->group(function () {
     Route::get('/', 'index')->name('index');
     Route::get('create', 'create')->name('create');
+    Route::get('{product}/edit', 'edit')->name('edit');
 });

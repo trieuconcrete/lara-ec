@@ -26,6 +26,7 @@
     <!-- custom Css-->
     <link href="{{ asset('backend/assets/css/custom.min.css') }}" rel="stylesheet" type="text/css" />
 
+    @livewireStyles
     @stack('style')
 </head>
 
@@ -123,6 +124,8 @@
     <!-- App js -->
     <script src="{{ asset('backend/assets/js/app.js') }}"></script>
 
+
+    @livewireScripts
     @stack('script')
 </body>
 

@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     'dashboard'     => 'Dashboard',
     'shop'          => 'Shop',
     'products'      => 'Products',
@@ -12,5 +11,4 @@ return [
     'blog'          => 'Blog',
     'posts'         => 'Posts',
     'authors'       => 'Authors',
-
 ];

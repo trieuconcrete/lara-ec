@@ -30,6 +30,13 @@ class User extends Authenticatable
     ];
 
     /**
+     * The relationships that should always be loaded.
+     *
+     * @var array
+     */
+    protected $with = ['userDetail'];
+
+    /**
      * The attributes that should be hidden for serialization.
      *
      * @var array<int, string>
@@ -65,7 +72,7 @@ class User extends Authenticatable
 
     public function getAvatarAttribute()
     {
-        $url = optional($this->userDetail)->avatar ? Storage::disk('local')->url($this->userDetail->avatar) : 'no_img.png';
+        $url = optional($this->userDetail)->avatar ? Storage::disk('local')->url($this->userDetail->avatar) : 'no_avatar.png';
         return asset($url);
     }
 }
