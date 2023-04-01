@@ -16,7 +16,7 @@ class Constants
         "vnp_CurrCode" => "VND",
         "vnp_Locale" => 'vn',
         "vnp_OrderType" => 200000,
-        "vnp_ReturnUrl" => env('APP_URL')."/mypage/return-vnpay",
+        "vnp_ReturnUrl" => env('APP_URL')."/mypage/return-vnpay"
     ];
     public const VNPAY_STATUS_CODE_OK = "00";
 
