@@ -10,7 +10,7 @@
                         <div class="d-flex align-items-lg-center flex-lg-row flex-column">
                             <div class="flex-grow-1">
                                 <h4 class="fs-16 mb-1">{{ greeting() }}, {{ auth()->user()->name }}!</h4>
-                                <p class="text-muted mb-0">{{ now()->format('d M, Y H:i') }}</p>
+                                <p class="text-muted mb-0">{{ now()->format('D d M, Y H:i') }}</p>
                             </div>
                             <div class="mt-3 mt-lg-0">
                                 <form action="javascript:void(0);">

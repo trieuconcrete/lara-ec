@@ -7,7 +7,7 @@
                 <img src="{{ asset('backend/assets/images/logo-sm.png') }}" alt="" height="22">
             </span>
             <span class="logo-lg">
-                <img src="{{ asset('backend/assets/images/logo-dark.png') }}" alt="" height="17">
+                <img src="{{ asset('assets/images/logo.png') }}" alt="" height="47">
             </span>
         </a>
         <!-- Light Logo-->
@@ -16,7 +16,7 @@
                 <img src="{{ asset('backend/assets/images/logo-sm.png') }}" alt="" height="22">
             </span>
             <span class="logo-lg">
-                <img src="{{ asset('backend/assets/images/logo-light.png') }}" alt="" height="17">
+                <img src="{{ asset('assets/images/logo.png') }}" alt="" height="47">
             </span>
         </a>
         <button type="button" class="btn btn-sm p-0 fs-20 header-item float-end btn-vertical-sm-hover"
@@ -77,6 +77,23 @@
                             </li>
                             <li class="nav-item">
                                 <a href="#" class="nav-link" data-key="t-authors"> {{ __('menu.authors') }} </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link menu-link" href="#sidebarSiteSettings" data-bs-toggle="collapse" role="button"
+                        aria-expanded="false" aria-controls="sidebarSiteSettings">
+                        <i class="ri-settings-3-line"></i> <span data-key="t-siteSettings">{{ __('menu.site_setting') }}</span>
+                    </a>
+                    <div class="collapse menu-dropdown" id="sidebarSiteSettings">
+                        <ul class="nav nav-sm flex-column">
+                            <li class="nav-item">
+                                <a href="#" class="nav-link" data-key="t-sliders"> {{ __('menu.sliders') }}
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link" data-key="t-settings"> {{ __('menu.settings') }} </a>
                             </li>
                         </ul>
                     </div>

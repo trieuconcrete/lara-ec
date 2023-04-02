@@ -11,4 +11,7 @@ return [
     'blog'          => 'Blog',
     'posts'         => 'Posts',
     'authors'       => 'Authors',
+    'site_setting'  => 'Website Setting',
+    'sliders'       => 'Sliders',
+    'settings'      => 'Settings',
 ];
