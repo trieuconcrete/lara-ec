@@ -7373,6 +7373,7 @@ span.fi-rs-apps {
 .categori-dropdown-active-large.open {
     opacity: 1;
     visibility: visible;
+    z-index: 99999;
 }
 
 .categori-dropdown-active-small {

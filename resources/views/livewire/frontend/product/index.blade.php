@@ -19,11 +19,9 @@
                                 </div>
                                 <div class="sort-by-dropdown">
                                     <ul>
-                                        <li><a class="active" href="#">50</a></li>
+                                        <li><a href="#">30</a></li>
+                                        <li><a href="#">50</a></li>
                                         <li><a href="#">100</a></li>
-                                        <li><a href="#">150</a></li>
-                                        <li><a href="#">200</a></li>
-                                        <li><a href="#">All</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -33,13 +31,13 @@
                                         <span><i class="fi-rs-apps-sort"></i>Sort by:</span>
                                     </div>
                                     <div class="sort-by-dropdown-wrap">
-                                        <span> Featured <i class="fi-rs-angle-small-down"></i></span>
+                                        <span> Price <i class="fi-rs-angle-small-down"></i></span>
                                     </div>
                                 </div>
                                 <div class="sort-by-dropdown">
                                     <ul>
-                                        <li><a wire:click="sortBy('DESC')">Price: Low to High</a></li>
-                                        <li><a wire:click="sortBy('ASC')">Price: High to Low</a></li>
+                                        <li><a wire:click="sortBy('ASC')">ASC</a></li>
+                                        <li><a wire:click="sortBy('DESC')">DESC</a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -103,23 +101,11 @@
                         <div class="col-lg-12 col-mg-6"></div>
                         <div class="col-lg-12 col-mg-6"></div>
                     </div>
-                    <!-- Fillter By Price -->
+                    <!-- FILTER By Price -->
                     <div class="sidebar-widget price_range range mb-30">
                         <div class="widget-header position-relative mb-20 pb-10">
-                            <h5 class="widget-title mb-10">Fill by price</h5>
+                            <h5 class="widget-title mb-10">FILTER</h5>
                             <div class="bt-1 border-color-1"></div>
-                        </div>
-                        <div class="price-filter">
-                            <div class="price-filter-inner">
-                                <div id="slider-range"></div>
-                                <div class="price_slider_amount">
-                                    <div class="label-input">
-                                        <span>Range:</span><input type="text" id="amount" name="price" placeholder="Add Your Price">
-                                    </div>
-                                    <input type="text" wire:model.defer="priceFrom" name="priceFrom" value="100" class="hidden">
-                                    <input type="text" wire:model.defer="priceTo" name="priceTo" value="500" class="hidden">
-                                </div>
-                            </div>
                         </div>
                         <div class="list-group">
                             <div class="list-group-item mb-10 mt-10">
