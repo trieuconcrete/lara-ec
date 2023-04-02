@@ -109,7 +109,9 @@ class Index extends Component
     public function render()
     {
         $this->keyword = is_array($this->keyword) ? implode(' ', $this->keyword) : $this->keyword;
+        $this->perPage = is_array($this->perPage) ? implode(' ', $this->perPage) : $this->perPage;
         $this->brandInputs = !is_array($this->brandInputs) ? [] : $this->brandInputs;
+
         $this->products = Product::with('productImages', 'category', 'brand')
         ->when($this->keyword, function($query) {
             $query->where('name', 'like', '%'.$this->keyword.'%')
