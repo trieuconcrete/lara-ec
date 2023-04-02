@@ -6,7 +6,7 @@
             <span class="pro-count blue">{{ $cartCount }}</span>
             @endif
         </a>
-        @if($carts)
+        @if($carts->isNotEmpty())
         <div class="cart-dropdown-wrap cart-dropdown-hm2">
             <ul>
                 @foreach($carts as $item)
