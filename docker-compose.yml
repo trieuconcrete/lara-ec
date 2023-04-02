@@ -17,20 +17,30 @@ services:
         networks:
             - laravel
     app:
-        build: docker
+        build: ./docker/app
         volumes:
             - ./:/var/www/:cached
-        working_dir: /var/www/lara-ec
+        working_dir: /var/www
         environment:
-            APP_URL: http://localhost
-            MIX_APP_URL_API: http://localhost/api
+            APP_URL: http://laraweb.test
+            MIX_APP_URL_API: http://laraweb.test/api
         depends_on:
             - db
+            - redis
         networks:
             - laravel
+        container_name: "laraweb-app"
+    redis:
+        image: redis:latest
+        volumes:
+            - ./docker/redis/data:/data
+        ports:
+            - 6379:6379
+        command: redis-server --appendonly yes
+        container_name: "laraweb-redis"
     db:
         platform: linux/x86_64
-        image: mysql:5.7
+        image: mysql:8.0
         environment:
             MYSQL_ROOT_PASSWORD: root
             MYSQL_DATABASE: lara_db
@@ -43,6 +53,7 @@ services:
             - ./docker/mysql/mysql_confd:/etc/mysql/conf.d:cached
         networks:
             - laravel
+        container_name: "laraweb-db"
     phpmyadmin:
         image: phpmyadmin/phpmyadmin
         container_name: "phpadmin_lara"
