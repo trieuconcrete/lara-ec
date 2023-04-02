@@ -24,29 +24,29 @@ class UserController extends Controller
 
     public function update(UserProfileRequest $request)
     {
-        $user = User::with('userDetail')->find(auth()->user()->id);
-        $data = [
-            'first_name' => $request->first_name,
-            'last_name' => $request->last_name,
-            'address' => $request->address,
-            'city' => $request->city,
-            'state' => $request->state,
-            'state' => $request->state,
-            'country' => $request->country,
-            'zipcode' => $request->zipcode,
-            'phone' => $request->phone,
-        ];
-        
-        $user->userDetail()->updateOrCreate(['user_id' => auth()->user()->id], $data);
-        if ($request->is_update_password) {
-            $currentPassword = Hash::check($request->current_password, auth()->user()->password);
-            if ($currentPassword) {
+        try {
+            $user = User::with('userDetail')->find(auth()->user()->id);
+            $data = [
+                'first_name' => $request->first_name,
+                'last_name' => $request->last_name,
+                'address' => $request->address,
+                'city' => $request->city,
+                'state' => $request->state,
+                'state' => $request->state,
+                'country' => $request->country,
+                'zipcode' => $request->zipcode,
+                'phone' => $request->phone,
+            ];
+            
+            $user->userDetail()->updateOrCreate(['user_id' => auth()->user()->id], $data);
+            if ($request->is_update_password) {
                 $user->update(['password' => Hash::make($request->password)]);
                 Auth::logout();
-            } else {
-                return redirect()->back()->with('message', 'Current Password does not match with old Password');
             }
+            return redirect()->back()->with('message', 'User Updated Successfully');
+        } catch (\Exception $e) {
+            \Log::error($e->getMessage());
+            return redirect()->back()->withInput();
         }
-        return redirect()->back()->with('message', 'User Updated Successfully');
     }
 }

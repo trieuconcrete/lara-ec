@@ -28,7 +28,6 @@ class UserProfileRequest extends FormRequest
             'last_name' => 'required|string'
         ];
         if ($this->is_update_password) {
-            $rule['current_password'] = ['required', 'string'];
             $rule['password'] = ['required', 'string', 'min:8', 'confirmed'];
         }
         return $rule;

@@ -69,7 +69,6 @@
         </div>
     </section>
     <section class="product-tabs section-padding position-relative wow fadeIn animated" wire:ignore>
-        <div class="bg-square"></div>
         <div class="container">
             <h3 class="section-title mb-20"><span>Trending</span> Products</h3>
             <div class="row product-grid-4">

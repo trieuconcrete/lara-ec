@@ -1,4 +1,4 @@
-<div wire:ignore>
+<div>
     <div class="attr-detail attr-color mb-15">
         @if ($colors)
             <strong class="mr-10">Color</strong>

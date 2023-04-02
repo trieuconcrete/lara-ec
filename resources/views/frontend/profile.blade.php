@@ -68,10 +68,6 @@
                     </div>
                     <div id="collapsePassword" class="row collapse in @error('password') show @enderror">
                         <div class="col-md-4 form-group">
-                            <input type="password" placeholder="Current Password" name="current_password">
-                            @error('current_password')<small class="text-danger">{{ $message }}</small>@enderror
-                        </div>
-                        <div class="col-md-4 form-group">
                             <input type="password" placeholder="Password" name="password">
                             @error('password')<small class="text-danger">{{ $message }}</small>@enderror
                         </div>

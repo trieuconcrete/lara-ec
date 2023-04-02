@@ -6605,7 +6605,6 @@ h6.post-title {
 
 .header-style-1 .header-top-ptb-1 {
     padding: 13px 0;
-    border-bottom: 3px solid #39b4ac;
     background-color: #d8f4e2;
     background-image: none;
 }
@@ -10138,8 +10137,7 @@ span.fi-rs-apps {
 
 .header-style-1 .header-top-ptb-1 {
     padding: 13px 0;
-    border-bottom: 1px solid #737975;
-    background-color: #f4f4d8;
+    background-color: #f3fbf5;
     background-image: none;
 }
 
