@@ -16,13 +16,15 @@ class Index extends Component
 
     protected $paginationTheme = 'bootstrap';
 
-    public $productId, $category, $brandInputs = [], $sortPrice, $priceFrom = 100, $priceTo = 500, $keyword;
+    public $productId, $category, $brandInputs = [], $sortPrice, $priceFrom = 100, $priceTo = 500, $keyword, $perPage = 18, $page = 1;
     protected $products, $brands, $listeners = ['productListSearch' => 'searchProduct'];
 
     protected $queryString = [
         'brandInputs' => ['except' => '', 'as' => 'brand'],
         'category' => ['except' => '', 'as' => 'category'],
-        'keyword' => ['except' => '', 'as' => 'keyword']
+        'keyword' => ['except' => '', 'as' => 'keyword'],
+        'page' => ['except' => 1],
+        'perPage' => ['except' => 18, 'as' => 'per_page']
     ];
 
     public function searchProduct($keyword)
@@ -30,19 +32,44 @@ class Index extends Component
         $this->keyword = $keyword;
     }
 
-    public function sortBy($sortPrice)
+    public function updatePerPage18()
     {
-        $this->sortPrice = $sortPrice;
+        $this->perPage = 18;
+    }
+
+    public function updatePerPage50()
+    {
+        $this->perPage = 50;
+    }
+
+    public function updatePerPage100()
+    {
+        $this->perPage = 100;
+    }
+
+    public function sortPriceASC()
+    {
+        $this->sortPrice('ASC');
+    }
+
+    public function sortPriceDESC()
+    {
+        $this->sortPrice('DESC');
+    }
+
+    public function sortPrice($order)
+    {
+        $this->sortPrice = $order;
         $this->queryString = array_merge([
-            'sortPrice' => ['except' => '', 'as' => 'price-sort']
+            'sortPrice' => ['except' => '', 'as' => 'sort_price']
         ], $this->queryString);
     }
 
     public function filterProduct()
     {
         $this->queryString = array_merge([
-            'priceFrom' => ['except' => '', 'as' => 'price-from'],
-            'priceTo' => ['except' => '', 'as' => 'price-to']
+            'priceFrom' => ['except' => '', 'as' => 'from_price'],
+            'priceTo' => ['except' => '', 'as' => 'to_price']
         ], $this->queryString);
     }
 
@@ -97,7 +124,7 @@ class Index extends Component
             $query->whereHas('category', function($where) {
                 $where->where('slug', $this->category);
             });
-        })->paginate(18);
+        })->paginate($this->perPage);
         $this->brands = Brand::where('status', 1)->get();
         $new_products = Product::with('productImages')->where('status', 1)->orderBy('created_at', 'DESC')->take(3)->get();
         return view('livewire.frontend.product.index', [
