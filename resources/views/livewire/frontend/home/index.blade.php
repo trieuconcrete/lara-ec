@@ -16,7 +16,7 @@
                         </div>
                         <div class="col-lg-7 col-md-6">
                             <div class="single-slider-img single-slider-img-1">
-                                <img class="animated slider-1-1" src="{{ $slider->getImage() }}" alt="">
+                                <img class="animated slider-1-1" src="{{ $slider->getImage() }}" alt="" loading="lazy">
                             </div>
                         </div>
                     </div>
@@ -31,37 +31,37 @@
             <div class="row">
                 <div class="col-lg-2 col-md-4 mb-md-3 mb-lg-0">
                     <div class="banner-features wow fadeIn animated hover-up">
-                        <img src="{{ asset('frontend/assets/imgs/theme/icons/feature-1.png') }}" alt="">
+                        <img src="{{ asset('frontend/assets/imgs/theme/icons/feature-1.png') }}" alt="" loading="lazy">
                         <h4 class="bg-1">Free Shipping</h4>
                     </div>
                 </div>
                 <div class="col-lg-2 col-md-4 mb-md-3 mb-lg-0">
                     <div class="banner-features wow fadeIn animated hover-up">
-                        <img src="{{ asset('frontend/assets/imgs/theme/icons/feature-2.png') }}" alt="">
+                        <img src="{{ asset('frontend/assets/imgs/theme/icons/feature-2.png') }}" alt="" loading="lazy">
                         <h4 class="bg-3">Online Order</h4>
                     </div>
                 </div>
                 <div class="col-lg-2 col-md-4 mb-md-3 mb-lg-0">
                     <div class="banner-features wow fadeIn animated hover-up">
-                        <img src="{{ asset('frontend/assets/imgs/theme/icons/feature-3.png') }}" alt="">
+                        <img src="{{ asset('frontend/assets/imgs/theme/icons/feature-3.png') }}" alt="" loading="lazy">
                         <h4 class="bg-2">Save Money</h4>
                     </div>
                 </div>
                 <div class="col-lg-2 col-md-4 mb-md-3 mb-lg-0">
                     <div class="banner-features wow fadeIn animated hover-up">
-                        <img src="{{ asset('frontend/assets/imgs/theme/icons/feature-4.png') }}" alt="">
+                        <img src="{{ asset('frontend/assets/imgs/theme/icons/feature-4.png') }}" alt="" loading="lazy">
                         <h4 class="bg-4">Promotions</h4>
                     </div>
                 </div>
                 <div class="col-lg-2 col-md-4 mb-md-3 mb-lg-0">
                     <div class="banner-features wow fadeIn animated hover-up">
-                        <img src="{{ asset('frontend/assets/imgs/theme/icons/feature-5.png') }}" alt="">
+                        <img src="{{ asset('frontend/assets/imgs/theme/icons/feature-5.png') }}" alt="" loading="lazy">
                         <h4 class="bg-5">Happy Sell</h4>
                     </div>
                 </div>
                 <div class="col-lg-2 col-md-4 mb-md-3 mb-lg-0">
                     <div class="banner-features wow fadeIn animated hover-up">
-                        <img src="{{ asset('frontend/assets/imgs/theme/icons/feature-6.png') }}" alt="">
+                        <img src="{{ asset('frontend/assets/imgs/theme/icons/feature-6.png') }}" alt="" loading="lazy">
                         <h4 class="bg-6">24/7 Support</h4>
                     </div>
                 </div>
@@ -79,8 +79,8 @@
                         <div class="product-img-action-wrap">
                             <div class="product-img product-img-zoom">
                                 <a href="{{ route('frontend.product.detail', $val->id) }}">
-                                    <img class="default-img" src="{{ $val->getImage() }}" alt="">
-                                    <img class="hover-img" src="{{ $val->getImage(1) }}" alt="">
+                                    <img class="default-img" src="{{ $val->getImage() }}" alt="{{ $val->slug }}" loading="lazy">
+                                    <img class="hover-img" src="{{ $val->getImage(1) }}" alt="{{ $val->slug }}" loading="lazy">
                                 </a>
                             </div>
                             <div class="product-action-1">
@@ -118,7 +118,7 @@
     <section class="banner-2 section-padding pb-0">
         <div class="container">
             <div class="banner-img banner-big wow fadeIn animated f-none">
-                <img src="{{ asset('frontend/assets/imgs/banner/banner-4.png') }}" alt="">
+                <img src="{{ asset('frontend/assets/imgs/banner/banner-4.png') }}" alt="" loading="lazy">
                 <div class="banner-text d-md-block d-none">
                     <h4 class="mb-15 mt-40 text-brand">Repair Services</h4>
                     <h1 class="fw-600 mb-20">We're an Apple <br>Authorised Service Provider</h1>
@@ -136,7 +136,7 @@
                     @foreach($categories as $cat)
                     <div class="card-1">
                         <figure class=" img-hover-scale overflow-hidden">
-                            <a href="{{ route('frontend.product.list', ['category' => $cat->slug]) }}"><img src="{{ $cat->getImage() }}" alt=""></a>
+                            <a href="{{ route('frontend.product.list', ['category' => $cat->slug]) }}"><img src="{{ $cat->getImage() }}" alt="" loading="lazy"></a>
                         </figure>
                         <h5><a href="{{ route('frontend.product.list', ['category' => $cat->slug]) }}">{{ $cat->name }}</a></h5>
                     </div>
@@ -150,7 +150,7 @@
             <div class="row">
                 <div class="col-lg-4 col-md-6">
                     <div class="banner-img wow fadeIn animated">
-                        <img src="{{ asset('frontend/assets/imgs/banner/banner-1.png') }}" alt="">
+                        <img src="{{ asset('frontend/assets/imgs/banner/banner-1.png') }}" alt="" loading="lazy">
                         <div class="banner-text">
                             <span>Smart Offer</span>
                             <h4>Save 20% on <br>Woman Bag</h4>
@@ -160,7 +160,7 @@
                 </div>
                 <div class="col-lg-4 col-md-6">
                     <div class="banner-img wow fadeIn animated">
-                        <img src="{{ asset('frontend/assets/imgs/banner/banner-2.png') }}" alt="">
+                        <img src="{{ asset('frontend/assets/imgs/banner/banner-2.png') }}" alt="" loading="lazy">
                         <div class="banner-text">
                             <span>Discount</span>
                             <h4>Great Summer <br>Collection</h4>
@@ -170,7 +170,7 @@
                 </div>
                 <div class="col-lg-4 d-md-none d-lg-flex">
                     <div class="banner-img wow fadeIn animated  mb-sm-0">
-                        <img src="{{ asset('frontend/assets/imgs/banner/banner-3.png') }}" alt="">
+                        <img src="{{ asset('frontend/assets/imgs/banner/banner-3.png') }}" alt="" loading="lazy">
                         <div class="banner-text">
                             <span>New Arrivals</span>
                             <h4>Shop Today’s <br>Deals & Offers</h4>
@@ -192,8 +192,8 @@
                         <div class="product-img-action-wrap">
                             <div class="product-img product-img-zoom">
                                 <a href="{{ route('frontend.product.detail', $item->id) }}">
-                                    <img class="default-img" src="{{ $item->getImage() }}" alt="">
-                                    <img class="hover-img" src="{{ $item->getImage(1) }}" alt="">
+                                    <img class="default-img" src="{{ $item->getImage() }}" alt="" loading="lazy">
+                                    <img class="hover-img" src="{{ $item->getImage(1) }}" alt="" loading="lazy">
                                 </a>
                             </div>
                             <div class="product-action-1">
@@ -237,7 +237,7 @@
                 <div class="carausel-6-columns text-center" id="carausel-6-columns-3">
                     @foreach($brands as $brand)
                     <div class="brand-logo">
-                        <img class="img-grey-hover" src="{{ $brand->getImage() }}" alt="">
+                        <img class="img-grey-hover" src="{{ $brand->getImage() }}" alt="" loading="lazy">
                     </div>
                     @endforeach
                 </div>

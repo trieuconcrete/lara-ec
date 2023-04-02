@@ -63,9 +63,9 @@
                                             <div class="product-img-action-wrap">
                                                 <div class="product-img product-img-zoom">
                                                     <a href="{{ route('frontend.product.detail', $val->id) }}">
-                                                        <img class="default-img" src="{{ $val->getImage() }}"
+                                                        <img class="default-img" src="{{ $val->getImage() }}" loading="lazy"
                                                             alt="">
-                                                        <img class="hover-img" src="{{ $val->getImage(1) }}"
+                                                        <img class="hover-img" src="{{ $val->getImage(1) }}" loading="lazy"
                                                             alt="">
                                                     </a>
                                                 </div>
@@ -157,7 +157,7 @@
                         @foreach ($new_products as $product)
                             <div class="single-post clearfix">
                                 <div class="image">
-                                    <img src="{{ $product->getImage() }}" alt="#">
+                                    <img src="{{ $product->getImage() }}" alt="#" loading="lazy">
                                 </div>
                                 <div class="content pt-10">
                                     <h5><a
@@ -169,7 +169,7 @@
                         @endforeach
                     </div>
                     <div class="banner-img wow fadeIn mb-45 animated d-lg-block d-none">
-                        <img src="{{ asset('frontend/assets/imgs/banner/banner-11.jpg') }}" alt="">
+                        <img src="{{ asset('frontend/assets/imgs/banner/banner-11.jpg') }}" alt="" loading="lazy">
                         <div class="banner-text">
                             <span>Women Zone</span>
                             <h4>Save 17% on <br>Office Dress</h4>
