@@ -28,14 +28,18 @@ class FrontendController extends Controller
      */
     public function getProductDetail($id)
     {
-        $product = Product::with('category', 'productVariants', 'productImages', 'productReviews', 'productReviews.user', 'productReviews.user.userDetail')
-        ->withCount('productReviews as review_count')
-        ->withAvg(['productReviews as product_rating' => fn($query) => $query->where('point', '<>', 0)], 'point')
-        ->with(['category.products' => function($query) use ($id) {
-            return $query->with('productImages')
-            ->where('id', '<>', $id)->limit(8);
-        }])->find($id);
-        return view('frontend.product_detail', compact('product'));
+        try {
+            $product = Product::with('category', 'productVariants', 'productImages', 'productReviews', 'productReviews.user', 'productReviews.user.userDetail')
+                ->withCount('productReviews as review_count')
+                ->withAvg(['productReviews as product_rating' => fn($query) => $query->where('point', '<>', 0)], 'point')
+                ->with(['category.products' => function($query) use ($id) {
+                    return $query->with('productImages')
+                    ->where('id', '<>', $id)->limit(8);
+                }])->find($id);
+            return view('frontend.product_detail', compact('product'));
+        } catch(\Exception $e) {
+            abort(404);
+        }
     }
 
     /**

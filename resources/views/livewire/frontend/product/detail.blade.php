@@ -16,7 +16,7 @@
                                                 <img src="{{ $image->getImage() }}" alt="product image">
                                             </figure>
                                             @endforeach
-                                            @else
+                                        @else
                                             <figure class="border-radius-10">
                                                 <img src="{{ $product->getImage() }}" alt="product image">
                                             </figure>
@@ -28,7 +28,7 @@
                                             @foreach($product->productImages as $image)
                                             <div><img src="{{ $image->getImage() }}" alt="product image"></div>
                                             @endforeach
-                                            @else
+                                        @else
                                             <figure class="border-radius-10">
                                                 <img src="{{ $product->getImage() }}" alt="product image">
                                             </figure>
