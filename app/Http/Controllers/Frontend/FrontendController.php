@@ -35,7 +35,7 @@ class FrontendController extends Controller
                 ->with(['category.products' => function($query) use ($id) {
                     return $query->with('productImages')
                     ->where('id', '<>', $id)->limit(8);
-                }])->find($id);
+                }])->findOrFaild($id);
             return view('frontend.product_detail', compact('product'));
         } catch(\Exception $e) {
             abort(404);
