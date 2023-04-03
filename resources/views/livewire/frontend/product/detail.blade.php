@@ -10,7 +10,7 @@
                                     <span class="zoom-icon"><i class="fi-rs-search"></i></span>
                                     <!-- MAIN SLIDES -->
                                     <div class="product-image-slider">
-                                        @if ($product->productImages->isNotEmpty())
+                                        @if (optional($product->productImages))
                                             @foreach($product->productImages as $image)
                                             <figure class="border-radius-10">
                                                 <img src="{{ $image->getImage() }}" alt="product image">
@@ -24,7 +24,7 @@
                                     </div>
                                     <!-- THUMBNAILS -->
                                     <div class="slider-nav-thumbnails pl-15 pr-15">
-                                        @if ($product->productImages->isNotEmpty())
+                                        @if (optional($product->productImages))
                                             @foreach($product->productImages as $image)
                                             <div><img src="{{ $image->getImage() }}" alt="product image"></div>
                                             @endforeach

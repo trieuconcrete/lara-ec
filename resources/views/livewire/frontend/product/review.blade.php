@@ -10,7 +10,7 @@
                         <div class="single-comment justify-content-between d-flex">
                             <div class="user justify-content-between d-flex">
                                 <div class="thumb text-center">
-                                    <img src="{{ $review->user->avatar }}" alt="">
+                                    <img src="{{ optional($review->user)->avatar }}" alt="">
                                     <h6><a href="#">{{ $review->full_name }}</a></h6>
                                     <p class="font-xxs">Since 2012</p>
                                 </div>
