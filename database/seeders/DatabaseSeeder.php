@@ -15,15 +15,15 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call([
-            // UserDataSeeder::class,
-            // CategorySeeder::class,
-            // BrandDataSeeder::class,
-            // SliderDataSeeder::class,
-            // ColorDataSeeder::class,
-            // SettingSeeder::class,
-            // ProductDataSeeder::class,
-            // ProductVariantDataSeeder::class,
-            // OrderDataSeeder::class,
+            UserDataSeeder::class,
+            CategorySeeder::class,
+            BrandDataSeeder::class,
+            SliderDataSeeder::class,
+            ColorDataSeeder::class,
+            SettingSeeder::class,
+            ProductDataSeeder::class,
+            ProductVariantDataSeeder::class,
+            OrderDataSeeder::class,
             UpdateOrderDataSeeder::class,
             ProductReviewDataSeeder::class
         ]);
