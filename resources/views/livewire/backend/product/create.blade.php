@@ -1,3 +1,3 @@
 <div>
-    @livewire('backend.product.form', ['type' => $type])
+    @livewire('backend.product.form', ['formAction' => $formAction])
 </div>

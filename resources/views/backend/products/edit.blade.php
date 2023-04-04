@@ -34,7 +34,7 @@
         <!-- end page title -->
 
         <!-- Form -->
-        @livewire('backend.product.edit', ['type' => 2])
+        @livewire('backend.product.edit', ['formAction' => 'update'])
 
     </div>
     <!-- container-fluid -->

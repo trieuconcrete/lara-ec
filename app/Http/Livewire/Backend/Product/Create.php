@@ -6,11 +6,11 @@ use Livewire\Component;
 
 class Create extends Component
 {
-    public $type;
+    public $formAction;
 
-    public function mount($type)
+    public function mount($formAction)
     {
-        $this->type = $type;
+        $this->formAction = $formAction;
     }
 
     public function render()
