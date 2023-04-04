@@ -72,7 +72,7 @@
 
                                         <div class="mb-3">
                                             <label for="email" class="form-label">Email</label>
-                                            <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" id="email" placeholder="Enter email" value="{{ old('email') }}">
+                                            <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" id="email" placeholder="Enter email" value="demo-admin@gmail.com">
                                             
                                             @error('email')
                                                 <span class="invalid-feedback" role="alert">
@@ -87,7 +87,7 @@
                                             </div>
                                             <label class="form-label" for="password-input">Password</label>
                                             <div class="position-relative auth-pass-inputgroup mb-3">
-                                                <input type="password" name="password" class="form-control pe-5 password-input @error('email') is-invalid @enderror" placeholder="Enter password" id="password-input">
+                                                <input type="password" value="password@123" name="password" class="form-control pe-5 password-input @error('email') is-invalid @enderror" placeholder="Enter password" id="password-input">
                                                 <button class="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted password-addon" type="button" id="password-addon"><i class="ri-eye-fill align-middle"></i></button>
                                             </div>
                                             
@@ -114,9 +114,9 @@
                         </div>
                         <!-- end card -->
 
-                        <div class="mt-4 text-center">
+                        {{-- <div class="mt-4 text-center">
                             <p class="mb-0">admin@gmail.com/password@123</p>
-                        </div>
+                        </div> --}}
 
                     </div>
                 </div>
