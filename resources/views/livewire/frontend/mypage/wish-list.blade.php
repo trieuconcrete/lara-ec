@@ -14,32 +14,35 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($wishlist as $item)
-                                @if ($item->product)
+                                @foreach ($products as $prod)
                                 <tr>
                                     <td class="image product-thumbnail">
-                                        <img src="{{ $item->product->getImage() }}" alt="#">
+                                        <img src="{{ $prod->getImage() }}" alt="#">
                                     </td>
                                     <td class="product-name">
-                                        <a href="{{ route('frontend.product.detail', $item->product->id) }}">{{ $item->product->name }}</a>
+                                        <a href="{{ route('frontend.product.detail', $prod->slug) }}">{{ $prod->name }}</a>
                                     </td>
-                                    <td class="price" data-title="Price"><span>${{ $item->product->selling_price }}</span></td>
+                                    <td class="price" data-title="Price"><span>{{ money($prod->selling_price) }}</span></td>
                                     <td class="action" data-title="Remove"><a href="#" class="text-muted">
-                                        <span wire:click="removeWishlist({{ $item->id }})" wire:loading.remove wire:target="removeWishlist({{ $item->id }})">
+                                        <span wire:click="removeWishlist({{ $prod->id }})" wire:loading.remove wire:target="removeWishlist({{ $prod->id }})">
                                             <i class="fi-rs-trash text-red"></i></a>
                                         </span>
-                                        <span wire:loading wire:target="removeWishlist({{ $item->id }})">
+                                        <span wire:loading wire:target="removeWishlist({{ $prod->id }})">
+                                            Removing...
+                                        </span>
+                                    </td>
+                                </tr>
+                                @endforeach
+                                @if ($products)
+                                <tr>
+                                    <td colspan="4" class="text-end">
+                                        <a wire:click="removeAllWishlist()" wire:loading.remove wire:target="removeAllWishlist()" class="text-muted"> <i class="fi-rs-cross-small"></i> Clear wishlist</a>
+                                        <span wire:loading wire:target="removeAllWishlist()">
                                             Removing...
                                         </span>
                                     </td>
                                 </tr>
                                 @endif
-                                @endforeach
-                                <tr>
-                                    <td colspan="4" class="text-end">
-                                        <a href="#" class="text-muted"> <i class="fi-rs-cross-small"></i> Clear wishlist</a>
-                                    </td>
-                                </tr>
                             </tbody>
                         </table>
                     </div>

@@ -14,7 +14,6 @@ class Cart extends Model
         'user_id',
         'product_id',
         'product_variant_id',
-        'product_color_id',
         'quantity',
     ];
 
@@ -28,12 +27,7 @@ class Cart extends Model
         return $this->belongsTo(Product::class);
     }
 
-    public function productColor()
-    {
-        return $this->belongsTo(ProductColor::class, 'product_color_id');
-    }
-
-    public function ProductVariant()
+    public function productVariant()
     {
         return $this->belongsTo(ProductVariant::class);
     }

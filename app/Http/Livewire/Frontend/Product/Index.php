@@ -76,28 +76,18 @@ class Index extends Component
     public function addToWishList($productId)
     {
         $this->productId = $productId;
-        if (Auth::check()) {
-            if (WishList::where([
-                'user_id' => auth()->user()->id,
-                'product_id' => $this->productId
-            ])->exists()) {
-                $message = 'Already Added to wishlist';
-                $type = 'warning';
-                $status = 200;
-            } else {
-                $wishlist = WishList::create([
-                    'user_id' => auth()->user()->id,
-                    'product_id' => $this->productId
-                ]);
-                $this->emit('wishListAddedUpdate');
-                $message = 'Wishlist Added Successfuly';
-                $type = 'success';
-                $status = 200;
-            }
+        $wishlist = session()->get('wishlist');
+        if(isset($wishlist[$this->productId])) {
+            $message = 'Already Added to wishlist';
+            $type = 'warning';
+            $status = 200;
         } else {
-            $message = 'Please login to continue';
-            $type = 'message';
-            $status = 401;
+            $wishlist[$this->productId] = $this->productId;
+            session()->put('wishlist', $wishlist);
+            $this->emit('wishListAddedUpdate');
+            $message = 'Wishlist Added Successfuly';
+            $type = 'success';
+            $status = 200;
         }
         $this->dispatchBrowserEvent('message', [
             'text' => $message,
@@ -109,7 +99,7 @@ class Index extends Component
     public function render()
     {
         $this->keyword = is_array($this->keyword) ? implode(' ', $this->keyword) : $this->keyword;
-        $this->perPage = is_array($this->perPage) ? implode(' ', $this->perPage) : $this->perPage;
+        $this->perPage = is_array($this->perPage) ? implode(' ', $this->perPage) : abs($this->perPage);
         $this->brandInputs = !is_array($this->brandInputs) ? [] : $this->brandInputs;
 
         $this->products = Product::with('productImages', 'category', 'brand')

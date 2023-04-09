@@ -159,9 +159,9 @@
                 <td>
                     {{ $item->product->name }}
                 </td>
-                <td width="10%">${{ $item->price }}</td>
+                <td width="10%">{{ $item->price }}</td>
                 <td width="10%">{{ $item->quantity }}</td>
-                <td width="15%" class="fw-bold">${{ $item->sub_total_price }}</td>
+                <td width="15%" class="fw-bold">{{ $item->sub_total_price }}</td>
             </tr>
             @endforeach
         </tbody>

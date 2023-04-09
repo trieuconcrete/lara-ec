@@ -26,8 +26,9 @@
     <!-- custom Css-->
     <link href="{{ asset('backend/assets/css/custom.min.css') }}" rel="stylesheet" type="text/css" />
 
-    @livewireStyles
     @stack('style')
+
+    @livewireStyles
 </head>
 
 <body>
@@ -75,7 +76,6 @@
         <!-- Start right Content here -->
         <!-- ============================================================== -->
         <div class="main-content">
-
             @yield('content')
             <!-- End Page-content -->
 
@@ -85,8 +85,6 @@
 
     </div>
     <!-- END layout-wrapper -->
-
-
 
     <!--start back-to-top-->
     <button onclick="topFunction()" class="btn btn-danger btn-icon" id="back-to-top">
@@ -111,6 +109,8 @@
     <script src="{{ asset('backend/assets/js/pages/plugins/lord-icon-2.1.0.js') }}"></script>
     <script src="{{ asset('backend/assets/js/plugins.js') }}"></script>
 
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+
     <!-- apexcharts -->
     <script src="{{ asset('backend/assets/libs/apexcharts/apexcharts.min.js') }}"></script>
 
@@ -124,9 +124,17 @@
     <!-- App js -->
     <script src="{{ asset('backend/assets/js/app.js') }}"></script>
 
+    <script>
+        $(function() {
+            $(".alert").fadeTo(5000, 1000).slideUp(1000, function() {
+                $(".alert").slideUp(1000);
+            });
+        })
+    </script>
+
+    @stack('script')
 
     @livewireScripts
-    @stack('script')
 </body>
 
 </html>

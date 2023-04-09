@@ -24,7 +24,7 @@
                             <h4 class="card-title">Total Products</h4>
                             <div class="d-flex justify-content-between">
                                 <p class="text-muted">Avg. Session</p>
-                                <p class="text-muted">max: {{ number_format($totalProducts) }}</p>
+                                <p class="text-muted">max: {{ money($totalProducts) }}</p>
                             </div>
                             <div class="progress progress-md">
                                 <div class="progress-bar bg-info w-25" role="progressbar" aria-valuenow="25"
@@ -39,7 +39,7 @@
                             <h4 class="card-title">Total Categories</h4>
                             <div class="d-flex justify-content-between">
                                 <p class="text-muted">Avg. Session</p>
-                                <p class="text-muted">max: {{ number_format($totalCategories) }}</p>
+                                <p class="text-muted">max: {{ money($totalCategories) }}</p>
                             </div>
                             <div class="progress progress-md">
                                 <div class="progress-bar bg-success w-25" role="progressbar" aria-valuenow="25"
@@ -54,7 +54,7 @@
                             <h4 class="card-title">Total Brands</h4>
                             <div class="d-flex justify-content-between">
                                 <p class="text-muted">Avg. Session</p>
-                                <p class="text-muted">max: {{ number_format($totalBrands) }}</p>
+                                <p class="text-muted">max: {{ money($totalBrands) }}</p>
                             </div>
                             <div class="progress progress-md">
                                 <div class="progress-bar bg-danger w-25" role="progressbar" aria-valuenow="25"
@@ -69,7 +69,7 @@
                             <h4 class="card-title">Total Clients</h4>
                             <div class="d-flex justify-content-between">
                                 <p class="text-muted">Avg. Session</p>
-                                <p class="text-muted">max: {{ number_format($totalClients) }}</p>
+                                <p class="text-muted">max: {{ money($totalClients) }}</p>
                             </div>
                             <div class="progress progress-md">
                                 <div class="progress-bar bg-warning w-25" role="progressbar" aria-valuenow="25"
@@ -83,8 +83,8 @@
                         <div class="card-body">
                             <h4 class="card-title">Total Orders</h4>
                             <div class="d-flex justify-content-between">
-                                <p class="text-muted">Total. ${{ number_format($totalOrders->sum('total_price')) }}</p>
-                                <p class="text-muted">max: {{ number_format($totalOrders->count()) }}</p>
+                                <p class="text-muted">Total. {{ money($totalOrders->sum('total_price')) }}</p>
+                                <p class="text-muted">max: {{ money($totalOrders->count()) }}</p>
                             </div>
                             <div class="progress progress-md">
                                 <div class="progress-bar bg-warning w-25" role="progressbar" aria-valuenow="25"
@@ -98,8 +98,8 @@
                         <div class="card-body">
                             <h4 class="card-title">Today Orders</h4>
                             <div class="d-flex justify-content-between">
-                                <p class="text-muted">Total. ${{ number_format($todayOrders->sum('total_price')) }}</p>
-                                <p class="text-muted">max: {{ number_format($todayOrders->count()) }}</p>
+                                <p class="text-muted">Total. {{ money($todayOrders->sum('total_price')) }}</p>
+                                <p class="text-muted">max: {{ money($todayOrders->count()) }}</p>
                             </div>
                             <div class="progress progress-md">
                                 <div class="progress-bar bg-warning w-25" role="progressbar" aria-valuenow="25"
@@ -113,8 +113,8 @@
                         <div class="card-body">
                             <h4 class="card-title">This Month Orders</h4>
                             <div class="d-flex justify-content-between">
-                                <p class="text-muted">Total. ${{ number_format($thisMonthOrders->sum('total_price')) }}</p>
-                                <p class="text-muted">max: {{ number_format($thisMonthOrders->count()) }}</p>
+                                <p class="text-muted">Total. {{ money($thisMonthOrders->sum('total_price')) }}</p>
+                                <p class="text-muted">max: {{ money($thisMonthOrders->count()) }}</p>
                             </div>
                             <div class="progress progress-md">
                                 <div class="progress-bar bg-warning w-25" role="progressbar" aria-valuenow="25"
@@ -128,8 +128,8 @@
                         <div class="card-body">
                             <h4 class="card-title">This Year Orders</h4>
                             <div class="d-flex justify-content-between">
-                                <p class="text-muted">Total. ${{ number_format($thisYearOrders->sum('total_price')) }}</p>
-                                <p class="text-muted">max: {{ number_format($thisYearOrders->count()) }}</p>
+                                <p class="text-muted">Total. {{ money($thisYearOrders->sum('total_price')) }}</p>
+                                <p class="text-muted">max: {{ money($thisYearOrders->count()) }}</p>
                             </div>
                             <div class="progress progress-md">
                                 <div class="progress-bar bg-warning w-25" role="progressbar" aria-valuenow="25"
@@ -175,7 +175,7 @@
                                     {{ $item->status }}
                                 </td>
                                 <td>
-                                    {{ number_format($item->total_price) }}
+                                    {{ money($item->total_price) }}
                                 </td>
                                 <td>
                                     {{ $item->order_date }}

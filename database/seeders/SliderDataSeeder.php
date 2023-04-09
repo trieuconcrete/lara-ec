@@ -5,6 +5,8 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Slider;
+use Faker\Factory as Faker;
+
 class SliderDataSeeder extends Seeder
 {
     /**
@@ -14,13 +16,15 @@ class SliderDataSeeder extends Seeder
      */
     public function run()
     {
+        Slider::truncate();
+        $faker = Faker::create();
         for($i = 0; $i <= 2; $i++) {
             Slider::create([
-                'title' => "Slider 0{$i}",
+                'title' => $faker->name,
                 'status' => 1,
-                'description' => 'description',
-                'title_md' => 'title medium',
-                'title_sm' => 'title small medium',
+                'description' => $faker->text(50),
+                'title_md' => 'Title medium',
+                'title_sm' => 'Title small medium',
             ]);
         }
     }

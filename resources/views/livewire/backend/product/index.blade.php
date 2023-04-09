@@ -138,8 +138,8 @@
                                                 </div>
                                             </span>
                                         </td>
-                                        <td class="stock">{{ number_format($product->quantity) }}</td>
-                                        <td class="price">${{ number_format($product->selling_price) }}</td>
+                                        <td class="stock">{{ money($product->quantity) }}</td>
+                                        <td class="price">{{ money($product->selling_price) }}</td>
                                         <td class="orders">{{ $product->order_items_count }}</td>
                                         <td class="rating">
                                             <span>

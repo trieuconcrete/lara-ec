@@ -1,16 +1,19 @@
 <div>
+    @if ($colors->isNotEmpty())
     <div class="attr-detail attr-color mb-15">
-        @if ($colors)
-            <strong class="mr-10">Color</strong>
-            <ul class="list-filter color-filter" wire:ignore>
-                @foreach($colors as $item)
+        <strong class="mr-10">Color</strong>
+        <ul class="list-filter color-filter" wire:ignore>
+            @foreach($colors as $item)
+                @if (optional($item->color))
                     <li class="">
-                        <a wire:click="selectColor({{ $item->id }})" data-color="{{ $item->name }}"><span class="product-color-{{ $item->code }}"></span></a>
+                        <a wire:click="selectColor({{ $item->color->id }})" data-color="{{ $item->color->name }}"><span class="product-color-{{ $item->color->code }}"></span></a>
                     </li>
-                @endforeach
-            </ul>
-        @endif
+                @endif
+            @endforeach
+        </ul>
     </div>
+    @endif
+    @if ($sizes)
     <div class="attr-detail attr-size">
         <strong class="mr-10">Size</strong>
         <ul class="list-filter size-filter font-small" wire:ignore>
@@ -21,6 +24,7 @@
             @endforeach
         </ul>
     </div>
+    @endif
     <div class="bt-1 border-color-1 mt-30 mb-30"></div>
     <div class="detail-extralink">
         <div class="detail-qty border radius">

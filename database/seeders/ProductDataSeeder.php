@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\Brand;
 use App\Models\Product;
 use App\Models\User;
+use Faker\Factory as Faker;
 
 class ProductDataSeeder extends Seeder
 {
@@ -18,6 +19,7 @@ class ProductDataSeeder extends Seeder
      */
     public function run()
     {
+        $faker = Faker::create();
         $users = User::where('user_type', 0)->pluck('id')->toArray();
         $categories = Category::where('status', 1)->pluck('id')->toArray();
         $brands = Brand::where('status', 1)->pluck('id')->toArray();
@@ -29,7 +31,7 @@ class ProductDataSeeder extends Seeder
                 $trending = 1;
             }
             $product = Product::create([
-                'name' => "Product Demo " . sprintf('%04d', $i),
+                'name' => $faker->name,
                 'status' => 1,
                 'trending' => $trending,
                 'quantity' => rand(10, 50),
@@ -37,11 +39,12 @@ class ProductDataSeeder extends Seeder
                 'selling_price' => $original_price*2,
                 'category_id' => $categories[array_rand($categories)],
                 'brand_id' => $brands[array_rand($brands)],
-                'small_description' => 'Lorem ipsum dolor, sit amet consectetur adipisicing elit.',
-                'description' => 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aliquam rem officia, corrupti reiciendis minima nisi modi, quasi, odio minus dolore impedit fuga eum eligendi? Officia doloremque facere quia. Voluptatum, accusantium!',
-                'meta_title' => "Product Demo {$i}",
-                'meta_keyword' => "Product Demo {$i}",
-                'meta_description' => 'Lorem ipsum dolor, sit amet consectetur adipisicing elit.'
+                'small_description' => $faker->text,
+                'description' => $faker->text(500),
+                'meta_title' => $faker->text(50),
+                'meta_keyword' => $faker->text(50),
+                'meta_description' => $faker->text,
+                'rating' => $faker->randomFloat(1, 0, 5)
             ]);
         }
     }

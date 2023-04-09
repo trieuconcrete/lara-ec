@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Brand;
+use Faker\Factory as Faker;
 
 class BrandDataSeeder extends Seeder
 {
@@ -15,9 +16,11 @@ class BrandDataSeeder extends Seeder
      */
     public function run()
     {
+        Brand::truncate();
+        $faker = Faker::create();
         for($i = 0; $i <= 10; $i++) {
             Brand::create([
-                'name' => "Brand " . sprintf('%02d', $i),
+                'name' => $faker->name,
                 'status' => 1
             ]);
         }

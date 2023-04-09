@@ -3,7 +3,8 @@
     <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
 
     <!-- Create the editor container -->
-    <div id="{{ $quillId }}" wire:ignore style="height: 240px;"></div>
+    <div id="{{ $quillId }}" wire:ignore style="height: 240px;">{!! $value !!}</div>
+    <input type="hidden" name="quill-contents" id="quill-contents" value="{{ $value }}">
 
     <!-- Include the Quill library -->
     <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
@@ -39,11 +40,18 @@
             }
         });
 
-        quill.on('text-change', function () {
-            let value = document.getElementsByClassName('ql-editor')[0].innerHTML;
-            console.log(value);
-            @this.set('value', value)
+        quill.on('text-change', function (delta, source) {
+            updateHtmlOutput();
         })
+
+        // Return the HTML content of the editor
+        function getQuillHtml() { return quill.root.innerHTML; }
+
+        function updateHtmlOutput()
+        {
+            let html = getQuillHtml();
+            $('#quill-contents').val( html )
+        }
     </script>
 
 </div>

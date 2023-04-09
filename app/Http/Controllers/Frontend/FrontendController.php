@@ -26,16 +26,20 @@ class FrontendController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function getProductDetail($id)
+    public function getProductDetail($slug)
     {
         try {
-            $product = Product::with('category', 'productVariants', 'productImages', 'productReviews', 'productReviews.user', 'productReviews.user.userDetail')
+            $product = Product::with('category', 'productVariants.color', 'productImages', 'productReviews', 'productReviews.user', 'productReviews.user.userDetail')
                 ->withCount('productReviews as review_count')
                 ->withAvg(['productReviews as product_rating' => fn($query) => $query->where('point', '<>', 0)], 'point')
-                ->with(['category.products' => function($query) use ($id) {
+                ->with(['category.products' => function($query) use ($slug) {
                     return $query->with('productImages')
-                    ->where('id', '<>', $id)->limit(8);
-                }])->findOrFail($id);
+                    ->where('slug', '<>', $slug)->limit(8);
+                }])
+                ->with(['productVariants' => function($query) {
+                    return $query->where('quantity', '>', 0);
+                }])
+                ->where('slug', $slug)->first();
             return view('frontend.product_detail', compact('product'));
         } catch(\Exception $e) {
             abort(404);

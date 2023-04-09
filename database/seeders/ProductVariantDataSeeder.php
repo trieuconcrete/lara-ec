@@ -35,6 +35,15 @@ class ProductVariantDataSeeder extends Seeder
                             'quantity' => rand(5, 10),
                             'price' => rand(100000, 500000)
                         ]);
+                    } elseif ($variant = ProductVariant::where([
+                        'product_id' => $prodId,
+                    ])->whereNull('color_id')->whereNull('size')->first()) {
+                        $variant->update([
+                            'color_id' => $colors[array_rand($colors)],
+                            'size' => $sizes[array_rand($sizes)],
+                            'quantity' => rand(5, 10),
+                            'price' => rand(100000, 500000)
+                        ]);
                     } else {
                         ProductVariant::create([
                             'product_id' => $prodId,

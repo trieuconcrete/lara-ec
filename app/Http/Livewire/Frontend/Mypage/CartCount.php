@@ -14,12 +14,8 @@ class CartCount extends Component
 
     public function checkCartCount()
     {
-        if (Auth::check()) {
-            $this->cartList = Cart::with('product', 'product.productImages')->where('user_id', auth()->user()->id)->get();
-            $this->cartCount = $this->cartList->count();
-        } else {
-            $this->cartCount = 0;
-        }
+        $cart = session()->get('cart');
+        $this->cartCount = $cart ? count($cart) : 0;
         return $this->cartCount;
     }
 

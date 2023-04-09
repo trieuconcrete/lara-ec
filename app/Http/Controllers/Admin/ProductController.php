@@ -8,7 +8,6 @@ use App\Models\Color;
 use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Support\Str;
-use App\Models\ProductColor;
 use App\Models\ProductVariant;
 use App\Models\ProductImage;
 use Illuminate\Http\Request;
@@ -31,7 +30,7 @@ class ProductController extends BaseController
         return view('admin.product.create', compact('categories', 'brands', 'colors'));
     }
 
-    public function save(ProductFormRequest $request)
+    public function save(Request $request)
     {
         try {
             $category = Category::findOrFail($request->category_id);
@@ -76,7 +75,7 @@ class ProductController extends BaseController
     {
         $categories = Category::select('id', 'name')->get();
         $brands = Brand::select('id', 'name')->get();
-        $product = Product::with('productImages', 'productColors', 'productVariants')->findOrFail($id);
+        $product = Product::with('productImages', 'productVariants')->findOrFail($id);
 
         return view('admin.product.edit', compact('product', 'categories', 'brands'));
     }
@@ -134,17 +133,17 @@ class ProductController extends BaseController
         return redirect()->back()->with('message', 'Product Image Deleted Successfully!');
     }
 
-    public function updateQuantity(Request $request, $productColorId)
+    public function updateQuantity(Request $request, $productVariantId)
     {
-        $productColor = Product::findOrFail($request->product_id)->productColors()->where('id', $productColorId)->first();
-        $productColor->update(['quantity' => $request->qty]);
+        $productVariant = Product::findOrFail($request->product_id)->productVariants()->where('id', $productVariantId)->first();
+        $productVariant->update(['quantity' => $request->qty]);
         return response()->json(['message' => 'Product Color Qty Updated Successfuly!']);
     }
 
-    public function deleteColor(Request $request, $productColorId)
+    public function deleteColor(Request $request, $productVariantId)
     {
-        $productColor = Product::findOrFail($request->product_id)->productColors()->where('id', $productColorId)->first();
-        $productColor->delete();
+        $productVariant = Product::findOrFail($request->product_id)->productVariants()->where('id', $productVariantId)->first();
+        $productVariant->delete();
         return response()->json(['message' => 'Product Color Qty Deleted Successfuly!']);
     }
 

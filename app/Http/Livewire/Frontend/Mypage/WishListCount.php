@@ -15,11 +15,9 @@ class WishListCount extends Component
 
     public function checkWishListCount()
     {
-        if (Auth::check()) {
-            return $this->wishListCount = WishList::where('user_id', auth()->user()->id)->count();
-        } else {
-            return $this->wishListCount = 0;
-        }
+        $wishlist = session()->get('wishlist');
+        $this->wishListCount = $wishlist ? count($wishlist) : 0;
+        return $this->wishListCount;
     }
 
     public function render()

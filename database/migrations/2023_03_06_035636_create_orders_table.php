@@ -27,10 +27,12 @@ return new class extends Migration
             $table->string('city')->nullable();
             $table->string('country')->nullable();
             $table->string('state')->nullable();
-            $table->string('status_message')->nullable();
+            $table->string('status')->nullable();
             $table->text('notes')->nullable();
             $table->string('payment_mode')->nullable();
             $table->string('payment_id')->nullable();
+            $table->double('total_price', 12, 2)->nullable();
+            $table->dateTime('order_date')->nullable();
             $table->timestamps();
         });
     }

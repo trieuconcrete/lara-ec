@@ -32,10 +32,18 @@ class Product extends Model
         'meta_title',
         'meta_keyword',
         'meta_description',
+        'main_image',
         'discount',
         'views',
         'likes',
-        'sku'
+        'sku',
+        'number_month_brand_warranty',
+        'number_day_return',
+        'is_cash_on_delivery',
+        'is_visibility',
+        'published_at',
+        'product_tag_id',
+        'rating'
     ];
 
     protected $with = ['category'];
@@ -55,11 +63,6 @@ class Product extends Model
         return $this->hasMany(ProductImage::class, 'product_id', 'id');
     }
 
-    public function productColors()
-    {
-        return $this->hasMany(ProductColor::class, 'product_id', 'id');
-    }
-
     public function productReviews()
     {
         return $this->hasMany(ProductReview::class, 'product_id', 'id');
@@ -70,6 +73,16 @@ class Product extends Model
         return $this->hasMany(ProductVariant::class, 'product_id', 'id');
     }
 
+    public function getColors()
+    {
+        return $this->productVariants->unique('color_id');
+    }
+
+    public function getSizes()
+    {
+        return $this->productVariants->unique('size')->pluck('size');
+    }
+
     public function orderItems()
     {
         return $this->hasMany(OrderItem::class, 'product_id', 'id');
@@ -78,6 +91,12 @@ class Product extends Model
     public function getImage($index = 0)
     {
         $url = isset($this->productImages[$index]) ? Storage::disk('local')->url($this->productImages[$index]['image']) : 'no_img.png';
+        return asset($url);
+    }
+
+    public function getMainImage()
+    {
+        $url = $this->main_image ? Storage::disk('local')->url($this->main_image) : 'no_img.png';
         return asset($url);
     }
 
@@ -105,11 +124,12 @@ class Product extends Model
     {
         static::creating(function ($model) {
             $model->product_code = Str::upper(Str::random(4)).Carbon::now()->format('Ymd');
-            $model->slug = Str::slug($model->slug);
+            $model->slug = Str::slug($model->name);
         });
 
         static::created(function ($model) {
             ProductVariant::create(['product_id' => $model->id]);
+            $model->slug = Str::slug($model->name);
         });
     }
 }

@@ -5,7 +5,7 @@
                 <div class="col-lg-9">
                     <div class="shop-product-fillter">
                         <div class="totall-product">
-                            <p> We found <strong class="text-brand">{{ number_format($products->total()) }}</strong>
+                            <p> We found <strong class="text-brand">{{ money($products->total()) }}</strong>
                                 items for you!</p>
                         </div>
                         <div wire:loading wire:target="sortPriceASC, sortPriceDESC, updatePerPage18, updatePerPage50, updatePerPage100" class="text-right">
@@ -62,7 +62,7 @@
                                         <div class="product-cart-wrap mb-30">
                                             <div class="product-img-action-wrap">
                                                 <div class="product-img product-img-zoom">
-                                                    <a href="{{ route('frontend.product.detail', $val->id) }}">
+                                                    <a href="{{ route('frontend.product.detail', $val->slug) }}">
                                                         <img class="default-img" src="{{ $val->getImage() }}" loading="lazy"
                                                             alt="">
                                                         <img class="hover-img" src="{{ $val->getImage(1) }}" loading="lazy"
@@ -94,13 +94,13 @@
                                                         href="{{ route('frontend.product.list', optional($val->category)->slug) }}">{{ optional($val->category)->name }}</a>
                                                 </div>
                                                 <h2><a
-                                                        href="{{ route('frontend.product.detail', $val->id) }}">{{ $val->name }}</a>
+                                                        href="{{ route('frontend.product.detail', $val->slug) }}">{{ $val->name }}</a>
                                                 </h2>
                                                 <div class="product-price">
-                                                    <span>${{ number_format($val->sale_price) }}</span>
+                                                    <span>{{ money($val->sale_price) }}</span>
                                                     @if ($val->discount)
                                                         <span
-                                                            class="old-price">${{ number_format($val->selling_price) }}</span>
+                                                            class="old-price">{{ money($val->selling_price) }}</span>
                                                         <small>{{ $val->sale_percent }}</small>
                                                     @endif
                                                 </div>
@@ -163,7 +163,7 @@
                                     <h5><a
                                             href="{{ route('frontend.product.detail', $product->id) }}">{{ $product->name }}</a>
                                     </h5>
-                                    <p class="price mb-0 mt-5">${{ number_format($product->selling_price) }}</p>
+                                    <p class="price mb-0 mt-5">{{ money($product->selling_price) }}</p>
                                 </div>
                             </div>
                         @endforeach

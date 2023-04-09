@@ -50,7 +50,7 @@
             <div class="card">
                 <div class="card-header">
                     <span class="fs-5">List</span>
-                    <span class="float-end">{{ number_format($products->total()) ?? 0 }} items</span>
+                    <span class="float-end">{{ money($products->total()) ?? 0 }} items</span>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -78,8 +78,8 @@
                                         <td>{{ $item->name }}</td>
                                         <td>{{ $item->category->name }}</td>
                                         <td>{{ optional($item->brand)->name }}</td>
-                                        <td>{{ number_format($item->original_price) }}</td>
-                                        <td>{{ number_format($item->selling_price) }}</td>
+                                        <td>{{ money($item->original_price) }}</td>
+                                        <td>{{ money($item->selling_price) }}</td>
                                         <td>
                                             @if (!$item->status)
                                                 <label class="badge bg-danger">Hidden</label>

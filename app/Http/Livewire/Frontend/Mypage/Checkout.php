@@ -71,7 +71,7 @@ class Checkout extends Component
                 if ($item->product) {
                     $orderItemsData = [
                         'product_id' => $item->product_id,
-                        'product_color_id' => $item->product_color_id ?? null,
+                        'product_variant_id' => $item->product_variant_id ?? null,
                         'quantity' => $item->quantity,
                         'price' => optional($item->product)->selling_price
                     ];
@@ -79,8 +79,8 @@ class Checkout extends Component
                     // create order items
                     $order->orderItems()->create($orderItemsData);
                     // update quantity in stock
-                    if ($item->product_color_id !== null) {
-                        $item->productColors()->where('id', $item->product_color_id)->decrement('quantity', $item->quantity);
+                    if ($item->product_variant_id !== null) {
+                        $item->productVariants()->where('id', $item->product_variant_id)->decrement('quantity', $item->quantity);
                     } else {
                         $item->product()->where('id', $item->product_id)->decrement('quantity', $item->quantity);
                     }

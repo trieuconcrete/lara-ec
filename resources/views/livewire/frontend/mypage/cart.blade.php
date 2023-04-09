@@ -17,38 +17,42 @@
                             </thead>
                             <tbody>
                                 @if($carts)
-                                    @foreach($carts as $item)
-                                    @if ($item->product)
+                                    @php
+                                        $total = 0;
+                                    @endphp
+                                    @foreach($carts as $key => $item)
+                                    @php
+                                        $total += $item['sub_total'];
+                                    @endphp
                                     <tr>
                                         <td class="image product-thumbnail">
-                                            <img src="{{ $item->product->getImage() }}" alt="#">
+                                            <img src="{{ $item['image'] }}" alt="#">
                                         </td>
                                         <td class="product-name">
-                                            <h5 class="product-name"><a href="{{ route('frontend.product.detail', $item->product_id) }}">{{ $item->product->name }}</a></h5>
+                                            <h5 class="product-name"><a href="{{ route('frontend.product.detail', $item['slug']) }}">{{ $item['name'] }}</a></h5>
                                         </td>
-                                        <td class="price" data-title="Price"><span>${{ $item->product->selling_price }}</span></td>
+                                        <td class="price" data-title="Price"><span>{{ money($item['price']) }}</span></td>
                                         <td class="text-center" data-title="Stock">
                                             <div class="detail-qty border radius  m-auto">
-                                                <a wire:click="decrementQuantity({{ $item->id }})" class="qty-down"><i class="fi-rs-angle-small-down"></i></a>
-                                                <span class="qty-val">{{ $item->quantity }}</span>
-                                                <a wire:click="incrementQuantity({{ $item->id }})" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
+                                                <a wire:click="decrementQuantity({{ $key }})" class="qty-down"><i class="fi-rs-angle-small-down"></i></a>
+                                                <span class="qty-val">{{ $item['quantity'] }}</span>
+                                                <a wire:click="incrementQuantity({{ $key }})" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
                                             </div>
                                         </td>
                                         <td class="text-right" data-title="Cart">
-                                            <span>${{ $item->sub_total_price }}</span>
+                                            <span>{{ money($item['sub_total']) }}</span>
                                         </td>
                                         <td class="action" data-title="Remove">
-                                            <a wire:click="removeCartItem({{ $item->id }})" class="text-muted">
-                                                <span wire:loading.remove wire:target="removeCartItem({{ $item->id }})">
+                                            <a wire:click="removeCartItem({{ $key }})" class="text-muted">
+                                                <span wire:loading.remove wire:target="removeCartItem({{ $key }})">
                                                     <i class="fi-rs-trash"></i></a>
                                                 </span>
-                                                <span wire:loading wire:target="removeCartItem({{ $item->id }})">
+                                                <span wire:loading wire:target="removeCartItem({{ $key }})">
                                                     Removing...
                                                 </span>
                                             </a>
                                         </td>
                                     </tr>
-                                    @endif
                                     @endforeach
                                 @endif
                                 <tr>
@@ -117,7 +121,7 @@
                                         <tbody>
                                             <tr>
                                                 <td class="cart_total_label">Cart Subtotal</td>
-                                                <td class="cart_total_amount"><span class="font-lg fw-900 text-brand">${{ $carts ? $carts->sum('sub_total_price') : 0 }}</span></td>
+                                                <td class="cart_total_amount"><span class="font-lg fw-900 text-brand">{{ $carts ? money($total) : null }}</span></td>
                                             </tr>
                                             <tr>
                                                 <td class="cart_total_label">Shipping</td>
@@ -125,7 +129,7 @@
                                             </tr>
                                             <tr>
                                                 <td class="cart_total_label">Total</td>
-                                                <td class="cart_total_amount"><strong><span class="font-xl fw-900 text-brand">${{ $carts ? $carts->sum('sub_total_price') : 0 }}</span></strong></td>
+                                                <td class="cart_total_amount"><strong><span class="font-xl fw-900 text-brand">{{ $carts ? money($total) : null }}</span></strong></td>
                                             </tr>
                                         </tbody>
                                     </table>

@@ -77,7 +77,7 @@
                     <div class="product-cart-wrap mb-30">
                         <div class="product-img-action-wrap">
                             <div class="product-img product-img-zoom">
-                                <a href="{{ route('frontend.product.detail', $val->id) }}">
+                                <a href="{{ route('frontend.product.detail', $val->slug) }}">
                                     <img class="default-img" src="{{ $val->getImage() }}" alt="{{ $val->slug }}" loading="lazy">
                                     <img class="hover-img" src="{{ $val->getImage(1) }}" alt="{{ $val->slug }}" loading="lazy">
                                 </a>
@@ -99,11 +99,11 @@
                             <div class="product-category">
                                 <a href="{{ route('frontend.product.list', optional($val->category)->slug ) }}">{{ optional($val->category)->name }}</a>
                             </div>
-                            <h2><a href="{{ route('frontend.product.detail', $val->id) }}">{{ $val->name }}</a></h2>
+                            <h2><a href="{{ route('frontend.product.detail', $val->slug) }}">{{ $val->name }}</a></h2>
                             <div class="product-price">
-                                <span>${{ number_format($val->sale_price) }}</span>
+                                <span>{{ money($val->sale_price) }}</span>
                                 @if($val->discount)
-                                    <span class="old-price">${{ number_format($val->selling_price) }}</span>
+                                    <span class="old-price">{{ money($val->selling_price) }}</span>
                                     <small>{{ $val->sale_percent }}</small>
                                 @endif
                             </div>
@@ -190,7 +190,7 @@
                     <div class="product-cart-wrap small hover-up">
                         <div class="product-img-action-wrap">
                             <div class="product-img product-img-zoom">
-                                <a href="{{ route('frontend.product.detail', $item->id) }}">
+                                <a href="{{ route('frontend.product.detail', $item->slug) }}">
                                     <img class="default-img" src="{{ $item->getImage() }}" alt="" loading="lazy">
                                     <img class="hover-img" src="{{ $item->getImage(1) }}" alt="" loading="lazy">
                                 </a>
@@ -211,14 +211,14 @@
                             </div>
                         </div>
                         <div class="product-content-wrap">
-                            <h2><a href="{{ route('frontend.product.detail', $item->id) }}">{{ $item->name }}</a></h2>
+                            <h2><a href="{{ route('frontend.product.detail', $item->slug) }}">{{ $item->name }}</a></h2>
                             <div class="rating-result" title="90%">
                                 <span>
                                 </span>
                             </div>
                             <div class="product-price">
-                                <span>${{ number_format($item->selling_price) }}</span>
-                                <span class="old-price">${{ number_format($item->original_price) }}</span>
+                                <span>{{ money($item->selling_price) }}</span>
+                                <span class="old-price">{{ money($item->original_price) }}</span>
                             </div>
                         </div>
                     </div>

@@ -63,8 +63,8 @@
                                     </div>
                                     <div class="clearfix product-price-cover">
                                         <div class="product-price primary-color float-left">
-                                            <ins><span class="text-brand">${{ number_format($product->selling_price) }}</span></ins>
-                                            <ins><span class="old-price font-md ml-15">${{ number_format($product->original_price) }}</span></ins>
+                                            <ins><span class="text-brand">{{ money($product->selling_price) }}</span></ins>
+                                            <ins><span class="old-price font-md ml-15">{{ money($product->original_price) }}</span></ins>
                                             <span class="save-price  font-md color3 ml-15">{{ $product->discout . "% Off" }}</span>
                                         </div>
                                     </div>

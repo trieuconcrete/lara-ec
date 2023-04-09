@@ -71,16 +71,16 @@
                                                     <img src="{{ $item->product->getImage() }}" alt="#">
                                                 </td>
                                                 <td>
-                                                    <h5><a href="{{ route('frontend.product.detail', $item->product_id) }}">{{ $item->product->name }}</a></h5>
+                                                    <h5><a href="{{ route('frontend.product.detail', $item->product->slug) }}">{{ $item->product->name }}</a></h5>
                                                     <span class="product-qty">x {{ $item->quantity }}</span>
                                                 </td>
-                                                <td>${{ $item->sub_total_price }}</td>
+                                                <td>{{ $item->sub_total_price }}</td>
                                             </tr>
                                             @endif
                                             @endforeach
                                         <tr>
                                             <th>SubTotal</th>
-                                            <td class="product-subtotal" colspan="2">${{ $carts->sum('sub_total_price') }}</td>
+                                            <td class="product-subtotal" colspan="2">{{ $carts->sum('sub_total_price') }}</td>
                                         </tr>
                                         <tr>
                                             <th>Shipping</th>
@@ -88,7 +88,7 @@
                                         </tr>
                                         <tr>
                                             <th>Total</th>
-                                            <td colspan="2" class="product-subtotal"><span class="font-xl text-brand fw-900">${{ $carts->sum('sub_total_price') }}</span></td>
+                                            <td colspan="2" class="product-subtotal"><span class="font-xl text-brand fw-900">{{ $carts->sum('sub_total_price') }}</span></td>
                                         </tr>
                                         @endif
                                     </tbody>

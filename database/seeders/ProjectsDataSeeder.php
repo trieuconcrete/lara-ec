@@ -5,7 +5,6 @@ namespace Database\Seeders;
 use App\Models\Project;
 use Illuminate\Support\Arr;
 use Illuminate\Database\Seeder;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class ProjectsDataSeeder extends Seeder
 {

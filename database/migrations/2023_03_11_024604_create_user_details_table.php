@@ -25,6 +25,11 @@ return new class extends Migration
             $table->string('city')->nullable();
             $table->string('state')->nullable();
             $table->string('country')->nullable();
+            $table->date('birthday')->nullable();
+            $table->tinyInteger('gender')->nullable()->comment('1: male, 2: female, 3: other');
+            $table->tinyInteger('contract_type')->nullable();
+            $table->integer('position_id')->nullable();
+            $table->integer('branch_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->softDeletes();
             $table->timestamps();

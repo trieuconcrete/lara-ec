@@ -9,6 +9,7 @@ use App\Models\ProductVariant;
 use Livewire\Component;
 use App\Models\WishList;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Arr;
 
 class Action extends Component
 {
@@ -42,28 +43,18 @@ class Action extends Component
     public function addToWishList($productId)
     {
         $this->productId = $productId;
-        if (Auth::check()) {
-            if (WishList::where([
-                'user_id' => auth()->user()->id,
-                'product_id' => $this->productId
-            ])->exists()) {
-                $message = 'Already Added to wishlist';
-                $type = 'warning';
-                $status = 200;
-            } else {
-                $wishlist = WishList::create([
-                    'user_id' => auth()->user()->id,
-                    'product_id' => $this->productId
-                ]);
-                $this->emit('wishListAddedUpdate');
-                $message = 'Wishlist Added Successfuly';
-                $type = 'success';
-                $status = 200;
-            }
+        $wishlist = session()->get('wishlist');
+        if(isset($wishlist[$this->productId])) {
+            $message = 'Already Added to wishlist';
+            $type = 'warning';
+            $status = 200;
         } else {
-            $message = 'Please login to continue';
-            $type = 'message';
-            $status = 401;
+            $wishlist[$this->productId] = $this->productId;
+            session()->put('wishlist', $wishlist);
+            $this->emit('wishListAddedUpdate');
+            $message = 'Wishlist Added Successfuly';
+            $type = 'success';
+            $status = 200;
         }
         $this->dispatchBrowserEvent('message', [
             'text' => $message,
@@ -75,72 +66,70 @@ class Action extends Component
     public function addToCart($productId)
     {
         $this->productId = $productId;
-        if (Auth::check()) {
-            if ($this->product->where('id', $this->productId)->where('status', 1)->exists()) {
-                if (!$this->colorId) {
-                    $this->dispatchBrowserEvent('message', [
-                        'text' => 'Please select a Color!',
-                        'type' => 'warning',
-                        'status' => 404
-                    ]);
-                    return ;
-                }
-                if (!$this->size) {
-                    $this->dispatchBrowserEvent('message', [
-                        'text' => 'Please select a Size!',
-                        'type' => 'warning',
-                        'status' => 404
-                    ]);
-                    return ;
-                }
-                // check product color & product quantity
-                $productVariant = ProductVariant::where([
-                    'product_id' => $this->productId,
-                    'color_id' => $this->colorId,
-                    'size' => $this->size,
-                ])->first();
-                if ($productVariant && $productVariant->quantity > 0) {
-                    if ($productVariant->quantity < $this->quantityCount) {
-                        $message = 'Only ' . $this->product->quantity . ' Quantity Available';
-                        $type = 'warning';
-                        $status = 404;
-                    } else {
-                        if (Cart::where([
-                            'user_id' => auth()->user()->id,
-                            'product_id' => $this->productId,
-                            'product_variant_id' => $productVariant->id
-                        ])->exists()) {
-                            $message = 'Product Already Added to cart';
-                            $type = 'warning';
-                            $status = 200;
-                        } else {
-                            Cart::create([
-                                'user_id' => auth()->user()->id,
-                                'product_id' => $this->productId,
-                                'product_variant_id' => $productVariant->id,
-                                'quantity' => $this->quantityCount
-                            ]);
-                            $message = 'Product Added to cart Successfuly';
-                            $type = 'success';
-                            $status = 200;
-                            $this->emit('cartAddedUpdate');
-                        }
-                    }
-                } else {
-                    $message = 'Out of stock';
+        if ($product = $this->product->where('id', $this->productId)->where('status', 1)->first()) {
+            if (!$this->colorId) {
+                $this->dispatchBrowserEvent('message', [
+                    'text' => 'Please select a Color!',
+                    'type' => 'warning',
+                    'status' => 404
+                ]);
+                return ;
+            }
+            if (!$this->size) {
+                $this->dispatchBrowserEvent('message', [
+                    'text' => 'Please select a Size!',
+                    'type' => 'warning',
+                    'status' => 404
+                ]);
+                return ;
+            }
+            // check product variant & quantity
+            $productVariant = ProductVariant::where([
+                'product_id' => $this->productId,
+                'color_id' => $this->colorId,
+                'size' => $this->size
+            ])->first();
+            if ($productVariant && $productVariant->quantity > 0) {
+                if ($productVariant->quantity < $this->quantityCount) {
+                    $message = 'Only ' . $this->product->quantity . ' Quantity Available';
                     $type = 'warning';
                     $status = 404;
+                } else {
+                    $cart = session()->get('cart');
+                    if(isset($cart[$productVariant->id])) {
+                        $quantity = $cart[$productVariant->id]['quantity'] + $this->quantityCount;
+                        $cart[$productVariant->id]['quantity'] = $quantity;
+                        $cart[$productVariant->id]['sub_total'] = $productVariant->price * $quantity;
+                        $cart[$productVariant->id]['image'] = $product->getImage();
+                    } else {
+                        $cart[$productVariant->id] = [
+                            'product_id' => $this->productId,
+                            'product_variant_id' => $productVariant->id,
+                            'quantity' => $this->quantityCount,
+                            'price' => $productVariant->price,
+                            'sub_total' => $productVariant->price * $this->quantityCount,
+                            'image' => $product->getImage(),
+                            'name' => $product->name,
+                            'slug' => $product->slug
+                        ];
+                        session()->put('cart', $cart);
+                    }
+                    $message = 'Product Added to cart Successfuly';
+                    $type = 'success';
+                    $status = 200;
+                    $this->emit('cartAddedUpdate');
                 }
             } else {
-                $message = 'Product does not exists';
+                $message = 'Out of stock';
                 $type = 'warning';
                 $status = 404;
             }
         } else {
-            $message = 'Please login to continue';
-            $type = 'message';
-            $status = 401;
+            $message = 'Product does not exists';
+            $type = 'warning';
+            $status = 404;
         }
+        
         $this->dispatchBrowserEvent('message', [
             'text' => $message,
             'type' => $type,
@@ -150,12 +139,12 @@ class Action extends Component
 
     public function render()
     {
-        $colors = Color::get();
-        $sizes = Constants::PRODUCT_SIZES;
+        $colors = $this->product->getColors();
+        $sizes = $this->product->getSizes()->toArray();
         return view('livewire.frontend.product.action', [
             'product' => $this->product,
             'colors' => $colors,
-            'sizes' => $sizes
+            'sizes' => $sizes ? Arr::sort($sizes) : []
         ]);
     }
 }

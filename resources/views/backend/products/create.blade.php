@@ -34,7 +34,7 @@
         <!-- end page title -->
 
         <!-- Form -->
-        @livewire('backend.product.create', ['formAction' => 'add'])
+        @include('backend.products.form', ['formAction' => 'add', 'product' => null])
 
     </div>
     <!-- container-fluid -->

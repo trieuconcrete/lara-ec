@@ -4,6 +4,7 @@ namespace App\Http\Livewire\Frontend\Mypage;
 
 use Livewire\Component;
 use App\Models\Cart as CartModel;
+use App\Models\ProductVariant;
 
 class Cart extends Component
 {
@@ -17,11 +18,11 @@ class Cart extends Component
             'user_id' => auth()->user()->id,
         ])->first();
         if($cart) {
-            $productColor = $cart->productColor()->where('id', $cart->product_color_id);
-            if ($productColor->exists()) {
+            $productVariant = $cart->productVariant()->where('id', $cart->product_variant_id);
+            if ($productVariant->exists()) {
                 // check product color quantity
-                $quantityAllow = $productColor->quantity;
-                if ($productColor->quantity >  $cart->quantity) {
+                $quantityAllow = $productVariant->quantity;
+                if ($productVariant->quantity >  $cart->quantity) {
                     $cart->increment('quantity');
                     $message = 'Quatity updated successfully';
                     $type = 'success';
@@ -112,7 +113,7 @@ class Cart extends Component
 
     public function render()
     {
-        $carts = CartModel::with('product', 'product.productImages')->where('user_id', auth()->user()->id)->get();
+        $carts = session()->get('cart');
         return view('livewire.frontend.mypage.cart', [
             'carts' => $carts
         ]);

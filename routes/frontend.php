@@ -15,17 +15,17 @@ use Illuminate\Support\Facades\Route;
 
 Route::controller(FrontendController::class)->group(function () {
     Route::get('/', 'index')->name('home');
-    Route::get('product/detail/{id}', 'getProductDetail')->name('product.detail');
+    Route::get('product/detail/{slug}', 'getProductDetail')->name('product.detail');
     Route::get('product/list', 'getProductList')->name('product.list');
 });
 
-Route::controller(MypageController::class)->prefix('mypage')->name('mypage.')->middleware('auth')->group(function () {
+Route::controller(MypageController::class)->prefix('mypage')->name('mypage.')->group(function () {
     Route::get('wishlist', 'wishList')->name('wishlist');
     Route::get('cart', 'cart')->name('cart');
-    Route::get('checkout', 'checkout')->name('checkout');
-    Route::get('thank-you', 'thankYou')->name('thankyou');
-    Route::get('orders', 'orders')->name('orders');
-    Route::get('return-vnpay', 'returnVnpay')->name('returnVnpay');
+    Route::get('checkout', 'checkout')->name('checkout')->middleware('auth');
+    Route::get('thank-you', 'thankYou')->name('thankyou')->middleware('auth');
+    Route::get('orders', 'orders')->name('orders')->middleware('auth');
+    Route::get('return-vnpay', 'returnVnpay')->name('returnVnpay')->middleware('auth');
 });
 
 Route::controller(UserController::class)->prefix('user')->name('user.')->middleware('auth')->group(function () {

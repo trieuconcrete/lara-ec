@@ -18,33 +18,39 @@ class ColorDataSeeder extends Seeder
         $data = [
             [
                 'name' => 'Orange',
-                'code' => 'orange'
+                'code' => 'orange',
+                'status' => 1
             ],[
                 'name' => 'Purple',
-                'code' => 'purple'
+                'code' => 'purple',
+                'status' => 1
             ],
             [
                 'name' => 'Yellow',
-                'code' => 'yellow'
+                'code' => 'yellow',
+                'status' => 1
             ],[
                 'name' => 'Orange',
-                'code' => 'orange'
+                'code' => 'orange',
+                'status' => 1
             ],[
                 'name' => 'White',
-                'code' => 'white'
+                'code' => 'white',
+                'status' => 1
             ],[
                 'name' => 'Red',
-                'code' => 'red'
+                'code' => 'red',
+                'status' => 1
             ],[
                 'name' => 'Green',
-                'code' => 'green'
+                'code' => 'green',
+                'status' => 1
             ],[
                 'name' => 'Blue',
-                'code' => 'Blue'
+                'code' => 'blue',
+                'status' => 1
             ]
         ];
-        foreach ($data as $val) {
-            Color::create($val);
-        }
+        Color::insert($data);
     }
 }

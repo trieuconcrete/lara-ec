@@ -61,7 +61,7 @@ class Edit extends Component
     {
         $colorList = Color::select('id', 'name', 'code')->get();
         $sizeList = Constants::PRODUCT_SIZES;
-        $productVariants = Product::with('productImages', 'productColors', 'productVariants')->findOrFail($this->product->id)->productVariants;
+        $productVariants = Product::with('productImages', 'productVariants')->findOrFail($this->product->id)->productVariants;
         return view('livewire.admin.product.edit', [
             'productVariants' => $productVariants,
             'colorList' => $colorList,
