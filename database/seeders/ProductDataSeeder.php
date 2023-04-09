@@ -44,7 +44,8 @@ class ProductDataSeeder extends Seeder
                 'meta_title' => $faker->text(50),
                 'meta_keyword' => $faker->text(50),
                 'meta_description' => $faker->text,
-                'rating' => $faker->randomFloat(1, 0, 5)
+                'rating' => $faker->randomFloat(1, 0, 5),
+                'main_image' => $faker->imageUrl($width = 640, $height = 480)
             ]);
         }
     }

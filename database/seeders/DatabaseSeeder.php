@@ -21,6 +21,8 @@ class DatabaseSeeder extends Seeder
             UserDataSeeder::class,
             ColorDataSeeder::class,
             SettingSeeder::class,
+            SupplierDataSeeder::class,
+            TagDataSeeder::class,
             ProductDataSeeder::class,
             ProductVariantDataSeeder::class,
             OrderDataSeeder::class,
