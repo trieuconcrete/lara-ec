@@ -25,6 +25,7 @@ return new class extends Migration
             $table->tinyInteger('type')->nullable()->default(0)->comment('project type');
             $table->mediumText('notes')->nullable();
             $table->string('image')->nullable();
+            $table->string('image_thumb')->nullable();
             $table->integer('estimate_price')->nullable();
             $table->string('country')->nullable();
             $table->string('country_code')->nullable();

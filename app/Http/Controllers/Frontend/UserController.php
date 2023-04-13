@@ -40,8 +40,13 @@ class UserController extends Controller
             
             $user->userDetail()->updateOrCreate(['user_id' => auth()->user()->id], $data);
             if ($request->is_update_password) {
-                $user->update(['password' => Hash::make($request->password)]);
-                Auth::logout();
+                $currentPassword = Hash::check($request->current_password, auth()->user()->password);
+                if ($currentPassword) {
+                    $user->update(['password' => Hash::make($request->password)]);
+                    Auth::login($user);
+                } else {
+                    return redirect()->back()->with('error', 'Current Password does not match with old Password');
+                }
             }
             return redirect()->back()->with('message', 'User Updated Successfully');
         } catch (\Exception $e) {

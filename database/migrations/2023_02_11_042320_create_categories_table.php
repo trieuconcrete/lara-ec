@@ -20,6 +20,7 @@ return new class extends Migration
             $table->bigInteger('parent_id')->nullable();
             $table->longText('description')->nullable();
             $table->string('image')->nullable();
+            $table->string('image_thumb')->nullable();
 
             $table->string('meta_title')->nullable();
             $table->string('meta_keyword')->nullable();

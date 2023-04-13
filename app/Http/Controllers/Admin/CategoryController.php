@@ -44,7 +44,8 @@ class CategoryController extends BaseController
             $category->status = $request->status ?? 0;
             // store file
             if ($request->hasFile('image')) {
-                $category->image = $this->uploadImage($path = 'uploads/category/', $request->file('image'));
+                $path = 'uploads/category/';
+                $category->image = $path . $this->uploadImage($path, $request->file('image'), true);
             }
 
             $category->save();
@@ -78,7 +79,8 @@ class CategoryController extends BaseController
             $category->status = $request->status ?? 0;
             // store file
             if ($request->hasFile('image')) {
-                $category->image = $this->uploadImage($path = 'uploads/category/', $request->file('image'), $category->image);
+                $path = 'uploads/category/';
+                $category->image = $path . $this->uploadImage($path, $request->file('image'), $category->image, true);
             }
 
             $category->update();

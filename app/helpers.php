@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Storage;
+
 if (!function_exists('greeting')) {
     function greeting()
     {
@@ -22,5 +24,14 @@ if (!function_exists('money')) {
     function money($int)
     {
         return $int ? number_format($int) . ' ' . config('app.currency_code') : null;
+    }
+}
+
+
+if (!function_exists('get_image_path')) {
+    function get_image_path($path)
+    {
+        $url = $path ? Storage::disk('local')->url($path) : 'no_img.png';
+        return asset($url);
     }
 }

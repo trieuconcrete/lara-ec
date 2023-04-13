@@ -37,6 +37,7 @@ class ProductDataSeeder extends Seeder
                 'quantity' => rand(10, 50),
                 'original_price' => rand(100000, 1000000),
                 'selling_price' => $original_price*2,
+                'discount' => rand(0, 30),
                 'category_id' => $categories[array_rand($categories)],
                 'brand_id' => $brands[array_rand($brands)],
                 'small_description' => $faker->text,
@@ -44,8 +45,7 @@ class ProductDataSeeder extends Seeder
                 'meta_title' => $faker->text(50),
                 'meta_keyword' => $faker->text(50),
                 'meta_description' => $faker->text,
-                'rating' => $faker->randomFloat(1, 0, 5),
-                'main_image' => $faker->imageUrl($width = 640, $height = 480)
+                'rating' => $faker->randomFloat(1, 0, 5)
             ]);
         }
     }

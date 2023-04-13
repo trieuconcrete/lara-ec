@@ -15,15 +15,13 @@
     </div>
     <section class="mt-50 mb-50">
         <div class="container">
-            @if(session('message'))
-                <h5 class="alert alert-success">{{ session('message') }}</h5>
-            @endif
+            @include('layouts.partials.frontend.alert')
             <form method="post" action="{{ route('frontend.user.update') }}">
                 @csrf
                 @method('PUT')
                 <div class="row">
                     <div class="mb-25">
-                        <h4>User Details</h4>
+                        <h4>User Detail</h4>
                     </div>
                     <div class="col-md-6 form-group">
                         <input type="text" required id="first_name" name="first_name" placeholder="First name *" value="{{ optional($user->userDetail)->first_name ?? old('first_name') }}">
@@ -67,6 +65,12 @@
                         </div>
                     </div>
                     <div id="collapsePassword" class="row collapse in @error('password') show @enderror">
+                        @if ($user->has_password)
+                        <div class="col-md-4 form-group">
+                            <input type="password" placeholder="Current Password" name="current_password">
+                            @error('current_password')<small class="text-danger">{{ $message }}</small>@enderror
+                        </div>
+                        @endif
                         <div class="col-md-4 form-group">
                             <input type="password" placeholder="Password" name="password">
                             @error('password')<small class="text-danger">{{ $message }}</small>@enderror

@@ -33,6 +33,7 @@ class Product extends Model
         'meta_keyword',
         'meta_description',
         'main_image',
+        'main_image_thumb',
         'discount',
         'views',
         'likes',

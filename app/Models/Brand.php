@@ -21,7 +21,8 @@ class Brand extends Model
         'address',
         'website',
         'phone',
-        'image'
+        'image',
+        'image_thumb'
     ];
 
     public function products()

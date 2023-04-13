@@ -52,15 +52,21 @@ class ProductController extends BaseController
                 'trending' => $request->trending ?? null,
                 'featured' => $request->featured ?? null
             ];
+            // store main_image
+            $path = 'uploads/product/';
+            if ($request->hasFile('main_image')) {
+                $data['main_image'] = $path . $this->uploadImage($path, $request->file('main_image'), true);
+            }
+
             // insert product
             $product = $category->products()->create($data);
+            
             // insert product images
             if ($request->hasFile('product_images')) {
-                $path = 'uploads/product/';
                 foreach ($request->file('product_images') as $file) {
                     $product->productImages()->create([
                         'product_id' => $product->id,
-                        'image' => $this->uploadImage($path, $file)
+                        'image' => $path . $this->uploadImage($path, $file)
                     ]);
                 }
             }
@@ -103,14 +109,19 @@ class ProductController extends BaseController
                     'trending' => $request->trending ?? null,
                     'featured' => $request->featured ?? null
                 ];
+                // store file
+                $path = 'uploads/product/';
+                if ($request->hasFile('main_image')) {
+                    $data['main_image'] = $path . $this->uploadImage($path, $request->file('main_image'), $product->main_image, true);
+                }
+
                 $product->update($data);
                 // upload product images
                 if ($request->hasFile('product_images')) {
-                    $path = 'uploads/product/';
                     foreach ($request->file('product_images') as $file) {
                         $product->productImages()->create([
                             'product_id' => $product_id,
-                            'image' => $this->uploadImage($path, $file)
+                            'image' => $path . $this->uploadImage($path, $file)
                         ]);
                     }
                 }

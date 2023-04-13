@@ -5,6 +5,7 @@ namespace App\View\Composers;
 use Illuminate\View\View;
 use App\Models\Category;
 use App\Models\Setting;
+use Illuminate\Support\Facades\Cache;
 
 class CategoryComposer
 {
@@ -21,13 +22,21 @@ class CategoryComposer
      */
     public function compose(View $view): void
     {
-        $categories = Category::where('status', 1)->get();
-        $settings = Setting::select('key', 'value')->get();
-        $data = [];
-        foreach($settings as $set) {
-            $data[$set['key']] = $set['value'];
-        }
+        $seconds = 360;
+        $categories = Cache::remember('categories', $seconds, function () {
+            return Category::where('status', 1)->get();
+        });
+
+        $settings = Cache::remember('settings', $seconds, function () {
+            $settings = Setting::select('key', 'value')->get();
+            $data = [];
+            foreach($settings as $set) {
+                $data[$set['key']] = $set['value'];
+            }
+            return $data;
+        });
+
         $view->with('categories', $categories);
-        $view->with('settings', $data);
+        $view->with('settings', $settings);
     }
 }

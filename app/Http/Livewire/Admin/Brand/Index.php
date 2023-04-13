@@ -9,10 +9,11 @@ use Livewire\WithPagination;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\BrandFormRequest;
+use App\UploadTrait;
 
 class Index extends Component
 {
-    use WithPagination, WithFileUploads;
+    use WithPagination, WithFileUploads, UploadTrait;
     protected $paginationTheme = 'bootstrap';
     
     public $name, $slug, $status, $brandId, $image, $isEdit, $imageUrl;
@@ -50,11 +51,13 @@ class Index extends Component
     {
         $validatedData = $this->validate();
         if ($this->image) {
-            $ext = $this->image->getClientOriginalExtension();
-            $filename = time().'.'.$ext;
+            // $ext = $this->image->getClientOriginalExtension();
+            // $filename = time().'.'.$ext;
             $path = 'uploads/brand/';
-            $this->image->storeAs($path, $filename);
-            $filePath = $path.$filename;
+            // $this->image->storeAs($path, $filename);
+            // $filePath = $path.$filename;
+
+            $filePath = $path . $this->uploadImage($path, $this->image, true);
         }
         Brand::create([
             'name' => $this->name,
@@ -88,15 +91,8 @@ class Index extends Component
             'status' => $this->status ? 1 : 0
         ];
         if ($this->image) {
-            if($brand->image && Storage::exists($brand->image)) {
-                Storage::delete($brand->image);
-            }
-
-            $ext = $this->image->getClientOriginalExtension();
-            $filename = time().'.'.$ext;
             $path = 'uploads/brand/';
-            $this->image->storeAs($path, $filename);
-            $data['image'] = $path.$filename;
+            $data['image'] = $path . $this->uploadImage($path, $this->image, true, $brand->image);
         }
         $brand->update($data);
         session()->flash('message', 'Brand Updated Successfully');

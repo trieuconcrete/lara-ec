@@ -10,6 +10,8 @@ use App\Models\Category;
 use App\Models\WishList;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redis;
+use Illuminate\Support\Facades\Cache;
 
 class Index extends Component
 {
@@ -47,11 +49,24 @@ class Index extends Component
     }
     public function render()
     {
-        $this->sliders = Slider::where('status', 1)->get();
-        $this->brands = Brand::where('status', 1)->get();
+        $seconds = 360;
         $query = Product::with('productImages', 'category')->where('status', 1);
-        $this->products = $query->where('trending', 1)->latest()->take(8)->get();
-        $this->productNewArrivals = $query->latest()->take(12)->get();
+    
+        $this->products = Cache::remember('products', $seconds, function () use ($query) {
+            return $query->where('trending', 1)->latest()->take(8)->get()->toArray();
+        });
+
+        $this->productNewArrivals = Cache::remember('product_new_arrivals', $seconds, function () use ($query) {
+            return $query->latest()->take(12)->get();
+        });
+
+        $this->sliders = Cache::remember('sliders', $seconds, function () {
+            return Slider::where('status', 1)->get();
+        });
+
+        $this->brands = Cache::remember('brands', $seconds, function () {
+            return Brand::where('status', 1)->get();
+        });
 
         return view('livewire.frontend.home.index', [
             'sliders' => $this->sliders,

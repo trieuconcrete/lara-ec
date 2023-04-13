@@ -13,7 +13,8 @@ class ProductImage extends Model
     protected $talbe = 'product_images';
     protected $fillable = [
         'product_id',
-        'image'
+        'image',
+        'image_thumb'
     ];
 
     public function getImage()

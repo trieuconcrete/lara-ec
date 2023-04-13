@@ -19,6 +19,7 @@ class ProductVariant extends Model
         'size',
         'price',
         'image',
+        'image_thumb',
         'notes',
         'options',
         'options'

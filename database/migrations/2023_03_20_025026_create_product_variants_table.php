@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('size')->nullable();
             $table->string('price')->nullable();
             $table->string('image')->nullable();
+            $table->string('image_thumb')->nullable();
             $table->mediumText('notes')->nullable();
             $table->jsonb('options')->nullable();
 

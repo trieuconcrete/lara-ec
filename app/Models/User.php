@@ -75,4 +75,9 @@ class User extends Authenticatable
         $url = optional($this->userDetail)->avatar ? Storage::disk('local')->url($this->userDetail->avatar) : 'no_avatar.png';
         return asset($url);
     }
+
+    public function getHasPasswordAttribute()
+    {
+        return $this->password ? true : false;
+    }
 }

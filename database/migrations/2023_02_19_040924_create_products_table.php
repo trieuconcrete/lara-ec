@@ -42,6 +42,7 @@ return new class extends Migration
             $table->integer('likes')->nullable()->default(0);
 
             $table->string('main_image')->nullable(true);
+            $table->string('main_image_thumb')->nullable(true);
             $table->integer('number_month_brand_warranty')->default(0)->nullable(true);
             $table->integer('number_day_return')->default(0)->nullable(true);
             $table->tinyInteger('is_cash_on_delivery')->default(1)->nullable(true);
