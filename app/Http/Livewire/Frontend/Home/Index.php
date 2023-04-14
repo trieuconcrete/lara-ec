@@ -10,7 +10,6 @@ use App\Models\Category;
 use App\Models\WishList;
 use Livewire\WithPagination;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Cache;
 
 class Index extends Component

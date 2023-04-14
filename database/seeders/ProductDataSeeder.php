@@ -24,7 +24,7 @@ class ProductDataSeeder extends Seeder
         $categories = Category::where('status', 1)->pluck('id')->toArray();
         $brands = Brand::where('status', 1)->pluck('id')->toArray();
     
-        for($i = 0; $i <= 20000; $i++) {
+        for($i = 0; $i <= 100000; $i++) {
             $original_price = rand(100000, 1000000);
             $trending = 0;
             if ($i <= 16) {
