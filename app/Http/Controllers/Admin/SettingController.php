@@ -23,9 +23,14 @@ class SettingController extends BaseController
                         'value' => $value,
                         'comment' => $request->comments[$key] ?? null
                     ];
-                    if ($key == 'logo_header' || $key == 'logo_footer') {
+                    $path = 'uploads/setting/';
+                    if ($key == 'logo_header') {
                         $image = Setting::where('key', $key)->first();
-                        $data['value'] = $this->uploadImage($path = 'uploads/setting/', $value, $image->value);
+                        $data['value'] = $path . $this->uploadImage($path, $value, false, $image->value);
+                    }
+                    if ($key == 'logo_footer') {
+                        $image = Setting::where('key', $key)->first();
+                        $data['value'] = $path . $this->uploadImage($path, $value, false, $image->value);
                     }
                     Setting::where('key', $key)->update($data);
                 }

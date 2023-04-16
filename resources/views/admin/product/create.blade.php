@@ -169,6 +169,11 @@
                             <div class="tab-pane fade mb-3" id="image-tab-pane" role="tabpanel"
                                 aria-labelledby="image-tab" tabindex="0">
                                 <div class="row">
+                                    <div class="col-md-6 mb-3 form-group">
+                                        <label for="main_image">Image</label>
+                                        <input type="file" name="main_image" class="form-control" />
+                                        @error('main_image') <small class="text-danger">{{ $message }}</small>@enderror
+                                    </div>
                                     <div class="col-md-12 mb-6 form-group">
                                         <label for="product_images">Product Images</label>
                                         <input type="file" name="product_images[]" class="form-control" multiple/>

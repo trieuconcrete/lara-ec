@@ -216,5 +216,5 @@ return [
         'PDF' => Barryvdh\DomPDF\Facade::class,
     ])->toArray(),
 
-    'currency_code' => env('CURRENCY_CODE', 'vnd')
+    'currency_code' => env('CURRENCY_CODE', 'đ')
 ];

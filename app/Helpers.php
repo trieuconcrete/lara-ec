@@ -23,7 +23,7 @@ if (!function_exists('greeting')) {
 if (!function_exists('money')) {
     function money($int)
     {
-        return $int ? number_format($int) . ' ' . config('app.currency_code') : null;
+        return $int ? number_format($int) . config('app.currency_code') : null;
     }
 }
 

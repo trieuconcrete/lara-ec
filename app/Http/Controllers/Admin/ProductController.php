@@ -140,6 +140,9 @@ class ProductController extends BaseController
         if (Storage::exists($productImage->image)) {
             Storage::delete($productImage->image);
         }
+        if (Storage::exists($productImage->image_thumb)) {
+            Storage::delete($productImage->image_thumb);
+        }
         $productImage->delete();
         return redirect()->back()->with('message', 'Product Image Deleted Successfully!');
     }
@@ -174,7 +177,7 @@ class ProductController extends BaseController
                 $path = 'uploads/product/product_variants/';
                 $file =  $request->images[$key] ?? null;
                 if ($file) {
-                    $data['image'] = $this->uploadImage($path, $file);
+                    $data['image'] = $path . $this->uploadImage($path, $file);
                 }
                 if ($value == 'insert') {
                     if (!ProductVariant::where([

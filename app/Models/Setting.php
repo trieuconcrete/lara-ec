@@ -20,7 +20,7 @@ class Setting extends Model
 
     public function getImage()
     {
-        $url = ($this->key == 'logo_header' && $this->value) ? Storage::disk('local')->url($this->value) : 'no_img.png';
+        $url = (($this->key == 'logo_header' || $this->key == 'logo_footer') && $this->value) ? Storage::disk('local')->url($this->value) : 'no_img.png';
         return asset($url);
     }
 
