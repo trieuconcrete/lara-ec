@@ -63,24 +63,28 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @php
+                                            $total = 0;
+                                        @endphp
                                         @if($carts)
                                             @foreach($carts as $item)
-                                            @if ($item->product)
+                                            @php
+                                                $total += (int) $item['sub_total'];
+                                            @endphp
                                             <tr>
                                                 <td class="image product-thumbnail">
-                                                    <img src="{{ $item->product->getImage() }}" alt="#">
+                                                    <img src="{{ $item['image'] }}" alt="#">
                                                 </td>
                                                 <td>
-                                                    <h5><a href="{{ route('frontend.product.detail', $item->product->slug) }}">{{ $item->product->name }}</a></h5>
-                                                    <span class="product-qty">x {{ $item->quantity }}</span>
+                                                    <h5><a href="{{ route('frontend.product.detail', $item['slug']) }}">{{ $item['name'] }}</a></h5>
+                                                    <span class="product-qty">x {{ $item['quantity'] }}</span>
                                                 </td>
-                                                <td>{{ $item->sub_total_price }}</td>
+                                                <td>{{ $item['sub_total'] }}</td>
                                             </tr>
-                                            @endif
                                             @endforeach
                                         <tr>
                                             <th>SubTotal</th>
-                                            <td class="product-subtotal" colspan="2">{{ $carts->sum('sub_total_price') }}</td>
+                                            <td class="product-subtotal" colspan="2">{{ $total }}</td>
                                         </tr>
                                         <tr>
                                             <th>Shipping</th>
@@ -88,7 +92,7 @@
                                         </tr>
                                         <tr>
                                             <th>Total</th>
-                                            <td colspan="2" class="product-subtotal"><span class="font-xl text-brand fw-900">{{ $carts->sum('sub_total_price') }}</span></td>
+                                            <td colspan="2" class="product-subtotal"><span class="font-xl text-brand fw-900">{{ $total }}</span></td>
                                         </tr>
                                         @endif
                                     </tbody>
@@ -146,7 +150,7 @@
             return actions.order.create({
                 purchase_units: [{
                     amount: {
-                        value: "{{ $carts->sum('sub_total_price') }}"
+                        value: "{{ $total }}"
                     }
                 }]
             });
@@ -192,7 +196,7 @@
             return actions.order.create({
                 purchase_units: [{
                     amount: {
-                        value: "{{ $carts->sum('sub_total_price') }}"
+                        value: "{{ $total }}"
                     }
                 }]
             });

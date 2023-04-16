@@ -126,16 +126,6 @@ class Checkout extends Component
         }
     }
 
-    public function render()
-    {
-        $this->email = auth()->user()->email;
-        $this->carts = Cart::with('product', 'product.productImages')->where('user_id', auth()->user()->id)->get();
-        return view('livewire.frontend.mypage.checkout', [
-            'carts' => $this->carts,
-            'email' => $this->email,
-        ]);
-    }
-
     public function createOrderVNPay()
     {
         DB::beginTransaction();
@@ -196,4 +186,16 @@ class Checkout extends Component
         }
     }
 
+    public function render()
+    {
+        $carts = session()->get('cart');
+        // dd($carts);
+        // $this->email = auth()->user()->email;
+        // $this->carts = Cart::with('product', 'product.productImages')->where('user_id', auth()->user()->id)->get();
+        $this->carts = $carts;
+        return view('livewire.frontend.mypage.checkout', [
+            'carts' => $this->carts,
+            'email' => $this->email,
+        ]);
+    }
 }
