@@ -47,7 +47,7 @@
                                 <a href="{{ route('backend.product.index') }}" class="nav-link" data-key="t-products"> {{ __('menu.products') }} </a>
                             </li>
                             <li class="nav-item">
-                                <a href="#" class="nav-link" data-key="t-customers"> {{ __('menu.customers') }} </a>
+                                <a href="{{ route('backend.customer.index') }}" class="nav-link" data-key="t-customers"> {{ __('menu.customers') }} </a>
                             </li>
                             <li class="nav-item">
                                 <a href="#" class="nav-link" data-key="t-orders"> {{ __('menu.orders') }}</a>

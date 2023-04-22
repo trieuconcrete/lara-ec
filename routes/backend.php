@@ -21,3 +21,7 @@ Route::controller(ProductController::class)->prefix('products')->name('product.'
     Route::post('create', 'save')->name('save');
     Route::get('{product}/edit', 'edit')->name('edit');
 });
+
+Route::controller(CustomerController::class)->prefix('customers')->name('customer.')->group(function () {
+    Route::get('/', 'index')->name('index');
+});
