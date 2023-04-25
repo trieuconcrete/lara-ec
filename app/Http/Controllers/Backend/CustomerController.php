@@ -11,4 +11,9 @@ class CustomerController extends Controller
     {
         return view('backend.customers.index');
     }
+
+    public function create()
+    {
+        return view('backend.customers.create');
+    }
 }

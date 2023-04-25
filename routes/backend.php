@@ -24,4 +24,5 @@ Route::controller(ProductController::class)->prefix('products')->name('product.'
 
 Route::controller(CustomerController::class)->prefix('customers')->name('customer.')->group(function () {
     Route::get('/', 'index')->name('index');
+    Route::get('create', 'create')->name('create');
 });
