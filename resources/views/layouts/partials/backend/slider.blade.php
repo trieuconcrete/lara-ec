@@ -93,6 +93,10 @@
                                 </a>
                             </li>
                             <li class="nav-item">
+                                <a href="#" class="nav-link" data-key="t-banners"> {{ __('menu.banners') }}
+                                </a>
+                            </li>
+                            <li class="nav-item">
                                 <a href="#" class="nav-link" data-key="t-settings"> {{ __('menu.settings') }} </a>
                             </li>
                         </ul>

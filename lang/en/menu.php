@@ -13,5 +13,6 @@ return [
     'authors'       => 'Authors',
     'site_setting'  => 'Website Setting',
     'sliders'       => 'Sliders',
+    'banners'       => 'Banners',
     'settings'      => 'Settings',
 ];

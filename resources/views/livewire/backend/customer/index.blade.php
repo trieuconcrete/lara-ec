@@ -7,7 +7,7 @@
                         <h5 class="card-title mb-0 flex-grow-1">All Customers</h5>
                         <div class="flex-shrink-0">
                         <div class="d-flex flex-wrap gap-2">
-                                <button class="btn btn-danger add-btn" data-bs-toggle="modal" data-bs-target="#showModal"><i class="ri-add-line align-bottom me-1"></i> Create Customer</button>
+                                <button class="btn btn-success add-btn" data-bs-toggle="modal" data-bs-target="#showModal"><i class="ri-add-line align-bottom me-1"></i> Add Customer</button>
                                 <button class="btn btn-soft-danger" id="remove-actions" onClick="deleteMultiple()"><i class="ri-delete-bin-2-line"></i></button>
                         </div>
                         </div>
@@ -182,7 +182,7 @@
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content border-0">
                 <div class="modal-header p-3 bg-soft-info">
-                    <h5 class="modal-title" id="exampleModalLabel">Create Task</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Create Customer</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="close-modal"></button>
                 </div>
                 <form class="tablelist-form" autocomplete="off">
@@ -190,174 +190,98 @@
                         <input type="hidden" id="tasksId" />
                         <div class="row g-3">
                             <div class="col-lg-12">
-                                <label for="projectName-field" class="form-label">Project Name</label>
-                                <input type="text" id="projectName-field" class="form-control" placeholder="Project name" required />
-                            </div>
-                            <!--end col-->
-                            <div class="col-lg-12">
-                                <div>
-                                    <label for="tasksTitle-field" class="form-label">Title</label>
-                                    <input type="text" id="tasksTitle-field" class="form-control" placeholder="Title" required />
+                                <div class="text-center">
+                                    <div class="position-relative d-inline-block">
+                                        <div class="position-absolute bottom-0 end-0">
+                                            <label for="company-logo-input" class="mb-0" data-bs-toggle="tooltip" data-bs-placement="right" title="Select Image">
+                                                <div class="avatar-xs cursor-pointer">
+                                                    <div class="avatar-title bg-light border rounded-circle text-muted">
+                                                        <i class="ri-image-fill"></i>
+                                                    </div>
+                                                </div>
+                                            </label>
+                                            <input class="form-control d-none" value="" id="company-logo-input" type="file" accept="image/png, image/gif, image/jpeg">
+                                        </div>
+                                        <div class="avatar-lg p-1">
+                                            <div class="avatar-title bg-light rounded-circle">
+                                                <img src="assets/images/users/multi-user.jpg" id="companylogo-img" class="avatar-md rounded-circle object-cover" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <h5 class="fs-13 mt-3">Avatar</h5>
                                 </div>
                             </div>
-                            <!--end col-->
-                            <div class="col-lg-12">
-                                <label for="clientName-field" class="form-label">Client Name</label>
-                                <input type="text" id="clientName-field" class="form-control" placeholder="Client name" required />
+                            <div class="col-lg-6">
+                                <label for="name-field" class="form-label">Name</label>
+                                <input type="text" id="name-field" class="form-control" placeholder="Name" required />
                             </div>
                             <!--end col-->
-                            <div class="col-lg-12">
-                                <label class="form-label">Assigned To</label>
-                                <div data-simplebar style="height: 95px;">
-                                    <ul class="list-unstyled vstack gap-2 mb-0">
-                                        <li>
-                                            <div class="form-check d-flex align-items-center">
-                                                <input class="form-check-input me-3" type="checkbox" name="assignedTo[]" value="avatar-2.jpg" id="james-forbes">
-                                                <label class="form-check-label d-flex align-items-center" for="james-forbes">
-                                                    <span class="flex-shrink-0">
-                                                        <img src="assets/images/users/avatar-2.jpg" alt="" class="avatar-xxs rounded-circle">
-                                                    </span>
-                                                    <span class="flex-grow-1 ms-2">James Forbes</span>
-                                                </label>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="form-check d-flex align-items-center">
-                                                <input class="form-check-input me-3" type="checkbox" name="assignedTo[]" value="avatar-3.jpg" id="john-robles">
-                                                <label class="form-check-label d-flex align-items-center" for="john-robles">
-                                                    <span class="flex-shrink-0">
-                                                        <img src="assets/images/users/avatar-3.jpg" alt="" class="avatar-xxs rounded-circle">
-                                                    </span>
-                                                    <span class="flex-grow-1 ms-2">John Robles</span>
-                                                </label>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="form-check d-flex align-items-center">
-                                                <input class="form-check-input me-3" type="checkbox" name="assignedTo[]" value="avatar-4.jpg" id="mary-gant">
-                                                <label class="form-check-label d-flex align-items-center" for="mary-gant">
-                                                    <span class="flex-shrink-0">
-                                                        <img src="assets/images/users/avatar-4.jpg" alt="" class="avatar-xxs rounded-circle">
-                                                    </span>
-                                                    <span class="flex-grow-1 ms-2">Mary Gant</span>
-                                                </label>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="form-check d-flex align-items-center">
-                                                <input class="form-check-input me-3" type="checkbox" name="assignedTo[]" value="avatar-1.jpg" id="curtis-saenz">
-                                                <label class="form-check-label d-flex align-items-center" for="curtis-saenz">
-                                                    <span class="flex-shrink-0">
-                                                        <img src="assets/images/users/avatar-1.jpg" alt="" class="avatar-xxs rounded-circle">
-                                                    </span>
-                                                    <span class="flex-grow-1 ms-2">Curtis Saenz</span>
-                                                </label>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="form-check d-flex align-items-center">
-                                                <input class="form-check-input me-3" type="checkbox" name="assignedTo[]" value="avatar-5.jpg" id="virgie-price">
-                                                <label class="form-check-label d-flex align-items-center" for="virgie-price">
-                                                    <span class="flex-shrink-0">
-                                                        <img src="assets/images/users/avatar-5.jpg" alt="" class="avatar-xxs rounded-circle">
-                                                    </span>
-                                                    <span class="flex-grow-1 ms-2">Virgie Price</span>
-                                                </label>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="form-check d-flex align-items-center">
-                                                <input class="form-check-input me-3" type="checkbox" name="assignedTo[]" value="avatar-10.jpg" id="anthony-mills">
-                                                <label class="form-check-label d-flex align-items-center" for="anthony-mills">
-                                                    <span class="flex-shrink-0">
-                                                        <img src="assets/images/users/avatar-10.jpg" alt="" class="avatar-xxs rounded-circle">
-                                                    </span>
-                                                    <span class="flex-grow-1 ms-2">Anthony Mills</span>
-                                                </label>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="form-check d-flex align-items-center">
-                                                <input class="form-check-input me-3" type="checkbox" name="assignedTo[]" value="avatar-6.jpg" id="marian-angel">
-                                                <label class="form-check-label d-flex align-items-center" for="marian-angel">
-                                                    <span class="flex-shrink-0">
-                                                        <img src="assets/images/users/avatar-6.jpg" alt="" class="avatar-xxs rounded-circle">
-                                                    </span>
-                                                    <span class="flex-grow-1 ms-2">Marian Angel</span>
-                                                </label>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="form-check d-flex align-items-center">
-                                                <input class="form-check-input me-3" type="checkbox" name="assignedTo[]" value="avatar-10.jpg" id="johnnie-walton">
-                                                <label class="form-check-label d-flex align-items-center" for="johnnie-walton">
-                                                    <span class="flex-shrink-0">
-                                                        <img src="assets/images/users/avatar-7.jpg" alt="" class="avatar-xxs rounded-circle">
-                                                    </span>
-                                                    <span class="flex-grow-1 ms-2">Johnnie Walton</span>
-                                                </label>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="form-check d-flex align-items-center">
-                                                <input class="form-check-input me-3" type="checkbox" name="assignedTo[]" value="avatar-8.jpg" id="donna-weston">
-                                                <label class="form-check-label d-flex align-items-center" for="donna-weston">
-                                                    <span class="flex-shrink-0">
-                                                        <img src="assets/images/users/avatar-8.jpg" alt="" class="avatar-xxs rounded-circle">
-                                                    </span>
-                                                    <span class="flex-grow-1 ms-2">Donna Weston</span>
-                                                </label>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="form-check d-flex align-items-center">
-                                                <input class="form-check-input me-3" type="checkbox" name="assignedTo[]" value="avatar-9.jpg" id="diego-norris">
-                                                <label class="form-check-label d-flex align-items-center" for="diego-norris">
-                                                    <span class="flex-shrink-0">
-                                                        <img src="assets/images/users/avatar-9.jpg" alt="" class="avatar-xxs rounded-circle">
-                                                    </span>
-                                                    <span class="flex-grow-1 ms-2">Diego Norris</span>
-                                                </label>
-                                            </div>
-                                        </li>
-                                    </ul>
+                            <div class="col-lg-6">
+                                <div>
+                                    <label for="email-field" class="form-label">Email</label>
+                                    <input type="text" id="email-field" class="form-control" placeholder="Email" required />
                                 </div>
                             </div>
                             <!--end col-->
                             <div class="col-lg-6">
-                                <label for="duedate-field" class="form-label">Due Date</label>
-                                <input type="text" id="duedate-field" class="form-control" data-provider="flatpickr" placeholder="Due date" required />
+                                <label for="password-field" class="form-label">Password</label>
+                                <input type="password" id="password-field" class="form-control" placeholder="Password" required />
+                            </div>
+                            <div class="col-lg-6">
+                                <label for="confirmPassword-field" class="form-label">Confirm Password</label>
+                                <input type="password" id="confirmPassword-field" class="form-control" placeholder="Confirm Password" required />
+                            </div>
+                            <!--end col-->
+                            <div class="col-lg-6">
+                                <label for="joinDate-field" class="form-label">Join Date</label>
+                                <input type="text" id="joinDate-field" class="form-control" data-provider="flatpickr" placeholder="Join date" />
                             </div>
                             <!--end col-->
                             <div class="col-lg-6">
                                 <label for="ticket-status" class="form-label">Status</label>
                                 <select class="form-control" data-choices data-choices-search-false id="ticket-status">
-                                    <option value="">Status</option>
-                                    <option value="New">New</option>
-                                    <option value="Inprogress">Inprogress</option>
-                                    <option value="Pending">Pending</option>
-                                    <option value="Completed">Completed</option>
+                                    <option value="1">New</option>
+                                    <option value="2">Active</option>
+                                    <option value="3">Block</option>
                                 </select>
                             </div>
                             <!--end col-->
-                            <div class="col-lg-12">
-                                <label for="priority-field" class="form-label">Priority</label>
+                            <div class="col-lg-6">
+                                <label for="birthday-field" class="form-label">Birthday</label>
+                                <input type="text" id="birthday-field" class="form-control" data-provider="flatpickr" placeholder="Birthday" />
+                            </div>
+                            <div class="col-lg-6">
+                                <label for="priority-field" class="form-label">Gender</label>
                                 <select class="form-control" data-choices data-choices-search-false id="priority-field">
-                                    <option value="">Priority</option>
-                                    <option value="High">High</option>
-                                    <option value="Medium">Medium</option>
-                                    <option value="Low">Low</option>
+                                    <option value="1">Male</option>
+                                    <option value="2">Female</option>
+                                    <option value="3">Other</option>
                                 </select>
                             </div>
                             <!--end col-->
+                            <div class="col-lg-6">
+                                <label for="city-field" class="form-label">City</label>
+                                <input type="text" id="city-field" class="form-control" placeholder="City" />
+                            </div>
+                            <div class="col-lg-6">
+                                <label for="state-field" class="form-label">State</label>
+                                <input type="text" id="state-field" class="form-control" placeholder="State" />
+                            </div>
+                            <div class="col-lg-6">
+                                <label for="zipCode-field" class="form-label">Zip-code</label>
+                                <input type="text" id="zipCode-field" class="form-control" placeholder="Zip-code" />
+                            </div>
+                            <div class="col-lg-6">
+                                <label for="address-field" class="form-label">Address</label>
+                                <input type="text" id="address-field" class="form-control" placeholder="Address" />
+                            </div>
                         </div>
                         <!--end row-->
                     </div>
                     <div class="modal-footer">
                         <div class="hstack gap-2 justify-content-end">
                             <button type="button" class="btn btn-light" id="close-modal" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-success" id="add-btn">Add Task</button>
-                            <!-- <button type="button" class="btn btn-success" id="edit-btn">Update Task</button> -->
+                            <button type="submit" class="btn btn-success" id="add-btn">Add Customer</button>
                         </div>
                     </div>
                 </form>
